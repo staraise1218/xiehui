@@ -1,0 +1,251 @@
+{template 'content', 'header'}
+<div class="min-width-1300">
+	<div class="container">
+		<div class="news_title">电子版杂志</div>
+		<div class="direction news_zazhi_d">
+			<span class="l"></span>
+			<span class="r"></span>
+		</div>
+		<div class="news_zazhi">
+			<ul>
+				{pc:content action="lists" catid="17" num="3" order="listorder desc, id desc"}
+				{loop $data $r}
+				<li>
+					<div class="date"><span class="day">{date('d', $r[inputtime])}</span><span class="time">{date('Y.m', $r[inputtime])}</span></div>
+					<div class="pic"><a href="{$r[url]}" target="_blank"><img src="{thumb($r[thumb], 265, 368)}" width="265" height="368" alt=""></a></div>
+				</li>
+				{/loop}
+				{/pc}
+			</ul>
+		</div>
+	</div>
+
+	<div class="zhanxun">
+		<div class="container" style="overflow: hidden;">
+			<div class="news_title">电子版展讯</div>
+			<div class="direction zhanxun_d">
+				<span class="l"></span>
+				<span class="r"></span>
+			</div>
+			<div class="zhanxunbox">
+				<ul>
+					{pc:content action="lists" catid="18" num="3" order="listorder desc, id desc"}
+					{loop $data $r}
+					<li>
+						<div class="date"><span class="day">{date('d', $r[inputtime])}</span><span class="time">{date('Y.m', $r[inputtime])}</span></div>
+						<div class="pic"><img src="{thumb($r[thumb], 265, 368)}" width="265" height="368" alt=""></div>
+						<div class="clear"></div>
+						<div class="des"><a href="{APP_PATH}api.php?op=other&act=downOthers&type=1&id={$r[id]}">阅读</a><a href="{APP_PATH}api.php?op=other&act=downOthers&id={$r[id]}">下载</a></div>				
+					</li>
+					{/loop}
+					{/pc}
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="news_title">其他文件</div>
+		<div class="direction others_d">
+			<span class="l"></span>
+			<span class="r"></span>
+		</div>
+		<div class="others">
+			<ul>
+				
+				{pc:content action="lists" catid="19" num="3" order="listorder desc, id desc" moreinfo="1"}
+				{loop $data $r}
+				<li>
+					<div class="date"><span class="day">{date('d', $r[inputtime])}</span><span class="time">{date('Y.m', $r[inputtime])}</span></div>
+						<div class="pic"><img src="{thumb($r[thumb], 265, 368)}" width="265" height="368" alt=""></div>
+						<div class="clear"></div>
+					<div class="des"><a href="{APP_PATH}api.php?op=other&act=downOthers&id={$r[id]}">下载</a></div>
+				</li>
+				{/loop}
+				{/pc}
+			</ul>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+
+		// 期刊滚动
+		var		li_w = 378, //一个 li 的宽度
+				li_marginLeft = 33, // li 的marginLeft 值
+				step = li_w+li_marginLeft,
+				limit = 1;
+
+		var		moveObj_news_zazhi = $('.news_zazhi ul'), //要移动的对象
+				moveObj_zhanxunbox = $('.zhanxunbox ul'), //要移动的对象
+				moveObj_others = $('.others ul'); //要移动的对象
+
+
+		var page_news_zazhi = 1, page_l_news_zazhi = 1; // 初始化第一页和取一条数据,
+		var page_zhanxun = 1, page_l_zhanxun = 1; // 初始化第一页和取一条数据,
+		var page_others = 1, page_l_others = 1; // 初始化第一页和取一条数据,
+
+		// 杂志滚动
+		$('.news_zazhi_d .r').click(function(){
+			moveObj_news_zazhi.stop(false, true);
+			if(page_l_news_zazhi < page_news_zazhi){
+				moveObj_news_zazhi.animate({ marginLeft: "-="+step }, 500);
+				page_l_news_zazhi ++;
+				return false;
+			}
+			$.ajax({
+				url: '{APP_PATH}api.php?op=other&act=getNextPeriodical',
+				type: 'post',
+				dataType:'json',
+				data: {page:page_news_zazhi, limit:limit},
+				success: function(data){
+					if(data.code == 400){
+						return false;
+					}
+
+					var info = data.data;
+
+					var ul_w = parseInt(moveObj_news_zazhi.css('width')); // 获取ul原始宽度
+					moveObj_news_zazhi.css('width', ul_w+li_marginLeft+li_w); // 增加一个li的宽度
+
+					var html_li = '<li>'
+						html_li += '<div class="date">'
+						html_li += '<span class="day">'+info.day+'</span>'
+						html_li += '<span class="time">'+info.time+'</span>'
+						html_li += '</div>'
+						html_li += '<div class="pic">'
+						html_li += '<a href="'+info.url+'" target="_blank"><img src="'+info.thumb+'" width="265" height="368" alt=""></a></div>';
+						html_li += '</li>';
+					moveObj_news_zazhi.append(html_li);
+
+					moveObj_news_zazhi.animate({ marginLeft: "-="+step }, 500);
+
+					page_news_zazhi ++;
+					page_l_news_zazhi ++;
+				}
+			})
+		})
+		$('.news_zazhi_d .l').click(function(){
+			moveObj_news_zazhi.stop(false, true);
+			if(parseInt(moveObj_news_zazhi.css('marginLeft')) >= 0) return;
+
+			moveObj_news_zazhi.animate({ marginLeft: "+="+step }, 500);
+			page_l_news_zazhi --;
+		})
+
+		// 电子版展讯滚动
+		$('.zhanxun_d .r').click(function(){
+			moveObj_zhanxunbox.stop(false, true);
+			if(page_l_zhanxun < page_zhanxun){
+				moveObj_zhanxunbox.animate({ marginLeft: "-="+step }, 500);
+				page_l_zhanxun ++;
+				return false;
+			}
+			$.ajax({
+				url: '{APP_PATH}api.php?op=other&act=getNextQikanOthers',
+				type: 'post',
+				dataType:'json',
+				data: {page:page_zhanxun, limit:limit, catid:18},
+				success: function(data){
+					if(data.code == 400){
+						return false;
+					}
+
+					var info = data.data;
+
+					var ul_w = parseInt(moveObj_zhanxunbox.css('width')); // 获取ul原始宽度
+					moveObj_zhanxunbox.css('width', ul_w+li_marginLeft+li_w); // 增加一个li的宽度
+
+					var html_li = '<li>'
+						html_li += '<div class="date">'
+						html_li += '<span class="day">'+info.day+'</span>'
+						html_li += '<span class="time">'+info.time+'</span>'
+						html_li += '</div>'
+						html_li += '<div class="pic">'
+						html_li += '<img src="'+info.thumb+'" width="265" height="368" alt=""></div>';
+						html_li += '<div class="clear"></div>';
+						html_li += '<div class="des"><a href="{APP_PATH}api.php?op=other&act=downOthers&type=1&id='+info.id+'">阅读</a><a href="{APP_PATH}api.php?op=other&act=downOthers&id='+info.id+'">下载</a></div>'
+						html_li += '</li>';
+
+					moveObj_zhanxunbox.append(html_li);
+
+					moveObj_zhanxunbox.animate({ marginLeft: "-="+step }, 500);
+
+					page_zhanxun ++;
+					page_l_zhanxun ++;
+				}
+			})
+		})
+		$('.zhanxun_d .l').click(function(){
+			moveObj_zhanxunbox.stop(false, true);
+			if(parseInt(moveObj_zhanxunbox.css('marginLeft')) >= 0) return;
+
+			moveObj_zhanxunbox.animate({ marginLeft: "+="+step }, 500);
+			page_l_zhanxun --;
+		})
+
+		// 其他文件滚动
+		$('.others_d .r').click(function(){
+			moveObj_others.stop(false, true);
+			if(page_l_others < page_others){
+				moveObj_others.animate({ marginLeft: "-="+step }, 500);
+				page_l_others ++;
+				return false;
+			}
+			$.ajax({
+				url: '{APP_PATH}api.php?op=other&act=getNextQikanOthers',
+				type: 'post',
+				dataType:'json',
+				data: {page:page_others, limit:limit, catid:19},
+				success: function(data){
+					if(data.code == 400){
+						return false;
+					}
+
+					var info = data.data;
+
+					var ul_w = parseInt(moveObj_others.css('width')); // 获取ul原始宽度
+					moveObj_others.css('width', ul_w+li_marginLeft+li_w); // 增加一个li的宽度
+
+					var html_li = '<li>'
+						html_li += '<div class="date">'
+						html_li += '<span class="day">'+info.day+'</span>'
+						html_li += '<span class="time">'+info.time+'</span>'
+						html_li += '</div>'
+						html_li += '<div class="pic">'
+						html_li += '<img src="'+info.thumb+'" width="265" height="368" alt=""></div>';
+						html_li += '<div class="des"><a href="{APP_PATH}api.php?op=other&act=downOthers&id='+info.id+'">下载</a></div>'
+						html_li += '</li>';
+
+					moveObj_others.append(html_li);
+
+					moveObj_others.animate({ marginLeft: "-="+step }, 500);
+
+					page_others ++;
+					page_l_others ++;
+				}
+			})
+		})
+		$('.others_d .l').click(function(){
+			moveObj_others.stop(false, true);
+			if(parseInt(moveObj_others.css('marginLeft')) >= 0) return;
+
+			moveObj_others.animate({ marginLeft: "+="+step }, 500);
+			page_l_others --;
+		})
+	})
+</script>
+<!-- banner -->
+<script type="text/javascript" src="{APP_PATH}statics/default/js/jquery.flexslider-min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.flexslider').flexslider({
+			directionNav: true,
+			pauseOnAction: false,
+			slideshowSpeed: 3000,
+			directionNav: false,
+		});
+	});
+</script>
+{template 'content', 'footer'}

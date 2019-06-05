@@ -1,0 +1,39 @@
+{template 'content', 'header'}
+<div class="categoryimage"><img src="{APP_PATH}statics/default/images/aboutbanner.jpg" alt=""></div>
+<div class="min-width-1300">
+	<div class="container">
+		<div class="crumb">中国游乐APP &gt; 招聘列表</div>
+		<div class="category_title">
+			<span>招聘列表</span>
+			<form action="" method="get">
+				<input type="hidden" name="m" value="app">
+				<input type="hidden" name="c" value="recruit">
+				<input type="hidden" name="a" value="lists">
+				<div class="searchpage">
+					<button class="sbt">搜索</button><input type="text" name="keyname" value="{$keyname}">
+				</div>
+			</form>
+		</div>
+		<div style="margin-top: 30px;"><img src="{get_extend_setting('recruit_banner')}" alt=""></div>
+		<div class="list zhaopin">
+			<ul>
+				{loop $recruits $r}
+				<li>
+					<div class="pic"><a href="?m=app&c=recruit&a=show&id={$r[advertise_id]}"><img src="{$r[img_url]}" width="200" height="150" alt=""></a></div>
+					<div class="info" style="width: 960px;">
+						<div class="title"><a href="?m=app&c=recruit&a=show&id={$r[advertise_id]}">{$r[name]}</a></div>
+						<div class="attr">
+							<span class="color">{$r[wages]}</span><em>|</em><span>{$r[local_name]}</span><em>|</em><span>{$r[education]}</span><em>|</em><span>{$r[experience]}</span>
+						</div>
+						<div class="company_name">{$r[enterprise_name]}</div>
+						<div class="time">{$r[uptime]}</div>
+					</div>
+				</li>
+				{/loop}
+			</ul>
+		</div>
+		<div id="pages">{$pages}</div>
+	</div>
+</div>
+
+{template 'content', 'footer'}

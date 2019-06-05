@@ -1,0 +1,371 @@
+<!-- 电子期刊 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+    <script src="statics/mobile/js/rem.js"></script>
+    <link rel="stylesheet" href="statics/mobile/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/global.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/index.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/slider.css">
+    <style>
+        .scro-box {
+            position: relative;
+            height: 25rem;
+        }
+
+        #scroll-con1 {
+            position: absolute;
+        }
+
+        #scroll-con2 {
+            position: absolute;
+        }
+
+        #scroll-con3 {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="ctrl">
+        <span class="ctr-icon glyphicon glyphicon-list"></span>
+    </div>
+
+    <div id="box">
+        <!-- ==============================================================
+        左侧内容区域
+============================================================== -->
+        <div id="left-box">
+            <!-- 轮播图 -->
+            <div class="slider">
+                <img class="img-100" src="statics/mobile/img/20190409110154571.jpg" alt="">
+            </div>
+            <!-- 轮播图 END -->
+            <!-- 导航区域 -->
+             {template "public", 'top', 'mobile'}
+            <!-- 导航区域 END -->
+
+
+            <!-- 报告列表 -->
+            <div class="title between-center text-1 padding-lr-1 margin-top-1">
+                <span class="text-blod">报告列表</span>
+                <span>
+                    <span id="prv_btn1">
+                        <img src="statics/mobile/img/dirl.jpg" alt="" class="pre-btn icon-2">
+                    </span>
+                    <span id="next_btn1">
+                        <img src="statics/mobile/img/dirr.jpg" alt="" class="next-btn icon-2">
+                    </span>
+                </span>
+            </div>
+            <div class="padding-1">
+                <div id="width"></div>
+                <div class="scro-box">
+                    <ul id="scroll-con1" class="scro-con">
+                        {pc:content action="lists" catid="38" num="3" order="listorder desc, id desc"}
+                        {loop $data $r}
+                        <li class="scro-item">
+                            <div class="tag">
+                                <p class="text-2">{date('Y-m-d', $r[inputtime])}</p>
+                            </div>
+                            <div class="poster-item margin-r-05">
+                                <div class="poster margin-top-05">
+                                    <a href="{$r[url]}"><img class="img-100" src="{$r[thumb]}"
+                                        alt="poster"></a>
+                                </div>
+                            </div>
+                        </li>
+                        {/loop}
+                        {/pc}
+
+                    </ul>
+                </div>
+            </div>
+            <!-- 报告列表 END -->
+
+
+
+            <div class="line"></div>
+
+             {template "public", 'footer', 'mobile'}
+        </div>
+        <!-- 左侧内容区域 END -->
+
+
+
+        <!-- ==============================================================
+        右侧菜单区域
+============================================================== -->
+        {template "public", 'rightMenu', 'mobile'}
+    </div>
+    <script src="statics/mobile/js/jquery.min.js"></script>
+    <script src="statics/mobile/bootstrap/js/bootstrap.min.js"></script>
+    <script src="statics/mobile/js/slider.js"></script>
+    <script src="statics/mobile/js/global.js"></script>
+    <script>
+        /**
+         * ===========================================
+         * 报告列表
+         * ==========================================
+         */
+        $width = $('#width').width() / 2;
+        $('#scroll-con1 .scro-item').css('width', $width); // 设置轮播item宽度
+        let $itemLen = $('#scroll-con1 .scro-item').length;
+        let $current = 0;
+        let $item = `<li class="scro-item">
+                    <div class="tag">
+                        <p class="text-2">2018-10-29</p>
+                    </div>
+                        <div class="poster-item margin-r-05">
+                            <div class="poster margin-top-05">
+                                <img class="img-100" src="statics/mobile/img/thumb_318_440_20181029091552915.png"
+                                    alt="poster">
+                            </div>
+                        </div>
+                    </li>`
+        let $scroFlag = true;
+
+        /**
+         * 右
+         */
+        $('#next_btn1').click(function () {
+            console.log('current', $current)
+            console.log('scroFlag', $scroFlag)
+            if ($scroFlag) {
+                $scroFlag = false;
+                setTimeout(function () {
+                    $scroFlag = true;
+                }, 500)
+                $itemLen = $('#scroll-con1 .scro-item').length;
+                let $left = $('#scroll-con1').position().left;
+                $current = $left / $width
+                if ($current < 0) {
+                    $current = -$current
+                }
+                if ($itemLen - $current <= 2) {
+                    console.log('Loading~~~~') // 加载
+                    $('#scroll-con1').append($item)
+                    $('#scroll-con1 .scro-item').css('width', $width); // 设置轮播item宽度
+                    $left = ($left - $width) + 'px';
+                    $('#scroll-con1').animate({
+                        left: $left
+                    }, 500);
+                    return
+                } else {
+                    $left = ($left - $width) + 'px';
+                    $('#scroll-con1').animate({
+                        left: $left
+                    }, 500);
+                }
+            }
+        })
+        /**
+         * 左
+         */
+        $('#prv_btn1').click(function () {
+            console.log('current', $current)
+            console.log('scroFlag', $scroFlag)
+            if ($scroFlag) {
+                $scroFlag = false;
+                setTimeout(function () {
+                    $scroFlag = true;
+                }, 500)
+                $itemLen = $('#scroll-con1 .scro-item').length;
+                let $left = $('#scroll-con1').position().left;
+                $current = $left / $width
+                if ($current < 0) {
+                    $current = -$current
+                }
+                if ($current == 0) {
+                    console.log('第一个，不能向前加载')
+                    return
+                }
+                $left = ($left + $width) + 'px';
+                $('#scroll-con1').animate({
+                    left: $left
+                }, 500);
+            }
+        })
+
+
+
+        /**
+         * =============================================
+         *      电子版展讯
+         * =============================================
+         */
+        $('#scroll-con2 .scro-item').css('width', $width); // 设置轮播item宽度
+        let $itemLen2 = $('#scroll-con .scro-item').length;
+        let $current2 = 0;
+        let $item2 = `<li class="scro-item">
+                            <div class="tag">
+                                <p class="text-2">2018-10-29</p>
+                            </div>
+                            <div class="poster-item margin-r-05">
+                                <div class="poster margin-top-05">
+                                    <img class="img-100" src="statics/mobile/img/thumb_318_440_20181029091552915.png"
+                                        alt="poster">
+                                </div>
+                            </div>
+                        </li>`
+        let $scroFlag2 = true;
+
+        /**
+         * 右
+         */
+        $('#next_btn2').click(function () {
+            console.log('current2', $current2)
+            console.log('scroFlag2', $scroFlag2)
+            if ($scroFlag2) {
+                $scroFlag2 = false;
+                setTimeout(function () {
+                    $scroFlag2 = true;
+                }, 500)
+                $itemLen2 = $('#scroll-con2 .scro-item').length;
+                let $left2 = $('#scroll-con2').position().left;
+                $current2 = $left2 / $width
+                if ($current2 < 0) {
+                    $current2 = -$current2
+                }
+                if ($itemLen2 - $current2 <= 2) {
+                    console.log('Loading~~~~') // 加载
+                    $('#scroll-con2').append($item2)
+                    $('#scroll-con2 .scro-item').css('width', $width); // 设置轮播item宽度
+                    $left2 = ($left2 - $width) + 'px';
+                    $('#scroll-con2').animate({
+                        left: $left2
+                    }, 500);
+                    return
+                } else {
+                    $left2 = ($left2 - $width) + 'px';
+                    $('#scroll-con2').animate({
+                        left: $left2
+                    }, 500);
+                }
+            }
+        })
+        /**
+         * 左
+         */
+        $('#prv_btn2').click(function () {
+            console.log('current2', $current2)
+            console.log('scroFlag2', $scroFlag2)
+            if ($scroFlag2) {
+                $scroFlag2 = false;
+                setTimeout(function () {
+                    $scroFlag2 = true;
+                }, 500)
+                $itemLen2 = $('#scroll-con2 .scro-item2').length;
+                let $left2 = $('#scroll-con2').position().left;
+                $current2 = $left2 / $width
+                if ($current2 < 0) {
+                    $current2 = -$current2
+                }
+                if ($current2 == 0) {
+                    console.log('第一个，不能向前加载')
+                    return
+                }
+                $left2 = ($left2 + $width) + 'px';
+                $('#scroll-con2').animate({
+                    left: $left2
+                }, 500);
+            }
+        })
+
+
+
+
+        /**
+         * =============================================
+         *      其他文件
+         * =============================================
+         */
+        $('#scroll-con3 .scro-item').css('width', $width); // 设置轮播item宽度
+        let $itemLen3 = $('#scroll-con .scro-item').length;
+        let $current3 = 0;
+        let $item3 = `<li class="scro-item">
+                        <div class="tag">
+                            <p class="text-2">2018-10-29</p>
+                        </div>
+                            <div class="poster-item margin-r-05">
+                                <div class="poster margin-top-05">
+                                    <img class="img-100" src="statics/mobile/img/thumb_318_440_20181029091552915.png"
+                                        alt="poster">
+                                </div>
+                            </div>
+                        </li>`
+        let $scroFlag3 = true;
+
+        /**
+         * 右
+         */
+        $('#next_btn3').click(function () {
+            console.log('current3', $current3)
+            console.log('scroFlag3', $scroFlag3)
+            if ($scroFlag3) {
+                $scroFlag3 = false;
+                setTimeout(function () {
+                    $scroFlag3 = true;
+                }, 500)
+                $itemLen3 = $('#scroll-con3 .scro-item').length;
+                let $left3 = $('#scroll-con3').position().left;
+                $current3 = $left3 / $width
+                if ($current3 < 0) {
+                    $current3 = -$current3
+                }
+                if ($itemLen3 - $current3 <= 2) {
+                    console.log('Loading~~~~') // 加载
+                    $('#scroll-con3').append($item3)
+                    $('#scroll-con3 .scro-item').css('width', $width); // 设置轮播item宽度
+                    $left3 = ($left3 - $width) + 'px';
+                    $('#scroll-con3').animate({
+                        left: $left3
+                    }, 500);
+                    return
+                } else {
+                    $left3 = ($left3 - $width) + 'px';
+                    $('#scroll-con3').animate({
+                        left: $left3
+                    }, 500);
+                }
+            }
+        })
+        /**
+         * 左
+         */
+        $('#prv_btn3').click(function () {
+            console.log('current3', $current3)
+            console.log('scroFlag3', $scroFlag3)
+            if ($scroFlag3) {
+                $scroFlag3 = false;
+                setTimeout(function () {
+                    $scroFlag3 = true;
+                }, 500)
+                $itemLen3 = $('#scroll-con3 .scro-item3').length;
+                let $left3 = $('#scroll-con3').position().left;
+                $current3 = $left3 / $width
+                if ($current3 < 0) {
+                    $current3 = -$current3
+                }
+                if ($current3 == 0) {
+                    console.log('第一个，不能向前加载')
+                    return
+                }
+                $left3 = ($left3 + $width) + 'px';
+                $('#scroll-con3').animate({
+                    left: $left3
+                }, 500);
+            }
+        })
+    </script>
+</body>
+
+</html>

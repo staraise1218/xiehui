@@ -1,0 +1,184 @@
+{template 'content', 'header'}
+
+<div class="min-width-1300">
+	<div class="container">
+		<div class="index_video_news">
+			<div class="index_news">
+				<div class="app_title"><a href="{$CATEGORYS[21][url]}">MORE»</a><span>新闻动态</span></div>
+				<ul>
+					{pc:content action="lists" catid="21" num="6" order="listorder desc, id DESC"}
+					{loop $data $r}
+					<li><a href="{$r['url']}" target="_blank">{strcut($r[title], 16)}<span>[{date('Y-m-d', $r[inputtime])}]</span></a></li>
+					{/loop}
+					{/pc}
+				</ul>
+			</div>
+			<div class="index_zazhi_box">
+				<div class="app_title" style="padding-left: 20px;"><a href="{$CATEGORYS[26][url]}">MORE»</a><span>电子期刊</span></div>
+				{pc:content action="lists" catid="17" num="2" order="listorder desc, id DESC"}
+				{loop $data $r}
+
+				<div class="index_zazhi">
+				<div class="date"><span class="day">{date('d', $r[inputtime])}</span><span class="time">{date('Y-m', $r[inputtime])}</span></div>
+				<div class="pic"><a href="{$r[url]}" target="_blank"><img src="{thumb($r[thumb], 318, 440)}" width="265" height="368" alt=""></a></div>
+				</div>
+				{/loop}
+				{/pc}
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+
+<div class="index_app">
+	<div class="container">
+		<div class="index_app_title">APP同步信息</div>
+		<ul>
+			<li><a href="?m=app&c=enterprise&a=lists"><img src="{APP_PATH}statics/default/images/index_16.jpg" width="120" height="120" alt=""><p>企业</p></a></li>
+			<li><a href="?m=app&c=project&a=lists"><img src="{APP_PATH}statics/default/images/index_18.jpg" width="120" height="120" alt=""><p>项目</p></a></li>
+			<li><a href="?m=app&c=product&a=lists"><img src="{APP_PATH}statics/default/images/index_20.jpg" width="120" height="120" alt=""><p>产品</p></a></li>
+			<li><a href="?m=app&c=recruit&a=lists"><img src="{APP_PATH}statics/default/images/index_22.jpg" width="120" height="120" alt=""><p>招聘</p></a></li>
+			<li><a href="?m=app&c=forum&a=artlists"><img src="{APP_PATH}statics/default/images/index_25.jpg" width="120" height="120" alt=""><p>论坛</p></a></li>
+		</ul>
+	</div>
+</div>
+
+<div class="index_exhibition">
+	<div class="container">
+		<div class="index_exhibition_title">历年展会图集</div>
+		<div class="direction">
+			<span class="l"></span>
+			<span class="r"></span>
+		</div>
+		<ul>
+			{pc:content action="lists" catid="22" num="4" order="listorder desc, id desc"}
+			{loop $data $r}
+			<li>
+				<a href="{$r[url]}" target="_blank">
+					<img src="{thumb($r[thumb], 290, 358)}" width="290" height="358" alt="">
+					<p class="tit" title="{$r[title]}">{strcut($r[title], 18)}</p>
+				</a>
+			</li>
+			{/loop}
+			{/pc}
+		</ul>
+	</div>
+</div>
+
+<div class="index_forum">
+	<div class="container">
+		<div class="index_forum_title">历年论坛图集</div>
+		<div class="direction">
+			<span class="l" onclick="move_r('.tuji_forum', 270, 40)"></span>
+			<span class="r" onclick="move_l('.tuji_forum', 270, 40)"></span>
+		</div>
+		<ul class="tuji_forum">
+			{pc:content action="lists" catid="22" num="3" order="listorder desc, id desc"}
+			{loop $data $r}
+			<li>
+				<a href="{$r[url]}" target="_blank">
+					<img src="{thumb($r[thumb], 270, 180)}" width="270" height="180" alt="">
+					<p class="tit">{$r[title]}</p>
+				</a>
+			</li>
+			<li>
+				<a href="{$r[url]}" target="_blank">
+					<img src="{thumb($r[thumb], 270, 180)}" width="270" height="180" alt="">
+					<p class="tit">{$r[title]}</p>
+				</a>
+			</li>
+			<li>
+				<a href="{$r[url]}" target="_blank">
+					<img src="{thumb($r[thumb], 270, 180)}" width="270" height="180" alt="">
+					<p class="tit">{$r[title]}</p>
+				</a>
+			</li>
+			<li>
+				<a href="{$r[url]}" target="_blank">
+					<img src="{thumb($r[thumb], 270, 180)}" width="270" height="180" alt="">
+					<p class="tit">{$r[title]}</p>
+				</a>
+			</li>
+			<li>
+				<a href="{$r[url]}" target="_blank">
+					<img src="{thumb($r[thumb], 270, 180)}" width="270" height="180" alt="">
+					<p class="tit">{$r[title]}</p>
+				</a>
+			</li>
+			<li>
+				<a href="{$r[url]}" target="_blank">
+					<img src="{thumb($r[thumb], 270, 180)}" width="270" height="180" alt="">
+					<p class="tit">{$r[title]}</p>
+				</a>
+			</li>
+			{/loop}
+			{/pc}
+		</ul>
+	</div>
+</div>
+
+<div class="index_exhibition">
+	<div class="container">
+		<div class="index_exhibition_title">历年摩天奖</div>
+		<ul>
+			{pc:content action="lists" catid="24" num="4" order="listorder desc, id desc"}
+			{loop $data $r}
+			<li>
+				<a href="{$r[url]}" target="_blank">
+					<img src="{thumb($r[thumb], 290, 358)}" width="290" height="358" alt="">
+					<p class="tit">{$r[title]}</p>
+				</a>
+			</li>
+			{/loop}
+			{/pc}
+		</ul>
+	</div>
+</div>
+<!-- banner -->
+<script type="text/javascript" src="{APP_PATH}statics/default/js/jquery.flexslider-min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.flexslider').flexslider({
+			directionNav: true,
+			pauseOnAction: false,
+			slideshowSpeed: 3000,
+			directionNav: false,
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	// 初始化宽度
+	init_ul_width('.tuji_forum');
+
+	function init_ul_width(obj){
+		var li_num = $(obj+' li').length;
+	  	var tuji_forum_w = li_num*270+li_num*40;
+	 	$(obj).css('width', tuji_forum_w);
+	}
+
+	function move_r(obj, per_width, space){
+
+		step_width = per_width+space
+
+		$(obj).stop(false, true);
+		if(parseInt($(obj).css('marginLeft')) >= -space) return;
+
+		$(obj).animate({ marginLeft: "+="+step_width }, 500);
+	}
+
+	function move_l(obj, per_width, space){
+		li_num = $(obj+' li').length;
+		step_width = per_width+space
+
+		$(obj).stop(false, true);
+		var marginLeft = Math.abs(parseInt($(obj).css('marginLeft')));
+		var stopLeft = (li_num-4)*per_width+(li_num-4)*space;
+
+		if(marginLeft >= stopLeft) return;
+
+		$(obj).stop(false, true).animate({ marginLeft: "-="+step_width }, 500);
+
+	}
+</script>
+{template 'content', 'footer'}

@@ -1,0 +1,77 @@
+<!-- 法律 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+    <script src="statics/mobile/js/rem.js"></script>
+    <link rel="stylesheet" href="statics/mobile/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/global.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/index.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/slider.css">
+    <style>
+        
+    
+    </style>
+</head>
+
+<body>
+
+    <div id="ctrl">
+        <span class="ctr-icon glyphicon glyphicon-list"></span>
+    </div>
+
+    <div id="box">
+        <!-- ==============================================================
+        左侧内容区域
+============================================================== -->
+        <div id="left-box">
+
+            <!-- 导航区域 -->
+            {template "public", 'top', 'mobile'}
+            <!-- 导航区域 END -->
+
+            <!-- 面包屑导航 -->
+            <div class="nav-link left-center padding-1 text-1">
+                <a href="#">法规标准</a> &nbsp;>&nbsp;
+                <a href="#">法律</a>
+            </div>
+            <p class="color-1 margin-lr-1 padding-b-05 border-bottom">法律</p>
+            <!-- 面包屑导航 END -->
+
+            <ul class="padding-1">
+                {pc:content action="lists" catid="$catid" num="15" order="listorder desc, id DESC" page="$page"}
+                {loop $data $r}
+                <li class="item between-center border-bottom text-1 padding-tb-05">
+                    <a class="color-6" href="{$r[url]}">{$r['title']}</a>
+                    <p class="nowrap color-6">{date('Y-m-d', $r[inputtime])}</p>
+                </li>
+                {/loop}
+                {/pc}
+            </ul>
+
+            <div id="pages">{$pages}</div>
+            
+            <div class="line"></div>
+            <!-- footer -->
+            {template "public", 'footer', 'mobile'}
+        </div>
+        <!-- 左侧内容区域 END -->
+
+        <!-- ==============================================================
+        右侧菜单区域
+============================================================== -->
+        {template "public", 'rightMenu', 'mobile'}
+    </div>
+    <script src="statics/mobile/js/jquery.min.js"></script>
+    <script src="statics/mobile/bootstrap/js/bootstrap.min.js"></script>
+    <script src="statics/mobile/js/index.js"></script>
+    <script src="statics/mobile/js/slider.js"></script>
+    <script src="statics/mobile/js/global.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+<!-- APP 产品详情 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Document</title>
+    <script src="statics/mobile/js/rem.js"></script>
+    <link rel="stylesheet" href="statics/mobile/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/global.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/index.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/slider.css">
+</head>
+    <style>
+        
+        .search-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .search-top input {
+            border: none;
+            padding: .5rem;
+            border-radius: .2rem;
+            flex: 1;
+        }
+        .img-box img {
+            width: 32%;
+            margin-right: .8%;
+        }
+        .img-box img:last-child {
+            margin: 0;
+        }
+        .search-top span {
+            padding: .5rem 1rem;
+            margin-left: 1rem;
+            border-radius: .3rem;
+        }
+
+        .item div:first-child {
+            width: 12rem;
+        }
+        #content {
+            padding: 1rem;
+        }
+        
+        .connect-box li {
+            display: flex;
+            justify-content: flex-start;
+            color: rgba(0,0,0,.5)
+        }
+        .connect-box li p:first-child {
+            width: 7rem;
+        }
+    
+    </style>
+<body>
+
+    <div id="ctrl">
+        <span class="ctr-icon glyphicon glyphicon-list"></span>
+    </div>
+
+    <div id="box">
+        <!-- ==============================================================
+        左侧内容区域
+============================================================== -->
+        <div id="left-box">
+            <!-- 轮播图 -->
+            <div class="slider">
+                <img class="img-100" src="statics/mobile/img/20190409110154571.jpg" alt="">
+            </div>
+            <!-- 轮播图 END -->
+            <!-- 导航区域 -->
+            {template "public", 'top', 'mobile'}
+            <!-- 导航区域 END -->
+
+            <!-- 面包屑导航 -->
+            <div class="nav-link left-center padding-1 text-1">
+                <a href="/index.php?m=app&c=index&a=index">中国游乐APP</a> &nbsp;>&nbsp;
+                <a href="/index.php?m=app&c=project&a=lists">产品列表 </a> &nbsp;>&nbsp;
+                <a href="javascript:;">产品详情</a>
+            </div>
+            <p class="color-1 margin-lr-1 padding-b-05 border-bottom">产品详情</p>
+            <!-- 面包屑导航 END -->
+
+
+            <div id="content">
+                    <div class="img-box">
+                        {loop $images $r}
+                        <img src="{$r}" alt="">
+                        {/loop}
+                    </div>
+    
+    
+                    <!-- 产品介绍 -->
+                    <div class="title padding-tb-1 between-center text-1">
+                        <span>产品介绍</span>
+                        <a class="" href="?m=app&c=product&a=show_case&id={$product_id}">查看成功案例 >> </a>
+                    </div>
+                    <div class="product-con">
+                        {php echo str_replace('/ueditor/php/upload/image', APP_BASE_URL.'/ueditor/php/upload/image', $brief)}
+                    </div>
+
+    
+                    <!-- 联系人 -->
+                    <div class="title padding-tb-1">联系人</div>
+                   {loop $contacts $contact}
+                    <ul class="connect-box">
+                        <li>
+                            <p class="title">联系人姓名</p>
+                            <p class="con">{$contact[fullname]}</p>
+                        </li>
+                        <li>
+                            <p class="title">联系人职务</p>
+                            <p class="con">{$contact[position]}</p>
+                        </li> 
+                        <li>
+                            <p class="title">联系人方式</p>
+                            <p class="con">{$contact[phone]}</p>
+                        </li> 
+                    </ul>
+                    {/loop}
+                </div>
+    
+    
+    
+            <div class="line"></div>
+            <!-- footer -->
+            {template "public", 'footer', 'mobile'}
+        </div>
+        <!-- 左侧内容区域 END -->
+
+
+
+        <!-- ==============================================================
+        右侧菜单区域
+============================================================== -->
+        {template "public", 'rightMenu', 'mobile'}
+    </div>
+    <script src="statics/mobile/js/jquery.min.js"></script>
+    <script src="statics/mobile/bootstrap/js/bootstrap.min.js"></script>
+    <script src="statics/mobile/js/index.js"></script>
+    <script src="statics/mobile/js/slider.js"></script>
+    <script src="statics/mobile/js/global.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+{template 'content', 'header'}
+<div class="categoryimage"><img src="{APP_PATH}statics/default/images/aboutbanner.jpg" alt=""></div>
+<div class="min-width-1300">
+	<div class="container">
+		<div class="crumb">中国游乐APP &gt; 文章列表</div>
+		<div class="forum_title"><a href="javascript:;" class="current">文章列表</a><a href="?m=app&c=forum&a=asklists">问答列表</a></div>
+		{loop $forums $r}
+		<div class="app_forum">
+			<div class="pic"><img src="{if $r[headerimg] != ''}{$r[headerimg]}{else}{IMG_PATH}nophoto.gif{/if}" width="80" height="80" alt=""></div>
+			<div class="info">
+				<div class="title">{$r[nickname]}</div>
+				<div class="attr">{$r[addtime]} <span>浏览人数：{$r[view]}</span></div>
+				<div class="des"><a href="?m=app&c=forum&a=show&type=art&id={$r[inter_id]}">{$r['brief']}</a></div>
+				{if $r[url_info][url_image] != '' && $r[url_info][url_intro]!=''}
+				<div class="info2" dataurl="{$r[url_info][url_link]}" style="cursor: pointer;">
+					<img src="{$r[url_info][url_image]}" width="192" height="192" alt="">
+					<div class="des2">
+						<p><span>{$r[url_info][url_intro]}</span></p>
+					</div>
+				</div>
+				{/if}
+			</div>
+		</div>
+		{/loop}
+		<div id="pages">{$pages}</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="{JS_PATH}dialog.js"></script>
+<style type="text/css">
+	td, th{ padding: 0; border:none; }
+</style>
+<link rel="stylesheet" href="{CSS_PATH}dialog_simp.css">
+
+<script type="text/javascript">
+
+	$('.info2').click(function(){
+		var dataurl = $(this).attr('dataurl');
+		if(dataurl == '') return false;
+		window.top.art.dialog(
+		{
+			title:'查看详情',
+			id:'url_info',
+			iframe:dataurl,
+			width:'900',
+			height:'500'
+		}
+		)
+	})
+
+</script>
+
+{template 'content', 'footer'}

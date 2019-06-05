@@ -1,0 +1,32 @@
+{template 'content', 'header'}
+<div class="categoryimage"><img src="{APP_PATH}statics/default/images/aboutbanner.jpg" alt=""></div>
+<div class="min-width-1300">
+	<div class="container">
+		<div class="crumb">中国游乐APP &gt; 项目列表</div>
+		<div class="category_title">
+			<span>项目列表</span>
+			<form action="" method="get">
+				<input type="hidden" name="m" value="app">
+				<input type="hidden" name="c" value="project">
+				<input type="hidden" name="a" value="lists">
+				<div class="searchpage">
+					<button class="sbt">搜索</button><input type="text" name="keyname" value="{$keyname}">
+				</div>
+			</form>
+		</div>
+		<div class="list">
+			{loop $projects $r}
+			<div class="item">
+				<div class="pic"><a href="?m=app&c=project&a=show&id={$r[project_id]}"><img src="{$r[image_default_url]}" alt="" width="240" height="180"></a></div>
+				<div class="info">
+					<div class="title"><a href="?m=app&c=project&a=show&id={$r[project_id]}">{$r[project_name]}</a></div>
+					<div class="des"><a href="?m=app&c=project&a=show&id={$r[project_id]}">{strcut($r[brief], 260)}</a></div>
+				</div>
+			</div>
+			{/loop}
+		</div>
+		<div id="pages">{$pages}</div>
+	</div>
+</div>
+
+{template 'content', 'footer'}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=1300" />
+	<meta name="format-detection" content="telephone=no">
+	<title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+	<meta name="keywords" content="{$SEO['keyword']}">
+	<meta name="description" content="{$SEO['description']}">
+	<link rel="stylesheet" href="{APP_PATH}statics/default/css/style.css?v=1.1">
+	<link rel="stylesheet" href="{APP_PATH}statics/default/css/flexslider.css">
+	<link rel="stylesheet" href="{APP_PATH}statics/default/css/app.css">
+	<link rel="stylesheet" href="{JS_PATH}ueditor/themes/table_default.css">
+	<script type="text/javascript" src="{APP_PATH}statics/default/js/jquery-1.11.0.min.js"></script>
+	<!-- <script type="text/javascript" src="js/PIE.js"></script> -->
+
+</head>
+<body>
+	<!-- 首页banner -->
+{if $catid == '' && $_GET['m'] == ''}
+<div class="jq22-container">
+	<div class="flexslider">
+		<ul class="slides">
+ 			{pc:get sql="SELECT setting FROM phpcms_poster WHERE spaceid = 11 AND disabled=0 ORDER BY listorder ASC"}
+				{loop $data $r}
+				<?php 
+					$r = json_decode($r['setting'], true);
+					$r = $r[1];
+				?>
+				<li><a href="{if $r[linkurl] != ''}{$r[linkurl]}{else}javascript:;{/if}" target="_blank"><img src="{$r[imageurl]}" alt="{$r[alt]}" title="{$r[alt]}"></a></li>
+				{/loop}
+			{/pc}
+		</ul>
+	</div>
+</div>
+{/if}
+<!-- 新闻中心banner -->
+{if $catid == '16'}
+<div class="jq22-container">
+	<div class="flexslider">
+		<ul class="slides">
+ 			{pc:get sql="SELECT setting FROM phpcms_poster WHERE spaceid = 13 AND disabled=0 ORDER BY listorder ASC"}
+				{loop $data $r}
+				<?php 
+					$r = json_decode($r['setting'], true);
+					$r = $r[1];
+				?>
+				<li><a href="{if $r[linkurl] != ''}{$r[linkurl]}{else}javascript:;{/if}" target="_blank"><img src="{$r[imageurl]}" alt="{$r[alt]}" title="{$r[alt]}"></a></li>
+				{/loop}
+			{/pc}
+		</ul>
+	</div>
+</div>
+{/if}
+<!-- app banner -->
+
+{if $_GET['m'] == 'app' && $_GET['c'] == 'index' && $_GET['a'] == 'index'}
+<div class="jq22-container">
+	<div class="flexslider">
+		<ul class="slides">
+ 			{pc:get sql="SELECT setting FROM phpcms_poster WHERE spaceid = 14 AND disabled=0 ORDER BY listorder ASC"}
+				{loop $data $r}
+				<?php 
+					$r = json_decode($r['setting'], true);
+					$r = $r[1];
+				?>
+				<li><a href="{if $r[linkurl] != ''}{$r[linkurl]}{else}javascript:;{/if}" target="_blank"><img src="{$r[imageurl]}" alt="{$r[alt]}" title="{$r[alt]}"></a></li>
+				{/loop}
+			{/pc}
+		</ul>
+	</div>
+</div>
+{/if}
+<div id="top">
+	<div class="container">
+		<div class="logo"><a href="/"><img src="{APP_PATH}statics/default/images/logo.jpg" alt=""></a></div>
+		<div class="search">
+			<form action="">
+				<input type="text" name="keyword" value="{if $keyword != ''}{$keyword}{/if}" placeholder="搜索">
+			</form>
+		</div>
+		<div class="reglogin"><a href="http://www.chinaattractionsexpo.com" target="_blank">English</a><a href="http://app.caapa.org/index.php/member-default.html" target="_blank">登录</a><a href="?m=app&c=register&a=index" target="_blank">注册</a></div>
+		<div class="clear"></div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$('input[name="keyword"]').keyup(function(e){
+			var keyword = this.value;
+			if(keyword == '') return false;
+
+			if(e.keyCode == '13'){
+				location.href = '{APP_PATH}index.php?m=content&c=index&a=search&siteid=1&keyword='+keyword
+			}
+		})
+	})
+</script>
+<div class="min-width-1300">
+	<div class="container">
+		<div class="menu">
+			{pc:content action="category" catid="0" num="7" siteid="$siteid" order="listorder ASC"}
+			<ul>
+				<!-- <li class="first"><a href="{siteurl($siteid)}">首页</a></li> -->
+					{loop $data $r}
+					<li>
+						<a href="{if $r[catid] == '16'}javascript:;{else}{$r[url]}{/if}">{$r[catname]}</a>
+						{pc:content action="category" catid="$r[catid]" return="subcats"}
+						{if !empty($subcats)}
+						<dl>
+							{loop $subcats $sub}
+							<dt><a href="{$sub[url]}">{$sub[catname]}</a></dt>
+							{/loop}
+						</dl>
+						{/if}
+						{/pc}
+					</li>
+					{/loop}
+			</ul>
+			{/pc}
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="index_heng"></div>
+</div>
+
+

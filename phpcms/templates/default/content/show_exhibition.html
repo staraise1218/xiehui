@@ -1,0 +1,48 @@
+{template 'content', 'header'}
+
+<div class="categoryimage"><img src="{$CATEGORYS[$catid][image]}" alt=""></div>
+<div class="min-width-1300">
+	<div class="container">
+		<div class="crumb">{catpos($catid)} {$title}</div>
+		<div class="category_title">历届展会详情</div>
+		
+		<div class="xqbanner"><img src="{$banner}" width="100%" alt=""></div>
+		<div class="fields">
+			<ul>
+				<li><span class="label">时间：</span>{$time}</li>
+				<li style="width: 700px"><span class="label">地点：</span>{$address}</li>
+			</ul>
+			<ul>
+				<li><span class="label">展会规模：</span>{$guimo}</li>
+				<li><span class="label">展商数：</span>{$zhanshang}</li>
+				<li style="width: 200px;"><span class="label">专业观众：</span>{$guanzhong}</li>
+			</ul>
+
+		</div>
+
+		<div class="act_title"><span>展会图集</span></div>
+		<div class="picbox" id="picbox">
+			<ul>
+				{loop $pics $pic}
+				<li>
+						<img src="{thumb($pic[url], 390, 220)}" width="390" height="220" alt="{$pic[alt]}">
+						<p class="tit">{$pic[alt]}</p>
+				</li>
+				{/loop}
+			</ul>
+		</div>
+
+	</div>
+</div>
+<script type="text/javascript" src="{APP_PATH}statics/plugin/layui/layui.js"></script>
+<script type="text/javascript">
+	layui.use('layer', function(){
+		var layer = layui.layer;
+
+		layer.photos({
+			photos: '#picbox',
+			anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+		});
+	});
+</script>
+{template 'content', 'footer'}

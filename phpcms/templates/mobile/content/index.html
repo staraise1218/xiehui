@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+    <script src="statics/mobile/js/rem.js"></script>
+    <link rel="stylesheet" href="statics/mobile/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/global.css?v=1.3">
+    <link rel="stylesheet" href="statics/mobile/css/css/index.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/slider.css">
+    <style>
+        .scro-box {
+            position: relative;
+            height: 16rem;
+        }
+
+        #scroll-con1 {
+            position: absolute
+        }
+
+        #scroll-con2 {
+            position: absolute
+        }
+
+        #scroll-con3 {
+            position: absolute
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="ctrl">
+        <span class="ctr-icon glyphicon glyphicon-list"></span>
+    </div>
+
+    <div id="box">
+        <!-- ==============================================================
+        左侧内容区域
+============================================================== -->
+        <div id="left-box">
+            <!-- 轮播图 -->
+            <div class="slider">
+                <img class="img-100" src="statics/mobile/img/20190409110154571.jpg" alt="">
+            </div>
+            <!-- 轮播图 END -->
+            <!-- 导航区域 -->
+            {template "public", 'top', 'mobile'}
+            <!-- 导航区域 END -->
+            <!-- 新闻动态 -->
+            <div class="news padding-1">
+                <div class="title between-center text-1">
+                    <span>新闻动态</span>
+                    <a class="" href="{$CATEGORYS[21][url]}">MORE >> </a>
+                </div>
+                <ul class="color-6 text-2">
+                    {pc:content action="lists" catid="21" num="6" order="listorder desc, id DESC"}
+                    {loop $data $r}
+                    <li class="list-item border-bottom padding-tb-05" onclick="window.location={$r['url']}">{$r['title']}</li>
+                    {/loop}
+                    {/pc}
+                </ul>
+            </div>
+            <!-- 新闻动态 END -->
+            <div class="line"></div>
+            <!-- 电子期刊 -->
+            <div class="qikan padding-1">
+                <div class="title between-center text-1">
+                    <span>电子期刊</span>
+                    <a class="" href="{$CATEGORYS[27][url]}">MORE >> </a>
+                </div>
+                <div class="poster-wrapper margin-top-1">
+                    {pc:content action="lists" catid="17" num="2" order="listorder desc, id DESC"}
+                    {loop $data $r}
+                    <div class="poster-item margin-r-05">
+                        <div class="tag">
+                            <p class="text-2">{date('Y-m-d', $r[inputtime])}</p>
+                        </div>
+                        <div class="poster margin-top-05">
+                            <a href="{$r[url]}"><img class="img-100" src="{thumb($r[thumb], 318, 440)}" alt="poster"></a>
+                        </div>
+                    </div>
+                    {/loop}
+                    {/pc}
+                </div>
+            </div>
+            <!-- 电子期刊 END -->
+            <!-- APP 同步信息 -->
+            <div class="app padding-1">
+                <div class="container text-center padding-tb-05">APP同步信息</div>
+                <ul class="app-wrap">
+                    <li>
+                        <a class="text-center color-6" href="#">
+                            <img src="statics/mobile/img/index_16.jpg" alt="icon" class="icon-1">
+                            <div class="text-2 margin-top-05">企业</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-center color-6" href="appList.html">
+                            <img src="statics/mobile/img/index_18.jpg" alt="icon" class="icon-1">
+                            <div class="text-2 margin-top-05">项目</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-center color-6" href="appList.html">
+                            <img src="statics/mobile/img/index_20.jpg" alt="icon" class="icon-1">
+                            <div class="text-2 margin-top-05">产品</div>
+                        </a>
+                    </li>
+                    <li>
+                        <img src="statics/mobile/img/index_22.jpg" alt="icon" class="icon-1">
+                        <div class="text-2 margin-top-05">招聘</div>
+                    </li>
+                    <li>
+                        <a class="text-center color-6" href="appWenzhangList.html">
+                            <img src="statics/mobile/img/index_25.jpg" alt="icon" class="icon-1">
+                            <div class="text-2 margin-top-05">论坛</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- APP 同步信息 END -->
+            <!-- 历年展会图集 -->
+            <div>
+                <div class="title between-center text-1 padding-1">
+                    <span>历年展会图集</span>
+                    <span>
+                        <span id="prv_btn1">
+                            <img src="statics/mobile/img/dirl.jpg" alt="" class="pre-btn icon-2">
+                        </span>
+                        <span id="next_btn1">
+                            <img src="statics/mobile/img/dirr.jpg" alt="" class="next-btn icon-2">
+                        </span>
+                    </span>
+                </div>
+                <div class="scro-box">
+                    <ul id="scroll-con1" class="scro-con">
+                        {pc:content action="lists" catid="22" num="25" order="listorder desc, id desc"}
+                        {loop $data $r}
+                        <li class="scro-item">
+                            <div>
+                                <a href="{$r[url]}"><img class="img-100" src="{thumb($r[thumb], 390, 220)}" alt="">
+                                <p class="text-center scro-tex padding-tb-05">{strcut($r[title], 14)}</p></a>
+                            </div>
+                        </li>
+                        {/loop}
+                        {/pc}
+                    </ul>
+                </div>
+            </div>
+            <!-- 历年展会图集 END -->
+
+
+            <!-- 历年论坛图集 -->
+            <div>
+                <div class="title between-center text-1 padding-1">
+                    <span>历年论坛图集</span>
+                    <span>
+                        <span id="prv_btn2">
+                            <img src="statics/mobile/img/dirl.jpg" alt="" class="pre-btn icon-2">
+                        </span>
+                        <span id="next_btn2">
+                            <img src="statics/mobile/img/dirr.jpg" alt="" class="next-btn icon-2">
+                        </span>
+                    </span>
+                </div>
+                <div class="scro-box">
+                    <ul id="scroll-con2" class="scro-con">
+                        {pc:content action="lists" catid="23" num="25" order="listorder desc, id desc"}
+                        {loop $data $r}
+                        <li class="scro-item">
+                            <div>
+                                <a href="{$r[url]}"><img class="img-100" src="{thumb($r[thumb], 390, 220)}" alt="">
+                                <p class="text-center scro-tex padding-tb-05">{strcut($r[title], 14)}</p></a>
+                            </div>
+                        </li>
+                        {/loop}
+                        {/pc}
+                    </ul>
+                </div>
+            </div>
+            <!-- 历年论坛图集 END -->
+
+
+            <!-- 历年摩天奖 -->
+            <div>
+                <div class="title between-center text-1 padding-1">
+                    <span>历年摩天奖</span>
+                    <span>
+                        <span id="prv_btn3">
+                            <img src="statics/mobile/img/dirl.jpg" alt="" class="pre-btn icon-2">
+                        </span>
+                        <span id="next_btn3">
+                            <img src="statics/mobile/img/dirr.jpg" alt="" class="next-btn icon-2">
+                        </span>
+                    </span>
+                </div>
+                <div class="scro-box">
+                    <ul id="scroll-con3" class="scro-con">
+                        {pc:content action="lists" catid="24" num="25" order="listorder desc, id desc"}
+                        {loop $data $r}
+                        <li class="scro-item">
+                            <div>
+                                <a href="{$r[url]}"><img class="img-100" src="{thumb($r[thumb], 390, 220)}" alt="">
+                                <p class="text-center scro-tex padding-tb-05">{strcut($r[title], 14)}</p></a>
+                            </div>
+                        </li>
+                        {/loop}
+                        {/pc}
+                    </ul>
+                </div>
+            </div>
+            <!-- 历年摩天奖 END -->
+
+            <div class="line"></div>
+
+            <div class="footer">
+                <ul class="footer-wrap text-1">
+                    <li>
+                        <p class="text-center color-5">官方APP</p>
+                        <img class="icon-code" src="statics/mobile/img/20181121034529295.png" alt="二维码">
+                    </li>
+                    <li>
+                        <p class="text-center color-5">协会微信</p>
+                        <img class="icon-code" src="statics/mobile/img/20181121034546370.jpg" alt="二维码">
+                    </li>
+                    <li>
+                        <p class="text-center color-5">展会微信</p>
+                        <img class="icon-code" src="statics/mobile/img/20181121034600156.jpg" alt="二维码">
+                    </li>
+                </ul>
+                <div class="footer-text">
+                    <div class="item between-center text-1">
+                        <div class="left">指导单位：</div>
+                        <div class="right flex-1 color-5">中华人民共和国文化和旅游部 公有资产监督管理委员会</div>
+                    </div>
+                    <div class="item between-center text-1">
+                        <div class="left">版权所有：</div>
+                        <div class="right flex-1 color-5">中国游艺机游乐园协会</div>
+                    </div>
+                    <div class="item between-center text-1">
+                        <div class="left">备案号：</div>
+                        <div class="right flex-1 color-5">京ICP备05018213号-1</div>
+                    </div>
+                    <div class="item between-center text-1">
+                        <div class="left">联系电话：</div>
+                        <div class="right flex-1 color-5">010-57690266</div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-shengming text-center text-1 padding-1">[法律声明] - 京ICP备05018213号-1 © 2018</div>
+        </div>
+        <!-- 左侧内容区域 END -->
+
+
+
+        <!-- ==============================================================
+        右侧菜单区域
+============================================================== -->
+        {template 'public', 'rightMenu', 'mobile'}
+    </div>
+    
+    <script src="statics/mobile/bootstrap/js/bootstrap.min.js"></script>
+    <script src="statics/mobile/js/index.js"></script>
+    <script src="statics/mobile/js/slider.js"></script>
+    <script src="statics/mobile/js/global.js"></script>
+</body>
+
+</html>

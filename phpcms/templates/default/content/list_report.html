@@ -1,0 +1,111 @@
+{template 'content', 'header'}
+<div class="min-width-1300">
+	<div class="container">
+		<div class="news_title">报告列表</div>
+		<div class="direction news_zazhi_d">
+			<span class="l"></span>
+			<span class="r"></span>
+		</div>
+		<div class="news_zazhi report_list">
+			<ul>
+				{pc:content action="lists" catid="38" num="3" order="listorder desc, id desc"}
+				{loop $data $r}
+				<li>
+					<div class="date"><span class="day">{date('d', $r[inputtime])}</span><span class="time">{date('Y.m', $r[inputtime])}</span></div>
+					<div class="pic"><a href="{$r[url]}" target="_blank"><img src="{thumb($r[thumb], 265, 368)}" width="265" height="368" alt=""></a></div>
+					<div class="report_button reportlist_item">
+						<a class="preview" href="/index.php?m=content&c=index&a=preview&type=1&id={$r[id]}" target="_blank">预览</a>
+						<a class="zixun" href="javascript:;" target="_blank">咨询</a>
+						<a class="buy" href="/index.php?m=report&c=index&a=buy&id={$r[id]}" class="buy" target="_blank">购买</a>
+						
+					</div>
+				</li>
+				{/loop}
+				{/pc}
+			</ul>
+		</div>
+	</div>
+</div>
+
+<link rel="stylesheet" href="/statics/plugin/layui/css/modules/layer/default/layer.css">
+<script type="text/javascript" src="/statics/default/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="/statics/plugin/layui/lay/modules/layer.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.report_list').delegate(".zixun","click",function(){
+			layer.open({
+				'content': "详情咨询：<?php echo get_extend_setting('kefu_phone') ?>",
+			})
+		})
+	})
+</script>
+
+<script type="text/javascript">
+	$(function(){
+
+		// 期刊滚动
+		var		li_w = 378, //一个 li 的宽度
+				li_marginLeft = 33, // li 的marginLeft 值
+				step = li_w+li_marginLeft,
+				limit = 1;
+
+		var		moveObj_news_zazhi = $('.news_zazhi ul');//要移动的对象
+
+		var page_news_zazhi = 1, page_l_news_zazhi = 1; // 初始化第一页和取一条数据,
+		
+		// 报告
+		$('.news_zazhi_d .r').click(function(){
+			moveObj_news_zazhi.stop(false, true);
+			if(page_l_news_zazhi < page_news_zazhi){
+				moveObj_news_zazhi.animate({ marginLeft: "-="+step }, 500);
+				page_l_news_zazhi ++;
+				return false;
+			}
+			$.ajax({
+				url: '{APP_PATH}api.php?op=other&act=getNextReport',
+				type: 'post',
+				dataType:'json',
+				data: {page:page_news_zazhi, limit:limit},
+				success: function(data){
+					if(data.code == 400){
+						return false;
+					}
+
+					var info = data.data;
+
+					var ul_w = parseInt(moveObj_news_zazhi.css('width')); // 获取ul原始宽度
+					moveObj_news_zazhi.css('width', ul_w+li_marginLeft+li_w); // 增加一个li的宽度
+
+					var html_li = '<li>'
+						html_li += '<div class="date">'
+						html_li += '<span class="day">'+info.day+'</span>'
+						html_li += '<span class="time">'+info.time+'</span>'
+						html_li += '</div>'
+						html_li += '<div class="pic">'
+						html_li += '<a href="'+info.url+'" target="_blank"><img src="'+info.thumb+'" width="265" height="368" alt=""></a></div>';
+						html_li += '<div class="report_button reportlist_item">\
+										<a class="preview" href="/index.php?m=content&c=index&a=preview&type=1&id='+info.id+'" target="_blank">预览</a>\
+										<a class="zixun" href="javascript:;" target="_blank">咨询</a>\
+										<a class="buy" href="/index.php?m=report&c=index&a=buy&id='+info.id+'" class="buy" target="_blank">购买</a>\
+									</div>';
+						html_li += '</li>';
+					moveObj_news_zazhi.append(html_li);
+
+					moveObj_news_zazhi.animate({ marginLeft: "-="+step }, 500);
+
+					page_news_zazhi ++;
+					page_l_news_zazhi ++;
+				}
+			})
+		})
+		$('.news_zazhi_d .l').click(function(){
+			moveObj_news_zazhi.stop(false, true);
+			if(parseInt(moveObj_news_zazhi.css('marginLeft')) >= 0) return;
+
+			moveObj_news_zazhi.animate({ marginLeft: "+="+step }, 500);
+			page_l_news_zazhi --;
+		})
+	})
+</script>
+
+{template 'content', 'footer'}

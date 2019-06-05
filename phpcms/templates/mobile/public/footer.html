@@ -1,0 +1,41 @@
+<div class="footer">
+                <ul class="footer-wrap text-1">
+                    {pc:get sql="SELECT name, setting FROM phpcms_poster WHERE spaceid = 12 AND disabled=0 ORDER BY listorder ASC"}
+                    {loop $data $r}
+                    <?php 
+                        $image = json_decode($r['setting'], true);
+                        $image = $image[1];
+                    ?>
+                    <li>
+                        <p class="text-center color-5">{$r[name]}</p>
+                        <img class="icon-code" src="{$image[imageurl]}" alt="{$image[alt]}">
+                    </li>
+                    {/loop}
+                    {/pc}
+                </ul>
+                <div class="footer-text">
+                    <div class="item between-center text-1">
+                        <div class="left">指导单位：</div>
+                        <div class="right flex-1 color-5">
+                            {pc:link action="lists" typeid="0" siteid="$siteid" linktype="0" order="desc" num="2"}
+                            {loop $data $r}
+                            <span><a href="{$r[url]}">{$r[name]}</a></span>
+                            {/loop}
+                            {/pc}
+                        </div>
+                    </div>
+                    <div class="item between-center text-1">
+                        <div class="left">版权所有：</div>
+                        <div class="right flex-1 color-5">{$SEO['copyright']}</div>
+                    </div>
+                    <div class="item between-center text-1">
+                        <div class="left">备案号：</div>
+                        <div class="right flex-1 color-5">{$SEO['beian']}</div>
+                    </div>
+                    <div class="item between-center text-1">
+                        <div class="left">联系电话：</div>
+                        <div class="right flex-1 color-5">{$SEO['phone']}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-shengming text-center text-1 padding-1">[法律声明] - 京ICP备05018213号-1 © 2018</div>

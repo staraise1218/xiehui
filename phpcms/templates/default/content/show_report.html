@@ -1,0 +1,44 @@
+{template 'content', 'header'}
+
+<div class="min-width-1300">
+	<div class="container">
+
+		<div class="crumb">文件下载 > 报告购买 > 报告名称</div>
+		<div class="baogao_description">
+			<div class="thumb baogao">
+				<img src="{thumb($thumb, 265, 368)}" alt="">
+			</div>
+			
+		</div>
+		
+		<div class="page_content baogao_content">
+			<h3>{$title}</h3>
+			<div style="margin-top: 10px;">{$content}</div>
+			<div class="baogaodown">
+				<p>本文可以预览5页，如需看完整请购买</p>
+				<p>￥{number_format($price, 2)} 元</p>
+				<div class="report_button">
+					<a class="preview" href="/index.php?m=content&c=index&a=preview&type=1&id={$id}" target="_blank">预览</a>
+					<a class="zixun" href="javascript:;" target="_blank">咨询</a>
+					<a class="buy" href="/index.php?m=report&c=index&a=buy&id={$id}" class="buy" target="_blank">购买</a>
+					
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<link rel="stylesheet" href="/statics/plugin/layui/css/modules/layer/default/layer.css">
+<script type="text/javascript" src="/statics/default/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="/statics/plugin/layui/lay/modules/layer.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.zixun').click(function(){
+			layer.open({
+				'content': "详情咨询：<?php echo get_extend_setting('kefu_phone') ?>",
+			})
+		})
+	})
+</script>
+	
+{template 'content', 'footer'}

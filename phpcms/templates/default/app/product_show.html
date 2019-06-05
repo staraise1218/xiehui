@@ -1,0 +1,74 @@
+{template 'content', 'header'}
+<div class="categoryimage"><img src="{APP_PATH}statics/default/images/aboutbanner.jpg" alt=""></div>
+<div class="min-width-1300">
+	<div class="container">
+		<div class="crumb">中国游乐APP &gt; 产品列表 > 产品详情</div>
+		<div class="category_title" style="color: #000;">{$project_name}</div>
+		<div class="tuji">
+			{if count($images) > 3}
+			<div class="direction">
+				<span class="l"></span>
+				<span class="r"></span>
+			</div>
+			{/if}
+			<ul class="tujibox">
+				{loop $images $r}
+				<li><img src="{$r}" width="390" height="300" alt=""></li>
+				{/loop}
+			</ul>
+		</div>
+
+		<div class="showtitle">产品介绍</div>
+		<div class="page_content">{php echo str_replace('/ueditor/php/upload/image', APP_BASE_URL.'/ueditor/php/upload/image', $brief)}</div>
+		
+		<div class="case"><a href="?m=app&c=product&a=show_case&id={$product_id}">查看成功案例</a></div>
+		{if !empty($certs)}
+		<div class="showtitle2">标准认证资格</div>
+		<div class="renzheng">
+			<ul>
+				{loop $certs $r}
+				<li><img src="{$r[cert_image]}" width="325" height="235" alt=""></li>
+				{/loop}
+			</ul>
+		</div>
+		{/if}
+		<div class="showtitle2">联系人</div>
+		<div class="contact_list">
+			{loop $contact $r}
+			<ul>
+				<li>联系人姓名：{$r[fullname]}</li>
+				<li>联系人职务：{$r[position]}</li>
+				<li>联系人方式：{$r[phone]}</li>
+			</ul>
+			{/loop}
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+
+		// 图集滚动
+		  // 设置ul总宽度
+		  var li_num = $('.tujibox li').length;
+		  var tujibox_w = li_num*390+li_num*15;
+		  $('.tujibox').css('width', tujibox_w);
+
+		$('.direction .r').click(function(){
+			$('.tujibox').stop(false, true);
+			var marginLeft = Math.abs(parseInt($('.tujibox').css('marginLeft')));
+			var stopLeft = (li_num-3)*390+(li_num-4)*15;
+
+			if(marginLeft >= stopLeft) return;
+
+			$('.tujibox').stop(false, true).animate({ marginLeft: "-=405" }, 500);
+		})
+		$('.direction .l').click(function(){
+			$('.tujibox').stop(false, true);
+			if(parseInt($('.tujibox').css('marginLeft')) >= 0) return;
+
+			$('.tujibox').animate({ marginLeft: "+=405" }, 500);
+		})
+	})
+</script>
+
+{template 'content', 'footer'}

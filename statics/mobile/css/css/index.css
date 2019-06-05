@@ -1,0 +1,111 @@
+
+
+a {
+    color: #B9585A;
+}
+
+
+
+
+/**
+ * 轮播图
+ */
+.slider {
+    width: 100%;
+}
+
+
+
+
+
+
+/**
+ * 新闻动态
+ */
+
+
+
+/**
+ * 电子期刊
+ */
+.qikan .poster-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.qikan .poster-wrapper .poster-item {
+    flex: 1;
+    justify-content: space-between;
+}
+.tag {
+    background: #F8E7E9;
+    display: inline-block;
+}
+.tag p {
+    margin: 0;
+    padding: .1rem;
+}
+.poster {
+    flex: 1;
+    min-height: 10rem;
+}
+
+
+
+
+
+/**
+ * APP 同步信息
+ */
+.app {
+    background-image: url('../../img/index_h.jpg')
+} 
+.app-wrap {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.app-wrap li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.scro-box {
+    width: 100%;
+    overflow: hidden;
+}
+.scro-con {
+    white-space: nowrap;
+    font-size: 0;
+}
+.scro-tex {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+}
+
+.scro-item {
+    width: 15.5rem;
+    display: inline-block;
+    padding: 0 .5rem;
+}
+.scro-item:first-child {
+    /* padding-left: 1rem; */
+}
+
+
+
+
+
+/* .scro-item {
+    width: 17.25rem;
+    display: inline-block;
+    box-sizing: border-box;
+} */
+.scro-box .scro-item div {
+    box-shadow: .3rem .3rem .3rem rgba(0,0,0,0.1);
+}
+
+
+
+

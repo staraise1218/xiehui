@@ -1,0 +1,253 @@
+<!-- 展会 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+    <script src="statics/mobile/js/rem.js"></script>
+    <link rel="stylesheet" href="statics/mobile/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/global.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/index.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/slider.css">
+    <style>
+        .poster-list-wrap {
+            margin: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap
+        }
+
+        .poster-list-wrap .item {
+            position: relative;
+            width: 30rem;
+            flex: 1;
+            flex-wrap: wrap;
+        }
+
+        .poster-list-wrap .item:first-child {
+            margin-right: 1rem
+        }
+
+        .poster-list-wrap .item div {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem;
+        }
+
+        .poster-list-wrap .item div p:last-child {
+            font-size: 1rem
+        }
+
+        .poster-list-wrap .item:first-child div {
+            top: 0
+        }
+
+        .poster-list-wrap .item:last-child div {
+            bottom: 0
+        }
+
+        .poster-list-wrap .item img {
+            width: 100%;
+        }
+
+        .cum-nav {
+            display: flex;
+            justify-content: space-between;
+        }
+        #scro-box1 {
+            position: relative;
+            height: 13rem;
+        }
+        #scroll-con1 {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="ctrl">
+        <span class="ctr-icon glyphicon glyphicon-list"></span>
+    </div>
+
+    <div id="box">
+        <!-- ==============================================================
+        左侧内容区域
+============================================================== -->
+        <div id="left-box">
+            <!-- 轮播图 -->
+            <div class="slider">
+                <img class="img-100" src="statics/mobile/img/20190409110154571.jpg" alt="">
+            </div>
+            <!-- 轮播图 END -->
+            <!-- 导航区域 -->
+            {template "public", 'top', 'mobile'}
+            <!-- 导航区域 END -->
+
+            <!-- 面包屑导航 -->
+            <div class="nav-link left-center padding-1 text-1">
+                展会 > {catpos($catid)}
+            </div>
+            <!-- 面包屑导航 END -->
+
+            <div class="container text-center">
+                <h4 class="text-center padding-1 color-1 title-bg">展会介绍</h4>
+                {$description}
+
+                
+                <div class="button-wrapper margin-top-4">
+                    <button class="btn-war margin-r-5 text-1 "><a class="color-f" href="index.php?m=activity&a=exhibition_join&exhibition_type={$exhibition_type}">我要参展</a></button>
+                    <button class="btn-def text-1"><a href="http://ezt.exporegist.com/CCPIACn/index.html" class="color-f">我要参观</a> </button>
+                </div>
+            </div>
+
+            <!-- 历年图集 -->
+            <h4 class="text-center margin-top-3 padding-1 color-1 title-bg">历年图集</h4>
+            <div>
+                <div class="title between-center text-1 padding-1">
+                    <span></span>
+                    <span>
+                        <span id="prv_btn1">
+                            <img src="statics/mobile/img/dirl.jpg" alt="" class="pre-btn icon-2">
+                        </span>
+                        <span id="next_btn1">
+                            <img src="statics/mobile/img/dirr.jpg" alt="" class="next-btn icon-2">
+                        </span>
+                    </span>
+                </div>
+                <div id="scro-box1" class="scro-box">
+                    <ul id="scroll-con1" class="scro-con">
+                        {pc:content action="lists" catid="22" num="20" order="listorder desc, id desc"}
+                        {loop $data $r}
+                        <li class="scro-item">
+                            <div>
+                                <a href="{$r[url]}"><img class="img-100" src="{thumb($r[thumb], 390, 220)}" alt="">
+                                <p class="text-center scro-tex padding-tb-05">{$r[title]}</p></a>
+                            </div>
+                        </li>
+                        {/loop}
+                        {/pc}
+                    </ul>
+                </div>
+            </div>
+            <!-- 历年展会图集 END -->
+
+
+            <h4 class="text-center margin-top-3 padding-1 color-1 title-bg">展商名录</h4>
+            <div class="padding-1">
+                <img src="{$minglu}" style="width: 100%;" alt="">
+            </div>
+
+            <h4 class="text-center margin-top-3 padding-1 color-1 title-bg">赞助与合作</h4>
+            <div class="padding-1">
+                <img src="{$cooperation}" style="width: 100%;" alt="">
+            </div>
+
+
+
+            <div class="line"></div>
+            <!-- footer -->
+            {template "public", 'footer', 'mobile'}
+        </div>
+        <!-- 左侧内容区域 END -->
+
+        <!-- ==============================================================
+        右侧菜单区域
+============================================================== -->
+        {template "public", 'rightMenu', 'mobile'}
+    </div>
+    <script src="statics/mobile/js/jquery.min.js"></script>
+    <script src="statics/mobile/bootstrap/js/bootstrap.min.js"></script>
+    <script src="statics/mobile/js/slider.js"></script>
+    <script src="statics/mobile/js/global.js"></script>
+    <script>
+        /**
+         * =============================================
+         *      动态效果部分
+         * =============================================
+         */
+        $width = $('body').width() / 2;
+        $('#scroll-con1 .scro-item').css('width', $width); // 设置轮播item宽度
+        let $itemLen = $('#scroll-con1 .scro-item').length;
+        let $current = 0;
+        /*let $item = `
+<li class="scro-item">
+    <div>
+        <img class="img-100" src="statics/mobile/img/thumb_390_220_20180303033246301.jpg" alt="">
+        <p class="text-center scro-tex padding-tb-05">文字文字文字</p>
+    </div>
+</li>`*/
+        let $scroFlag = true;
+
+        /**
+         * 右
+         */
+        $('#next_btn1').click(function () {
+            console.log('current', $current)
+            console.log('scroFlag', $scroFlag)
+            if ($scroFlag) {
+                $scroFlag = false;
+                setTimeout(function () {
+                    $scroFlag = true;
+                }, 500)
+                $itemLen = $('#scroll-con1 .scro-item').length;
+                let $left = $('#scroll-con1').position().left;
+                $current = $left / $width
+                if ($current < 0) {
+                    $current = -$current
+                }
+                if ($itemLen - $current <= 2) {
+                    console.log('Loading~~~~') // 加载
+                    // $('#scroll-con1').append($item)
+                    $('#scroll-con1 .scro-item').css('width', $width); // 设置轮播item宽度
+                    $left = ($left - $width) + 'px';
+                    $('#scroll-con1').animate({
+                        left: $left
+                    }, 500);
+                    return
+                } else {
+                    $left = ($left - $width) + 'px';
+                    $('#scroll-con1').animate({
+                        left: $left
+                    }, 500);
+                }
+            }
+        })
+        /**
+         * 左
+         */
+        $('#prv_btn1').click(function () {
+            console.log('current', $current)
+            console.log('scroFlag', $scroFlag)
+            if ($scroFlag) {
+                $scroFlag = false;
+                setTimeout(function () {
+                    $scroFlag = true;
+                }, 500)
+                $itemLen = $('#scroll-con1 .scro-item').length;
+                let $left = $('#scroll-con1').position().left;
+                $current = $left / $width
+                if ($current < 0) {
+                    $current = -$current
+                }
+                if ($current == 0) {
+                    console.log('第一个，不能向前加载')
+                    return
+                }
+                $left = ($left + $width) + 'px';
+                $('#scroll-con1').animate({
+                    left: $left
+                }, 500);
+            }
+        })
+    </script>
+</body>
+
+</html>

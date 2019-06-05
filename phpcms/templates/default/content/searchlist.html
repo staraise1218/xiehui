@@ -1,0 +1,49 @@
+{template 'content', 'header'}
+<div class="categoryimage"><img src="{APP_PATH}statics/default/images/aboutbanner.jpg" alt=""></div>
+<div class="min-width-1300">
+	<div class="container">
+
+		<div class="crumb">搜索结果页</div>
+		<div class="searchform">
+			<div class="guan">关键字</div>
+			<input class="searchword" type="text" name="searchword" value="{if $keyword != ''}{$keyword}{/if}" />
+			<button class="searchbutton" type="button">搜索</button>
+		</div>
+		<div class="searchlist">
+
+			{if !empty($lists)}
+			<ul>
+				{loop $lists $r}
+				<li><a href="{$r[url]}" target="_blank"><span>•</span>{$r[title]}</a></li>
+				{/loop}
+			</ul>
+			{else}
+			<span class="nosearch">没有找到您要搜索的内容，请尝试其他搜索条件。</span>
+			{/if}
+		</div>
+		<div id="pages">{$pages}</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$('.searchbutton').click(function(e){
+			var keyword = $('input[name=searchword]').val();
+			if(keyword == '') return false;
+
+			
+
+			location.href = '{APP_PATH}index.php?m=content&c=index&a=search&siteid=1&keyword='+keyword
+
+		})
+
+		$('input[name="searchword"]').keyup(function(e){
+			var keyword = $('input[name=searchword]').val();
+			if(keyword == '') return false;
+
+			if(e.keyCode == '13'){
+				location.href = '{APP_PATH}index.php?m=content&c=index&a=search&siteid=1&keyword='+keyword
+			}
+		})
+	})
+</script>
+{template 'content', 'footer'}

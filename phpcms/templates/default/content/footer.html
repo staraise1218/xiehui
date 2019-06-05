@@ -1,0 +1,48 @@
+
+<div class="ch"></div>
+<div class="footer">
+	<div class="container" style="overflow: hidden;">
+		<div class="foot_l">
+			<ul>
+				<li><span class="lable">指导单位：</span>{pc:link action="lists" typeid="0" siteid="$siteid" linktype="0" order="desc" num="2"}{loop $data $r}<span class="huoban"><a href="{$r[url]}" target="_blank">{$r[name]}</a></span>
+					{/loop}
+					{/pc}
+				</li>
+				<li><span class="lable">版权所有：</span>{$SEO['copyright']}</li>
+				<li><span class="lable">备案号：</span>{$SEO['beian']}</li>
+				<li><span class="lable">联系电话：</span>{$SEO['phone']}</li>
+			</ul>
+		</div>
+		<div class="foot_r">
+			
+			
+			{pc:get sql="SELECT name, setting FROM phpcms_poster WHERE spaceid = 12 AND disabled=0 ORDER BY listorder ASC"}
+			<ul>
+				{loop $data $r}
+				<?php 
+					$image = json_decode($r['setting'], true);
+					$image = $image[1];
+				?>
+				<li><p>{$r[name]}</p><img src="{$image[imageurl]}" width="110" height="110" alt="{$image[alt]}"></li>
+				{/loop}
+			</ul>
+			{/pc}
+		</div>
+
+	</div>
+	<div class="foot_b">[法律声明] - 京ICP备05018213号-1 © 2018</div>
+</div>
+
+
+<script type="text/javascript">
+	// 导航下拉
+	$(function(){
+		$('.menu li').hover(function(){
+			$(this).find('dl').show();
+		}, function(){
+			$(this).find('dl').hide();
+		})
+	})
+</script>
+</body>
+</html>

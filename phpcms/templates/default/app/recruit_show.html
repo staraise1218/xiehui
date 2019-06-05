@@ -1,0 +1,38 @@
+{template 'content', 'header'}
+<div class="categoryimage"><img src="{APP_PATH}statics/default/images/aboutbanner.jpg" alt=""></div>
+<div class="min-width-1300">
+	<div class="container">
+		<div class="crumb">中国游乐APP &gt; 招聘列表 > 招聘详情</div>
+		<div class="category_title" style="color: #000;">{$advertise[0]}</div>
+
+		<div class="showtitle2">{$advertise[0]}</div>
+		<div class="recruit_basic">
+			<p><label>公司名称</label>{$enterprise[enterprise_name]}</p>
+			<p><label>职位性质</label>{$advertise[2]}</p>
+			<p><label>招聘人数</label>{$advertise[7]} 人</p>
+			<p><label>工作经验</label>{$advertise[4]}</p>
+			<p><label>工资待遇</label>{$advertise[1]}</p>
+			<p><label>工作地点</label>{$advertise[3]}</p>
+			<p><label>职位类别</label>{$advertise[0]}</p>
+			<p><label>发布时间</label>{$advertise[5]}</p>
+		</div>
+		<div class="showtitle3">职位描述</div>
+		<div class="page_content"><pre>{$zhiweiyaoqiu}</pre></div>
+		<div class="showtitle3">公司联系方式</div>
+		<div class="page_content">
+			<div class="cont">
+				{if $gongzuodizhi != ''}
+				<div>地址 {$gongzuodizhi}</div>
+				{/if}
+				{if $lianxiren != ''}
+				<div>{$lianxiren} {$lianxirenzhiwu} {$lianxirendianhua}</div>
+				{/if}
+				{if $email != ''}
+				<div>邮箱 {$email}</div>
+				{/if}
+				
+			</div>
+		</div>
+	</div>
+</div>
+{template 'content', 'footer'}

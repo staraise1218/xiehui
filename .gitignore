@@ -1,0 +1,4 @@
+caches/
+uploadfile/
+statics/plugin/payment/alipay/config.php
+statics/plugin/payment/wxpay/WxPayConfig.php

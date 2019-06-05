@@ -1,0 +1,39 @@
+{template 'content', 'header'}
+<div class="categoryimage"><img src="{$image}" alt=""></div>
+<div class="min-width-1300">
+	<div class="container">
+		<div class="page_left">
+			<div class="title">协会简介</div>
+			<ul class="navlist">
+				{pc:content action="category" catid="1" num="25" siteid="$siteid" order="listorder desc, id desc"}
+				{loop $data $n $r}
+				<li {if $r[catid] == $catid} class="current"{/if}><a href="{$r[url]}">{$r[catname]}</a></li>
+				{/loop}
+				{/pc}
+			</ul>
+		</div>
+		<div class="page_right">
+			<div class="crumb">{catpos($catid)}</div>
+			<div class="category_title">{$catname}</div>
+			<div class="page_content">
+				{$content}
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+
+{template 'content', 'footer'}
+
+<script type="text/javascript">
+	if(GetQueryString('catid')=='1'){
+		var url = window.location.href.replace('catid=1', 'catid=2');
+		window.location.href=url
+	}
+	function GetQueryString(name)
+	{
+	     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	     var r = window.location.search.substr(1).match(reg);
+	     if(r!=null)return  unescape(r[2]); return null;
+	}
+</script>

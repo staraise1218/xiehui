@@ -1,0 +1,15 @@
+{template 'content', 'header'}
+<div class="categoryimage"><img src="{$CATEGORYS[$catid][image]}" alt=""></div>
+<div class="min-width-1300">
+	<div class="container">
+
+		<div class="crumb">{catpos($catid)}</div>
+		<div class="category_title">{$title}</div>
+		<div class="page_content">
+			{$content}
+		</div>
+
+	</div>
+
+</div>
+{template 'content', 'footer'}

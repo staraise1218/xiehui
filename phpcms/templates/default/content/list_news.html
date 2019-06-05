@@ -1,0 +1,26 @@
+{template 'content', 'header'}
+<div class="categoryimage"><img src="{$CATEGORYS[$catid][image]}" alt=""></div>
+<div class="min-width-1300">
+	<div class="container">
+
+		<div class="crumb">{catpos($catid)}</div>
+		<div class="category_title">新闻中心</div>
+		<div class="news_list">
+			<ul>
+				{pc:content action="lists" catid="$catid" num="20" order="listorder desc, id DESC" page="$page"}
+				{loop $data $r}
+				<li>
+					<div class="title"><a href="{$r[url]}" target="_blank">{$r[title]}</a></div>
+					<div class="time">{date('Y-m-d', $r[inputtime])}</div>
+					<div class="des">{$r[description]}</div>
+				</li>
+				{/loop}
+				{/pc}
+			</ul>
+		</div>
+		<div id="pages">{$pages}</div>
+
+	</div>
+</div>
+
+{template 'content', 'footer'}

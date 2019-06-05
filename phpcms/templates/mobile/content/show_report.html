@@ -1,0 +1,91 @@
+<!-- 页面 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+    <script src="statics/mobile/js/rem.js"></script>
+    <link rel="stylesheet" href="statics/mobile/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/global.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/index.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/slider.css">
+</head>
+
+<body>
+
+    <div id="ctrl">
+        <span class="ctr-icon glyphicon glyphicon-list"></span>
+    </div>
+
+    <div id="box">
+        <!-- ==============================================================
+        左侧内容区域
+============================================================== -->
+        <div id="left-box">
+            <!-- 轮播图 -->
+            <div class="slider">
+                <img class="img-100" src="statics/mobile/img/20190409110154571.jpg" alt="">
+            </div>
+            <!-- 轮播图 END -->
+            <!-- 导航区域 -->
+            {template "public", 'top', 'mobile'}
+            <!-- 导航区域 END -->
+
+            <!-- 面包屑导航 -->
+            <div class="nav-link left-center padding-1 text-1">
+                新闻中心 > 报告购买 > {$title}
+            </div>
+            <p class="color-1 margin-lr-1 padding-b-05 border-bottom">报告详情</p>
+            <!-- 面包屑导航 END -->
+            <div class="text-center margin-top-2">
+                <img class="img-50" src="statics/mobile/img/thumb_318_440_20181029091552915.png" alt="">
+            </div>
+            <p class="text-indent padding-1">
+                《中国游乐》杂志前身为1987年创刊的《游艺机游乐园》，由中国游艺机游乐园协会编辑出版，于2014年正式升级改版，每刊发行纸质杂志约25000份，电子杂志约10万份。《中国游乐》是一本从协会服务角度探讨中国游乐行业发展的杂志，是连接供需双方的服务平台，是一个展示文化旅游市场的专业媒体。
+                栏目设置
+            </p>
+
+
+            <p class="text-indent padding-1">
+                行业动态：以新闻人的敏锐，以客观的视角，走近焦点事件。通过《中国游乐》深入采访，纵深解读企业关注的政策、法规以及市场动向和行业焦点或以焦点问题为主题召开主题会议，汇总各方意见全方位呈现观点探寻求解之道。
+                行业前沿：主题公园所应用的先进技术、先进运营理念进行报道，每期采访五到六家的相关企业。它既是了解行业前沿的技术、理念、法律法规的窗口，也是展示企业风采的平台。
+            </p>
+
+            <div class="margin-1 padding-1 bg-gray">
+                <p class="text-center">本文本可以预览5页，如需看完整请购买</p>
+                <p class="text-center padding-1">
+                    <b>￥100.00</b>
+                </p>
+                <div class="text-center">
+                    <button class="btn-border-1" onclick="window.location='/index.php?m=content&c=index&a=preview&type=1&id={$id}'">预览</button>
+                    <button class="btn-war" onclick="window.location='/index.php?m=report&c=index&a=buy&id={$id}'">购买</button>
+                </div>
+            </div>
+
+
+            <div class="line"></div>
+            <!-- footer -->
+            {template "public", 'footer', 'mobile'}
+        </div>
+        <!-- 左侧内容区域 END -->
+
+
+
+        <!-- ==============================================================
+        右侧菜单区域
+============================================================== -->
+        
+        {template "public", 'rightMenu', 'mobile'}
+    </div>
+    <script src="statics/mobile/js/jquery.min.js"></script>
+    <script src="statics/mobile/bootstrap/js/bootstrap.min.js"></script>
+    <script src="statics/mobile/js/index.js"></script>
+    <script src="statics/mobile/js/slider.js"></script>
+    <script src="statics/mobile/js/global.js"></script>
+</body>
+
+</html>

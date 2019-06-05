@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=1300px" /> 
+	<title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}-注册中国游乐APP</title>
+	<meta name="keywords" content="{$SEO['keyword']}">
+	<meta name="description" content="{$SEO['description']}">
+	<link rel="stylesheet" href="{APP_PATH}statics/default/css/style.css">
+	<link rel="stylesheet" href="{APP_PATH}statics/default/css/app.css">
+	<link rel="stylesheet" href="{APP_PATH}statics/plugin/layui/css/modules/layer/default/layer.css">
+	<script type="text/javascript" src="{APP_PATH}statics/default/js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="{APP_PATH}statics/default/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="{APP_PATH}statics/plugin/layui/lay/modules/layer.js"></script>
+</head>
+<body>
+<div class="regbg">
+	<img src="{APP_PATH}statics/default/images/regbg.jpg" alt="">
+</div>
+<div class="regbox">
+	<div class="container">
+		<div class="reg_left">
+			<!-- <p class="p1">行业平台铸就行业品牌</p> -->
+			<!-- <p class="p2">—— 走出自己的风景</p> -->
+		</div>
+		<div class="reg_right">
+			
+			<div class="regform">
+				<div class="tab"><span tab="company" class="current">注册企业账户</span><span tab="person">注册个人账户</span></div>
+				<div class="company_reg regtype">
+					<form action="">
+					<input type="text" class="input input-phone" name="email" id="email" value="" placeholder="请输入邮箱">
+					<div class="vcodebox">
+						<input type="text" name="vcode" id="vcode_email" value="" placeholder="请输入验证码"><span class="getEmailcode">获取验证码</span>
+					</div>
+					<input type="password" class="input" name="pwd" id="pwd_email" value="" placeholder="请输入密码">
+					<input type="password" class="input" name="confirm_pwd" id="confirm_pwd_email" value="" placeholder="请确认密码">
+					<div class="xieyi">
+						<input type="checkbox" name="agree_email" id="agree_email">  我同意<a href="javascript:;" class="read_xieyi">《用户注册协议》</a>
+					</div>
+					<button type="button" class="submit company_submit">注册</button>
+					</form>
+				</div>
+				<div class="person_reg regtype">
+					<form action="">
+					<input type="text" class="input input-phone" name="phone" id="phone" value="" placeholder="请输入手机号">
+					<div class="vcodebox">
+						<input type="text" name="vcode" id="vcode_phone" value="" placeholder="请输入验证码"><span class="getcode">获取验证码</span>
+					</div>
+					<input type="password" class="input" name="pwd" id="pwd" value="" placeholder="请输入密码">
+					<input type="password" class="input" name="confirm_pwd" id="confirm_pwd" value="" placeholder="请确认密码">
+					<div class="xieyi">
+						<input type="checkbox" name="agree" id="agree"> 我同意<a href="javascript:;" class="read_xieyi">《用户注册协议》</a>
+					</div>
+					<button type="button" class="submit person_submit">注册</button>
+					</form>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$('.tab span').click(function(){
+			$(this).addClass('current').siblings('span').removeClass('current');
+			var tab = $(this).attr('tab');
+
+			$('.regtype').hide();
+			$('.'+tab+'_reg').show();
+		})
+
+		// 提交表单验证
+		$('.person_submit').click(function(){
+			
+			var form = $(this).parents('form');
+
+			// 手机号码验证
+			var phone = form.find('#phone').val();
+			if(!isPhone(phone)){
+				tips('手机号格式错误', '#phone');
+				return false;
+			}
+
+			var vcode = form.find('#vcode_phone').val();
+			if(vcode == ''){
+				tips('请填写验证码', '#vcode_phone');
+				return false;
+			}
+
+			var pwd = form.find('#pwd').val();
+			if(pwd == ''){
+				tips('请填写密码', '#pwd');
+				return false;
+			}
+
+			var confirm_pwd = form.find('#confirm_pwd').val();
+			if(confirm_pwd != pwd){
+				tips('两次密码不一致', '#confirm_pwd');
+				return false;
+			}
+			if(form.find('#agree').prop('checked') != true){
+				tips('请同意《用户注册协议》', '#agree');
+				return false;
+			}
+
+			$(this).attr('disabled', true);
+			var load = layer.load();
+			$.ajax({
+				url: '?m=app&c=register&a=registerUser',
+				type: 'post',
+				dataType: 'json',
+				data: {mobile: phone, code: vcode, password: pwd, password_re: confirm_pwd},
+				success: function (data){
+					layer.close(load);
+					if(data.code == 400){
+						layer.msg(data.msg);
+					}
+					if(data.code == 200){
+						layer.msg('注册成功', function(){
+							window.location='/';
+						});
+					}
+				},
+				error: function (){
+					layer.close(load);
+					layer.msg('服务器错误');
+				}
+			})
+
+		})
+
+		// 企业注册
+		$('.company_submit').click(function(){
+			
+			var form = $(this).parents('form');
+
+			var email = form.find('#email').val();
+			if(!isEmail(email)){
+				tips('邮箱格式错误', '#email');
+				return false;
+			}
+
+			var vcode = form.find('#vcode_email').val();
+			if(vcode == ''){
+				tips('请填写验证码', '#vcode_email');
+				return false;
+			}
+
+			var pwd = form.find('#pwd_email').val();
+			if(pwd == ''){
+				tips('请填写密码', '#pwd_email');
+				return false;
+			}
+
+			var confirm_pwd = form.find('#confirm_pwd_email').val();
+			if(confirm_pwd != pwd){
+				tips('两次密码不一致', '#confirm_pwd_email');
+				return false;
+			}
+			if(form.find('#agree_email').prop('checked') != true){
+				tips('请同意《用户注册协议》', '#agree_email');
+				return false;
+			}
+
+			// $(this).attr('disabled', true);
+			var load = layer.load();
+			$.ajax({
+				url: '?m=app&c=register&a=registerEnterpriseStep1',
+				type: 'post',
+				dataType: 'json',
+				data: {email: email, code: vcode, password: pwd, password_re: confirm_pwd},
+				success: function (data){
+					layer.close(load);
+					if(data.code == 400){
+						layer.msg(data.msg);
+					}
+					if(data.code == 200){
+						
+						layer.msg('还需填写企业资料才能成功注册，跳转中...', function(){
+							window.location='?m=app&c=register&a=registerEnterprise';
+						})
+					}
+				},
+				error: function (){
+					layer.close(load);
+					layer.msg('服务器错误');
+				}
+			})
+
+		})
+		// 发送手机验证码
+		$('.getcode').click(function(){
+			var form = $(this).parents('form');
+			// 手机号码验证
+			var phone = form.find('#phone').val();
+			if(!isPhone(phone)){
+				tips('手机号格式错误', '#phone');
+				return false;
+			}
+			// 判断是否已发送，计时发送
+			if($(this).attr('disabled') == 'disabled'){
+				return false;
+			}
+
+			
+			// 可以发送验证码
+			$.cookie('second', 60);
+			settime($('.getcode'));
+
+			$.ajax({
+				url: '?m=app&c=register&a=sendMobileCode',
+				type:'post',
+				dataType:'json',
+				data:{phone:phone, type:1},
+				success: function(data){
+					if(data.code == 400){
+						layer.msg(data.msg)
+						$.cookie('second', 0);
+						return false;
+					}
+					if(data.code == 200){
+						
+						layer.msg('验证码发送成功');
+					}
+				},
+				error: function(){
+					layer.msg('服务器错误');
+				}
+			})
+		})
+
+		// 发送邮箱验证码
+		$('.getEmailcode').click(function(){
+			var form = $(this).parents('form');
+			// 邮箱验证
+			var email = form.find('#email').val();
+			if(!isEmail(email)){
+				tips('邮箱号格式错误', '#email');
+				return false;
+			}
+
+			// 判断是否已发送，计时发送
+			if($(this).attr('disabled') == 'disabled'){
+				return false;
+			}
+
+			
+			// 可以发送验证码
+			$.cookie('second_email', 60);
+			settime($(this), 'email');
+
+			$.ajax({
+				url: '?m=app&c=register&a=sendEmailCode',
+				type:'post',
+				dataType:'json',
+				data:{email:email, type:1},
+				success: function(data){
+					if(data.code == 400){
+						layer.msg(data.msg)
+						$.cookie('second_email', 0);
+						return false;
+					}
+					if(data.code == 200){
+						
+						layer.msg(data.msg);
+					}
+				},
+				error: function(){
+					layer.msg('服务器错误');
+				}
+			})
+		})
+		// 刷新页面计算验证码发送时间
+		settime($('.getcode'));
+
+		function tips(message, id){
+			layer.tips(message, id, {tips:[1, '#000']})
+		}
+
+		function isPhone(phone){
+			var reg_mobile = /^1[34578]\d{9}$/;
+			return reg_mobile.test(phone);
+		}
+
+		//检查email邮箱
+		function isEmail(email){
+			var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+			return reg.test(email);
+		}
+
+
+		//开始倒计时
+		var countnum;
+		function settime(obj, type='phone') { 
+			if(type == 'phone'){
+				countnum=$.cookie("second");
+			} else if (type == 'email') {
+				countnum=$.cookie("second_email");
+			}
+		
+			if (countnum == 0) { 
+				obj.removeAttr("disabled");
+				obj.removeClass('disabled');
+				obj.html("获取验证码"); 
+				return;
+			} else if(countnum>0){ 
+				obj.attr("disabled", true);
+				obj.addClass('disabled');
+				obj.html("重新发送(" + countnum + ")"); 
+				countnum--;
+
+				if(type == 'phone'){
+					$.cookie("second", countnum);
+				} else if (type == 'email') {
+					$.cookie("second_email", countnum);
+				}
+				
+			} 
+			setTimeout(function() { settime(obj, type) },1000) //每1000毫秒执行一次
+		}
+
+		// 协议
+		$('.read_xieyi').click(function(){
+			layer.open({
+				type: 1,
+				title: '《用户注册协议》',
+				skin: 'layui-layer-rim', //加上边框
+				area: ['600px', '500px'], //宽高
+				content: '<div style="padding:10px;">{get_extend_setting("register_xieyi")}</div>'
+			});
+		})
+	})
+</script>
+</body>
+</html>

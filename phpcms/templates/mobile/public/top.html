@@ -1,0 +1,30 @@
+<div class="top-nav between-center">
+    <div class="left-center">
+        <div class="logo-wrap">
+            <img src="statics/mobile/img/logo.jpg" alt="logo" class="icon-logo">
+        </div>
+        <div class="search">
+            <input type="text" name="keyword" value="{if $keyword != ''}{$keyword}{/if}" placeholder="搜索">
+        </div>
+    </div>
+    <div class="right-center">
+        <!-- <a href="http://app.caapa.org/index.php/member-default.html">登陆</a> -->
+        <a href="?m=app&c=register&a=index">注册</a>
+        <a href="http://www.chinaattractionsexpo.com">English</a>
+    </div>
+</div>
+
+
+<script src="statics/mobile/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('input[name="keyword"]').keyup(function(e){
+            var keyword = this.value;
+            if(keyword == '') return false;
+
+            if(e.keyCode == '13'){
+                location.href = '{APP_PATH}index.php?m=content&c=index&a=search&siteid=1&keyword='+keyword
+            }
+        })
+    })
+</script>

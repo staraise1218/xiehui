@@ -1,0 +1,125 @@
+.app_title {margin-top: 70px; padding-bottom: 50px; font-size: 24px;}
+.app_title a {font-size: 16px; color: #ab3131;  float: right; margin-top: 8px;}
+.app_title a:hover {color: #c43737;}
+.project_box {width: 570px; float: left;}
+.product_box {width: 570px; float: right;}
+
+.proproul li { overflow: hidden; padding-bottom: 25px; border-bottom: 1px solid #f0f0f0; }
+.proproul li .title {font-size: 22px; padding: 15px 0; font-family: "黑体";}
+.proproul li .pic {width: 200px; height: 122px; float: left;}
+.proproul li .des { width: 350px; float: right; font-size: 16px; letter-spacing: 2px; line-height: 1.6em; }
+.proproul li .des a { color: #999;}
+.proproul li .des a:hover {color: #ad0400;}
+
+.company_zhaopin {background: url(../images/index_h.jpg); padding-bottom: 50px;}
+
+.company_zhaopin {margin-top: 50px}
+.company_zhaopin .company {width: 570px; float: left;}
+.company_zhaopin .zhaopin {width: 570px; float: right;}
+
+.zhaopin li { margin-top: 27px; padding-bottom: 25px; border-bottom: 1px solid #f0f0f0; overflow: hidden; }
+.zhaopin li .pic {width: 200px; height: 150px; float: left;}
+.zhaopin li .info {width: 350px; float: right;}
+.zhaopin li .title {font-size: 22px; line-height: 60px; font-family: "黑体";}
+.zhaopin li .attr { padding-bottom: 15px; font-family: "Arial Black, 微软雅黑"; font-size: 18px;}
+.zhaopin li .attr em {font-style: normal; padding: 0 5px;}
+.zhaopin li .attr span.color{color: #ea612a;}
+.zhaopin li .company_name {color: #999; font-size: 14px;}
+.zhaopin li .time {color: #999; margin-top: 6px;}
+/*.zhaopin li .company_name a:hover {color: #ad0400;}*/
+
+.app_forum { overflow: hidden;  margin-top: 30px; border-bottom:1px solid #f0f0f0; padding-bottom: 25px;}
+.app_forum .pic {width: 80px; float: left;}
+.app_forum .info {width: 1100px; float: right;}
+.app_forum .info .title {font-size: 24px;color: #2162b3; line-height: 1.4em; font-family: "黑体";}
+.app_forum .info .title a{  color: #2162b3; }
+.app_forum .info .attr {color: #b5b5b5; margin-top: 30px;}
+.app_forum .info .attr span {margin-left: 20px;}
+.app_forum .info .des {font-size: 18px; line-height: 1.8em;}
+.app_forum .info2 {background: #f8f7f7; margin-top: 20px;}
+.app_forum .info2 img {float: left;}
+.app_forum .info2 .des2 { height: 193px; float: right; width: 880px; font-size: 18px; line-height: 1.6em; }
+.app_forum .info2 .des2 p {display: table; height: 193px; width: 880px; color: #999;}
+.app_forum .info2 .des2 span {display: table-cell; vertical-align: middle;}
+
+/*.category_title form {float: right;}*/
+.searchpage input {height: 40px; line-height: 40px; text-indent: 15px; width: 400px; border:2px solid #eee; border-radius: 3px; behavior:url('PIE.htc'); float: right;}
+.searchpage button {width: 134px; text-align: center; height: 44px; line-height: 44px; margin-left: 20px; font-size: 24px; background: #bf1321; float: right; color: #FFF; border:none;}
+
+.list .item { overflow: hidden; padding-bottom: 25px; margin-top: 30px; }
+.list .item .pic {width: 240px; height: 180px; float: left;}
+.list .item .enterpic {width: 210px; height: 210px; border:1px solid #eee;}
+.list .item .info {float: right; width: 920px;}
+.list .item .title {font-size: 22px;font-family: "黑体";}
+.list .item .des {font-size: 14px; margin-top: 20px; letter-spacing: 2px; line-height: 1.8em; }
+.list .item .des a { color: #999;}
+.list .item .des a:hover {color: #ad0400;}
+
+.showtitle {margin-top: 30px; border-bottom: 2px solid #ab3131; display: inline; font-size: 24px; padding-bottom: 5px;}
+.showtitle2 {font-size: 24px; margin-top: 30px;}
+.showtitle3 {margin-top: 30px; border-left: 5px solid #ab3131; padding-left: 10px; font-size: 24px; display: inline-block;}
+.contact_list ul {margin-top: 20px;padding-bottom: 10px; width: 300px;}
+.contact_list li {color: #999; font-size: 18px; line-height: 1.8em;}
+
+.case {text-align: right; font-size: 20px;}
+.case a{ background: url(../images/yj.jpg) right center no-repeat; padding-right: 20px;}
+.renzheng {margin-top: 30px;}
+.renzheng ul {overflow: hidden; margin-left: -30px;}
+.renzheng li {float: left; width: 325px; height: 235px; border: 1px solid #e1e1e1; margin-left: 30px;}
+
+.recruit_basic {margin-top: 30px;}
+.recruit_basic p {line-height: 2.4em; font-size: 14px; color: #999;}
+.recruit_basic p label {display: inline-block; width: 80px;}
+
+.enterprise_attr {margin-top: 50px;}
+.enterprise_attr a{padding-left: 20px; background: url(../images/reds.jpg) left center no-repeat; font-size: 28px;}
+.enterprise_attr span {background: url(../images/eyj.jpg) center center no-repeat; width: 44px; height: 27px; display: inline-block; padding: 0 70px;}
+
+.forum_title { border-bottom: 1px solid #f0f0f0; letter-spacing: 3px; padding-bottom: 15px; font-size: 20px; }
+.forum_title a {margin-right: 100px;}
+.forum_title a.current{color: #ab3131;}
+.info3 {width: 620px; margin-top: 20px; overflow: hidden;}
+.info3 img {margin: 8px 8px 0 0; float: left;}
+
+.downapp {height: 720px; background: url(../images/app_21.jpg) center center no-repeat; margin-top: 50px;}
+.rukou {font-size: 28px; margin-top: 30px; overflow: hidden;}
+.rukou .zhuce {float: right;}
+.rukou span a {color: #608cc6; margin-left: 30px}
+
+.comment_title {margin-top: 30px; padding-bottom: 6px; font-size: 18px; border-bottom:1px solid #f0f0f0;}
+.commentlist { padding: 15px 0; overflow: hidden; border-bottom: 1px dashed #ededed; }
+.commentlist .pic {width: 45px; height: 45px; float: left;}
+.commentlist .info {width: 1120px; float: right; font-size: 18px;}
+.commentlist .info .name {color: #2162b3}
+.commentlist .info .time {margin-top: 15px; font-size: 16px; color: #999;}
+
+.regbg img {width: 100%}
+.regbox {position: absolute; top: 0; z-index: 100; width: 100%}
+.regbox .reg_left {float: left; width: 700px;}
+.regbox .reg_right {float: right;}
+
+.regbox .p1 {margin-top: 230px; font-size: 50px; color: #FFF; letter-spacing: 5px; font-family: "宋体"; margin-left: 200px;}
+.regbox .p2 {margin-top: 30px; font-size: 30px; color: #FFF; margin-left: 200px; font-family: "宋体";}
+.regbox .regform {width: 330px; padding-bottom: 20px; overflow: hidden; margin-top: 100px; margin-right: 150px; background: #FFF; border-radius: 5px; behavior:url('PIE.htc');}
+.regbox .regform .tab {background: #5b6a7d;}
+.regbox .regform .tab span{ display: inline-block; color: #FFF; height: 54px; line-height: 54px; text-align: center; width: 50%; font-size: 18px; cursor: default; }
+
+.regbox .regform .tab span.current { background: #FFF;  color: #5b6a7d;}
+.regbox .regform .input, .regbox .vcodebox 	{height: 40px; width: 290px; margin: 20px 0 0 20px; border:1px solid #ebebeb; border-radius: 5px;  behavior:url('PIE.htc'); text-indent: 10px;}
+.regbox .vcodebox {text-indent: 0; line-height: 38px;}
+.regbox .vcodebox input {border:none; width: 180px; height: 40px; text-indent: 10px; }
+.regbox .vcodebox span{ margin-left: 15px; color: #1980e5; cursor: pointer;}
+.regbox .vcodebox span.disabled{color: #999; cursor: default;}
+.regbox .xieyi {padding: 20px 0 10px 20px;}
+.regbox .submit {height: 40px; line-height: 40px; font-size: 18px; letter-spacing: 3px; font-family: "黑体"; width: 290px; margin-left: 20px; color: #FFF; background: #f39800; left: 3px; border:none;}
+.regbox .person_reg {display: none;}
+
+.upfile {overflow: hidden; padding-left: 120px; margin-top: 50px;}
+.upfile .item {float: left; width: 202px; margin-right: 60px; font-size: 
+18px; color: #9d9998; position: relative;}
+.upfile .item img {margin-top: 30px;}
+.upfile .item p {font-size: 16px;}
+.upfile .item  input{display: none;}
+/*.upfile .selectbtn {margin-top:20px; margin-bottom:10px; background: url(../images/up.jpg); width: 202px; height: 120px; border:none;}*/
+.form_item em {font-style: normal; color: red;}
+.baoming .company_register .label {width: 140px;}

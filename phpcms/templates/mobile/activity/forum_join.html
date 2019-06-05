@@ -1,0 +1,549 @@
+<!-- 我要参会 北京 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+    <script src="statics/mobile/js/rem.js"></script>
+    <link rel="stylesheet" href="statics/mobile/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/global.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/index.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/slider.css">
+    <link rel="stylesheet" href="statics/plugin/layui/css/modules/layer/default/layer.css">
+    <style>
+        .input-box {
+            margin: 1rem
+        }
+        .input-box .input-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1rem
+        }
+        .input-box .input-wrap div {
+            width: 5.8rem;
+        }
+        .input-box .input-wrap input {
+            white-space: nowrap;
+            flex: 1;
+        }
+        .input-box .input-wrap textarea {
+            flex: 1;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .input-box .btn-wrap{
+            flex: 1;
+        }
+        .input-box .btn-wrap.huiyuanbox label {
+            vertical-align: middle;
+        }
+        .input-box .btn-wrap.huiyuanbox span {
+            /* margin-right: .rem; */
+            background: #fff !important;
+            color: #222;
+            padding: 0;
+            line-height: 1rem;
+            vertical-align: 2px;
+        }
+        .input-box .btn-wrap span {
+            color: #fff;
+            border-radius: 4px;
+            background: #1E9FFF;
+            padding:  .5rem 1rem;
+            font-size: 1rem
+        }
+        .input-box .btn-wrap p {
+            color: #AF4D68;
+            font-weight: 600;
+            font-size: 1.6rem;
+        }
+        .input-box .btn-wrap img {
+            height: 2.2rem;
+        }
+    
+        .alert {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,.5);
+        }
+        .alert .alert-con {
+            width: 25rem;
+            background: #fff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            border-radius: .5rem;
+            padding: 1rem;
+            transform: translate(-50%, -50%);
+        }
+        .alert .alert-con .title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.4rem;
+        }
+        .alert .alert-con .title .icon-1 {
+            width: 1.8rem;
+            height: 1.8rem;
+        }
+        .alert .alert-con .item {
+            font-size: 1.4rem;
+        }
+        .alert .alert-con .item span {
+            display: inline-block;
+            width: 5rem;
+            text-align: right;
+            margin-top: 1rem;
+            margin-right: .5rem
+        }
+        .alert .alert-con .item input {
+            border-radius: 4px;
+            border: 1px solid rgba(0,0,0,.1);
+            padding: .2rem
+        }
+        .alert .alert-con .btn-wrap {
+            width: 100%;
+            text-align: right;
+            margin-top: 3rem;
+            font-size: 1.2rem;
+        }
+        .alert .alert-con .btn-wrap span:first-child {
+            background: #1E9FFF;
+            color: #fff;
+            padding: .3rem 1rem;
+            border-radius: 4px;
+        }
+        .alert .alert-con .btn-wrap span:last-child {
+            padding: .3rem 1rem;
+            border-radius: 4px;
+            margin-left: .2rem;
+            border: 1px solid rgba(0,0,0,.2)
+        }
+        .user-box {
+            /* border: 1px solid red; */
+            margin: 1rem 0;
+        }
+        .user-box .item {
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(0,0,0,.2);
+            border-top: none;
+            justify-content: space-between;
+            padding: .2rem;
+        }
+        .user-box .item:first-child {
+            border: 1px solid rgba(0,0,0,.2);
+        }
+        .user-box .item p {
+            font-size: 1.2rem;
+        }
+        .delete-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+        .codediv .getcode { position: absolute; color: #38f; right: 2rem; font-size: 1rem; margin-top: 0.7rem; }
+    
+    </style>
+</head>
+
+<body>
+
+    <div id="ctrl">
+        <span class="ctr-icon glyphicon glyphicon-list"></span>
+    </div>
+
+    <div id="box">
+        <!-- ==============================================================
+        左侧内容区域
+============================================================== -->
+        <div id="left-box">
+            <!-- 轮播图 -->
+            <div class="slider">
+                <img class="img-100" src="statics/mobile/img/20190409110154571.jpg" alt="">
+            </div>
+            <!-- 轮播图 END -->
+            <!-- 导航区域 -->
+            {template "public", 'top', 'mobile'}
+            <!-- 导航区域 END -->
+
+            <!-- 面包屑导航 -->
+            <div class="nav-link left-center padding-1 text-1">
+                <a href="javascript:;">峰会论坛</a> &nbsp;>&nbsp;
+                <a href="javascript:;">我要参会</a>
+            </div>
+            <p class="color-1 margin-lr-1 padding-b-05 border-bottom">我要参会</p>
+            <!-- 面包屑导航 END -->
+
+
+            <!-- 文字公共 -->
+            <div class="content padding-1">
+                <h4>联系方式</h4>
+                {get_extend_setting(forum_contact)}
+            </div>
+
+
+            <h4 class="title">预定信息</h4>
+            <form class="input-box mainform" action="" method="post">
+                <div class="input-wrap">
+                    <div class="text-1">单位名称:</div>
+                    <input type="text" class="form-control danwei" name="info[unit_name]">
+                </div>
+                <div class="input-wrap">
+                    <div class="text-1">联系人:</div>
+                    <input type="text" class="form-control user-name" name="info[contact_name]">
+                </div>
+                <div class="input-wrap">
+                    <div class="text-1">手机号:</div>
+                    <input type="text" id="phone" class="form-control phone-top" name="info[contact_phone]">
+                </div>
+
+                <div class="input-wrap codediv">
+                    <div class="text-1">验证码:</div>
+                    <input type="text" name="code" class="form-control">
+                    <span class="getcode">获取验证码</span>
+                </div>
+                <div class="input-wrap">
+                    <div class="text-1">职位:</div>
+                    <input type="text" class="form-control jobe-top" name="info[position]">
+                </div>
+                <div class="input-wrap">
+                    <div class="text-1">邮箱:</div>
+                    <input type="text" class="form-control email-top" name="info[email]">
+                </div>
+                <div class="input-wrap">
+                    <div class="text-1">添加报名:</div>
+                    <!-- <input type="text" class="form-control"> -->
+                    <div class="btn-wrap">
+                        <span class="baoming">添加报名</span>
+                    </div>
+                </div>
+                <!-- 添加用户 -->
+                <div class="user-box"></div>
+
+                <div class="input-wrap">
+                    <div class="text-1">备注:</div>
+                    <textarea  name="info[remarks]" id="" cols="30" rows="5"></textarea>
+                </div>
+
+                <div class="input-wrap">
+                    <div class="text-1">报名费:</div>
+                    <div class="btn-wrap">
+                        <p class="baomingfei">￥<?php echo get_extend_setting('meeting_price_nomember')?>元</p>
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <div class="text-1">是否会员:</div>
+                    <div class="btn-wrap huiyuanbox">
+                        <label for="feihuiyuan" class="feihuiyuan">
+                            <input id="feihuiyuan" name="info[is_member]" value="0" checked type="radio" name="choose">
+                            <span>非会员</span>
+                        </label>
+                        <label for="huiyuan" class="huiyuan">
+                            <input id="huiyuan" name="info[is_member]" value="1" type="radio" name="choose">
+                            <span>会员</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <div class="text-1">支付方式:</div>
+                    <div class="btn-wrap">
+                        <img class="zfb" data-pay="zfb" src="statics/mobile/img/r_zfb.jpg" alt="">
+                        <img class="wx" data-pay="wx" src="statics/mobile/img/g_wx.jpg" alt="">
+
+                        <input type="hidden" name="payment" value="alipay">
+                    </div>
+                </div>
+                <div class="container text-center padding-1 margin-top-2">
+                    <button id="submit" type="button" class="btn-war">提交信息</button>
+                </div>
+
+
+                <input type="hidden" name="forum_type" value="{$forum_type}">
+                <input type="hidden" name="dosubmit" value="dosubmit">
+                <input type="hidden" id="meeting_price_nomember" value="{get_extend_setting('meeting_price_nomember')}">
+                <input type="hidden" id="meeting_price_member" value="{get_extend_setting('meeting_price_member')}">
+            </form>
+
+            <!-- alert -->
+            <div class="alert" style="display:none">
+                <div class="alert-con">
+                    <div class="title">
+                        <span>新增联系人</span>
+                        <img src="statics/mobile/img/close.png" alt="" class="close icon-1 close-btn">
+                    </div>
+                    <div class="item">
+                        <span>姓名</span>
+                        <input class="addname" type="text" placeholder="请输入姓名">
+                    </div>
+                    <div class="item">
+                        <span>职位</span>
+                        <input class="addjob" type="text" placeholder="请输入职位">
+                    </div>
+                    <div class="item">
+                        <span>手机号</span>
+                        <input class="addphonbe" type="text" placeholder="请输入手机号">
+                    </div>
+                    <div class="item">
+                        <span>邮箱地址</span>
+                        <input class="addemail" type="text" placeholder="请输入邮箱地址">
+                    </div>
+                    <div class="btn-wrap">
+                        <span id="add">确定</span>
+                        <span class="close-btn">关闭</span>
+                    </div>
+                </div>
+            </div>
+            <!-- alert END -->
+
+
+
+            <div class="line"></div>
+            <!-- footer -->
+            {template "public", 'footer', 'mobile'}
+        </div>
+        <!-- 左侧内容区域 END -->
+
+
+
+        <!-- ==============================================================
+        右侧菜单区域
+============================================================== -->
+        {template "public", 'rightMenu', 'mobile'}
+    </div>
+    <script src="statics/mobile/js/jquery.min.js"></script>
+    <script src="statics/mobile/bootstrap/js/bootstrap.min.js"></script>
+    <script src="statics/mobile/js/index.js"></script>
+    <script src="statics/mobile/js/slider.js"></script>
+    <script src="statics/mobile/js/global.js"></script>
+    <link rel="stylesheet" href="statics/plugin/layui/css/modules/layer/default/layer.css">
+    <script type="text/javascript" src="statics/plugin/layui/lay/modules/layer.js"></script>
+    <script type="text/javascript" src="{APP_PATH}statics/default/js/jquery.cookie.js"></script>
+    <script>
+        
+        $('.input-wrap .btn-wrap .feihuiyuan').on('click', function () {
+            var price = $('#meeting_price_nomember').val();
+            $(".baomingfei").text('￥'+price+'元')
+        })
+        $('.input-wrap .btn-wrap .huiyuan').on('click', function () {
+            var price = $('#meeting_price_member').val();
+            $(".baomingfei").text('￥'+price+'元')
+        })
+
+        // 切换支付方式
+        $('.input-wrap .btn-wrap img').on('click', function (e) {
+            console.log($(this).attr('data-pay'))
+            if($(this).attr('data-pay') == 'wx') {
+                $('.input-wrap .btn-wrap .wx').prop('src','statics/mobile/img/r_wx.jpg');
+                $('.input-wrap .btn-wrap .zfb').prop('src','statics/mobile/img/g_zfb.jpg');
+                $('input[name=payment]').val('wxpay')
+            } else if ($(this).attr('data-pay') == 'zfb') {
+                $('.input-wrap .btn-wrap .wx').prop('src','statics/mobile/img/g_wx.jpg');
+                $('.input-wrap .btn-wrap .zfb').prop('src','statics/mobile/img/r_zfb.jpg');
+                $('input[name=payment]').val('alipay')
+            }
+        })
+
+
+
+        // 报名弹窗
+        $('.baoming').on('click', function () {
+            $('.alert').css('display','block')
+        })
+        $('.close-btn').on('click', function () {
+            $('.alert').css('display','none')
+        })
+
+        /**
+         * 添加用户
+         * addMSG       用户存储数组
+        */
+       let addMSG = []
+       $('#add').on('click', function () {
+            if($('.addname').val() == '') {
+                alert('请输入姓名')
+                return false;
+            }
+            if(!(/^1[34578]\d{9}$/.test($('.addphonbe').val()))){ 
+                alert("手机号码有误，请重填");  
+                return false; 
+            }
+            var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+            if($('.addemail').val() && !reg.test($('.addemail').val())){
+                console.log("邮箱格式不正确");
+            }
+
+            let len = addMSG.length;
+            addMSG[len] = {};
+            addMSG[len].name = $('.addname').val();
+            addMSG[len].jobe = $('.addjob').val();
+            addMSG[len].phone = $('.addphonbe').val();
+            addMSG[len].email = $('.addemail').val();
+            let str = '';
+            for(var i = 0; i <= len; i++) {
+                str += `
+                        <div class="item">
+                            <p class="username">${addMSG[i].name} <input type="hidden" name="add_contact_name[]" val="${addMSG[i].name}" /></p>
+                            <p class="phone">${addMSG[i].phone} <input type="hidden" name="add_contact_phone" value="${addMSG[i].phone}"/></p>
+                            <p class="jobe">${addMSG[i].jobe} <input type="hidden" name="add_position" value="${addMSG[i].jobe}"/></p>
+                            <p class="email">${addMSG[i].email} <input type="hidden" name="add_email" value="${addMSG[i].email}"/></p>
+                            <p class="delete"><img data-index="${i}" class="delete-icon" src="statics/mobile/img/删除.png" alt=""></p>
+                        </div>`
+            }
+            $('.user-box').html(str);
+            $('.alert').css('display','none');
+       })
+
+       /**
+        * 添加报名删除
+       */
+       $('.user-box').delegate('.delete-icon','click', function () {
+           addMSG.splice($(this).attr('data-index'),1) 
+            let str = '';
+                for(var i = 0; i < addMSG.length; i++) {
+                    if(addMSG[i] == 'undefined') {
+                        continue
+                    }
+                    str += `
+                            <div class="item">
+                                <p class="username">${addMSG[i].name}</p>
+                                <p class="phone">${addMSG[i].phone}</p>
+                                <p class="jobe">${addMSG[i].jobe}</p>
+                                <p class="email">${addMSG[i].email}</p>
+                                <p class="delete"><img data-index="${i}" class="delete-icon" src="statics/mobile/img/删除.png" alt=""></p>
+                            </div>`
+                }
+                $('.user-box').html(str);
+       })
+
+       // 提交表单
+       $('#submit').click(function(){
+            // 检验数据
+            if($('.danwei').val() == ''){
+                layer.msg('单位名称必填', {icon:2});
+                return false;
+            }
+            if($('.user-name').val() == ''){
+                layer.msg('联系人必填', {icon:2});
+                return false;
+            }
+            if($('.phone-top').val() == ''){
+                layer.msg('手机号必填', {icon:2});
+                return false;
+            }
+
+            var payname = $('input[name=payment]').val();
+            layer.load('1');
+            $.ajax({
+                url: 'index.php?m=activity&a=forum_join',
+                type: 'post',
+                dataType: 'json',
+                data: $('form').serialize(),
+                success:function(data){
+                    layer.closeAll('loading');
+                    if(data.code == 200){
+                        layer.msg('报名成功，正在跳往支付页面', {icon:1}, function(){
+                            window.location="/index.php?m=activity&c=paywap&a=topay&order_sn="+data.order_sn+"&payname="+payname;
+                        })
+                    } else {
+                        layer.msg(data.msg, {icon:2})
+                    }
+                },
+                error: function(){
+                    layer.msg('服务器错误，请稍后再试');
+                }
+            })
+       })
+
+
+        // 发送手机验证码
+        $('.getcode').click(function(){
+            var form = $(this).parents('form');
+            // 手机号码验证
+            var phone = form.find('#phone').val();
+            if(!isPhone(phone)){
+                layer.msg('手机号格式错误', {icon:2});
+                return false;
+            }
+            // 判断是否已发送，计时发送
+            if($(this).attr('disabled') == 'disabled'){
+                return false;
+            }
+
+            
+            // 可以发送验证码
+            $.cookie('second', 60);
+            settime($('.getcode'));
+
+            $.ajax({
+                url: '?m=activity&c=index&a=sendMobileCode',
+                type:'post',
+                dataType:'json',
+                data:{mobile:phone, scene:1},
+                success: function(data){
+                    if(data.code == 400){
+                        layer.msg(data.msg)
+                        $.cookie('second', 0);
+                        return false;
+                    }
+                    if(data.code == 200){
+                        
+                        layer.msg('验证码发送成功');
+                    }
+                },
+                error: function(){
+                    layer.msg('服务器错误');
+                }
+            })
+        })
+        // 刷新页面计算验证码发送时间
+        settime($('.getcode'));
+
+        function isPhone(phone){
+            var reg_mobile = /^1[34578]\d{9}$/;
+            return reg_mobile.test(phone);
+        }
+
+
+        //开始倒计时
+        var countnum;
+        function settime(obj, type='phone') { 
+            if(type == 'phone'){
+                countnum=$.cookie("second");
+            } else if (type == 'email') {
+                countnum=$.cookie("second_email");
+            }
+        
+            if (countnum == 0) { 
+                obj.removeAttr("disabled");
+                obj.removeClass('disabled');
+                obj.html("获取验证码"); 
+                return;
+            } else if(countnum>0){ 
+                obj.attr("disabled", true);
+                obj.addClass('disabled');
+                obj.html("重新发送(" + countnum + ")"); 
+                countnum--;
+
+                if(type == 'phone'){
+                    $.cookie("second", countnum);
+                } else if (type == 'email') {
+                    $.cookie("second_email", countnum);
+                }
+                
+            } 
+            setTimeout(function() { settime(obj, type) },1000) //每1000毫秒执行一次
+        }
+
+    </script>
+</body>
+
+</html>

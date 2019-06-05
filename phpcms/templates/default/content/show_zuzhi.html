@@ -1,0 +1,27 @@
+{template 'content', 'header'}
+<div class="categoryimage"><img src="{$CATEGORYS[$catid][image]}" alt=""></div>
+<div class="min-width-1300">
+	<div class="container">
+		<div class="page_left">
+			<div class="title">协会简介</div>
+			<ul class="navlist">
+				{pc:content action="category" catid="1" num="25" siteid="$siteid" order="listorder desc, id desc"}
+				{loop $data $n $r}
+				<li {if $r[catid] == $catid} class="current"{/if}><a href="{$r[url]}">{$r[catname]}</a></li>
+				{/loop}
+				{/pc}
+			</ul>
+		</div>
+		<div class="page_right">
+			<div class="crumb">{catpos($catid)} {$title}</div>
+			<div class="category_title">{$CATEGORYS[$catid][catname]}</div>
+			<div class="page_content">
+				<div class="page_title">{$title}</div>
+				{$content}
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+
+{template 'content', 'footer'}

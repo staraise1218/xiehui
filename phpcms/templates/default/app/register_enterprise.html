@@ -1,0 +1,121 @@
+{template 'content', 'header'}
+<div class="categoryimage"><img src="{APP_PATH}statics/default/images/aboutbanner.jpg" alt=""></div>
+<div class="min-width-1300">
+	<div class="container">
+		<div class="crumb">注册企业账号 > 填写资料</div>
+		<div class="category_title">资料表格</div>
+		<div class="baoming">
+			<form id="registerForm" action="{APP_URL}api_passport/registerEnterprise" class="layui-form" method="post" enctype="multipart/form-data">
+				<div class="form_item company_register">
+					<span class="label">企业全称<em>*</em></span>
+					<input class="input-text" type="text" id="enterprise_name" name="enterprise_name" lay-verify="required" placeholder="请输入营业执照上的商家名称">
+				</div>
+				<div class="form_item company_register">
+					<span class="label">企业所在地<em>*</em></span>
+					<input class="input-text" type="text" id="address" name="address" lay-verify="required" placeholder="请输入详细地址">
+				</div>
+				<div class="form_item company_register">
+					<span class="label">负责人姓名<em>*</em></span>
+					<input class="input-text" type="text" id="contacts_name" name="contacts_name" lay-verify="required" placeholder="请输入负责人姓名">
+				</div>
+				<div class="form_item company_register">
+					<span class="label">联系电话<em>*</em></span>
+					<input class="input-text" type="text" id="contacts_mobile" name="contacts_mobile" lay-verify="required" placeholder="请输入联系电话">
+				</div>
+				<div class="form_item company_register">
+					<span class="label">营业执照注册号<em>*</em></span>
+					<input class="input-text" type="text" id="number" name="number" placeholder="请输入营业执照注册号">
+				</div>
+				<div class="upfile form_item">
+					<div class="item item1">
+						上传LOGO<em>*</em>
+						<div class="picBox_logo"></div>
+						<p>图片大小不可超过5M</p>
+					</div>
+					<div class="item item1">
+						上传营业执照<em>*</em>
+						<div class="picBox_zhizhao"></div>
+						<p>图片大小不可超过5M</p>
+					</div>
+				</div>
+				<input type="hidden" name="email" value="{$email}">
+				<input type="hidden" name="code" value="{$code}">
+				<input type="hidden" name="password" value="{$password}">
+				<input type="hidden" name="password_re" value="{$password_re}">
+				<input type="hidden" name="dosubmit" value="dosubmit">
+				<div class="submit"><button id="submit" type="button">提交信息</button></div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<link rel="stylesheet" href="{APP_PATH}statics/plugin/layui/css/modules/layer/default/layer.css">
+<script type="text/javascript" src="{APP_PATH}statics/plugin/layui/lay/modules/layer.js"></script>
+<script type="text/javascript" src="{APP_PATH}statics/default/js/uploadImg.js"></script>
+<script type="text/javascript" src="{APP_PATH}statics/default/js/jquery.form.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		
+		
+		$(".picBox_logo").uploadImg({
+			"id": 'logo',
+			"file_name": 'file[image_logo]'
+		});
+		$(".picBox_zhizhao").uploadImg({
+			"id": 'zhizhao',
+			"file_name": 'file[image]'
+		});
+
+		// 提交
+		$('#submit').click(function(){
+			if($('#enterprise_name').val() == ''){
+				tips('企业名称必填', '#enterprise_name');
+				return false;
+			}
+			if($('#address').val() == ''){
+				tips('企业所在地必填', '#address');
+				return false;
+			}
+			if($('#contacts_name').val() == ''){
+				tips('负责人姓名必填', '#contacts_name');
+				return false;
+			}
+			// 联系电话
+			var contacts_mobile = $('#contacts_mobile').val();
+			
+			var reg_mobile = /^1[34578]\d{9}$/;
+			var reg_phone = /^((\+?86)|(\(\+86\)))?\d{3,4}-\d{7,8}(-\d{3,4})?$/;
+			if(!(reg_mobile.test(contacts_mobile)) && !(reg_phone.test(contacts_mobile))){
+				tips('联系电话格式不正确', '#contacts_mobile');
+				return false;
+			}
+			if($('#number').val() == ''){
+				tips('营业执照注册号必填', '#number');
+				return false;
+			}
+			$('#registerForm').ajaxSubmit({
+				success:function(data){
+					data = JSON.parse(data);
+					console.log(data)
+					if(data.code == 400){
+						layer.msg(data.msg);
+					}
+					if(data.code == 200){
+						layer.msg('注册成功');
+					}
+				},
+				error: function(){
+					layer.msg('服务器错误');
+				}
+			});
+		})
+
+		function tips(message, id){
+			layer.tips(message, id, {tips:[2, '#000']})
+		}
+	})
+
+</script>
+ 
+{template 'content', 'footer'}

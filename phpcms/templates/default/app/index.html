@@ -1,0 +1,92 @@
+{template 'content', 'header'}
+<div class="min-width-1300">
+	<div class="container">
+		 <div class="project_box">
+		 	<div class="app_title"><a href="?m=app&c=project&a=lists">MORE»</a><span>项目</span></div>
+		 	<ul class="proproul">
+		 		{loop $projects $r}
+		 		{php if($n>3) break;}
+		 		<li>
+		 			<div class="title"><a href="?m=app&c=project&a=show&id={$r[project_id]}">{$r[project_name]}</a></div>
+		 			<div class="pic"><a href="?m=app&c=project&a=show&id={$r[project_id]}"><img src="{$r[image_default_url]}" width="200" height="122" alt=""></a></div>
+		 			<div class="des"><a href="?m=app&c=project&a=show&id={$r[project_id]}">{strcut($r[brief], 70)}</a></div>
+		 		</li>
+		 		{/loop}
+		 	</ul>
+		 </div>
+		 <div class="product_box">
+		 	<div class="app_title"><a href="?m=app&c=product&a=lists">MORE»</a><span>产品</span></div>
+		 	<ul class="proproul">
+		 		{loop $products $r}
+		 		{php if($n>3) break;}
+		 		<li>
+		 			<div class="title"><a href="?m=app&c=product&a=show&id={$r[product_id]}">{$r[product_name]}</a></div>
+		 			<div class="pic"><a href="?m=app&c=product&a=show&id={$r[product_id]}"><img src="{$r[image_default_url]}" width="200" height="122" alt=""></a></div>
+		 			<div class="des"><a href="?m=app&c=product&a=show&id={$r[product_id]}">{strcut($r[brief], 70)}</a></div>
+		 		</li>
+		 		{/loop}
+		 	</ul>
+		 </div>
+		 <div class="clear"></div>
+	</div>
+
+	<div class="company_zhaopin">
+		<div class="container">
+			<div class="company">
+				<div class="app_title"><a href="?m=app&c=enterprise&a=lists">MORE»</a><span>企业</span></div>
+				<ul class="proproul">
+				{loop $enterprises $r}
+		 		<li>
+		 			<div class="title"><a href="?m=app&c=enterprise&a=show&id={$r[user_id]}">{$r[enterprise_name]}</a></div>
+		 			<div class="pic"><a href="?m=app&c=enterprise&a=show&id={$r[user_id]}"><img src="{$r[image_url]}" width="200" height="122" alt=""></a></div>
+		 			<div class="des"><a href="?m=app&c=enterprise&a=show&id={$r[user_id]}">{strcut($r[biref], 70)}</a></div>
+		 		</li>
+		 		{/loop}
+		 	</ul>
+			</div>
+			<div class="zhaopin">
+				<div class="app_title"><a href="?m=app&c=recruit&a=lists">MORE»</a><span>招聘</span></div>
+				<ul>
+					{loop $recruits $r}
+					{php if($n > 3) break;}
+					<li>
+						<div class="pic"><a href="?m=app&c=recruit&a=show&id={$r[advertise_id]}"><img src="{$r[img_url]}" width="200" height="150" alt=""></a></div>
+						<div class="info">
+							<div class="title"><a href="?m=app&c=recruit&a=show&id={$r[advertise_id]}">{$r[name]}</a></div>
+							<div class="attr">
+								<span class="color">{$r[wages]}</span><em>|</em><span>{$r[local_name]}</span><em>|</em><span>{$r[education]}</span><em>|</em><span>{$r[experience]}</span>
+							</div>
+							<div class="company_name">{$r[enterprise_name]}</div>
+						</div>
+					</li>
+					{/loop}
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="app_title"><a href="?m=app&c=forum&a=artlists">MORE»</a><span>论坛</span></div>
+		{loop $forums $r}
+		{php if($n>3) break;}
+		<div class="app_forum">
+			<div class="pic"><img src="{if $r[headerimg] != ''}{$r[headerimg]}{else}{IMG_PATH}nophoto.gif{/if}" width="80" height="80" alt=""></div>
+			<div class="info">
+				<div class="title">{$r[nickname]}</div>
+				<div class="attr">{$r[addtime]} <span>浏览人数：{$r[view]}</span></div>
+				<div class="des"><a href="?m=app&c=forum&a=show&type=art&id={$r[inter_id]}">{$r['brief']}</a></div>
+				<!-- <div class="info2">
+					<img src="{$r[url_info][url_image]}" width="192" height="192" alt="">
+					<div class="des2">
+						<p><span>{$r[url_info][url_intro]}</span></p>
+					</div>
+				</div> -->
+			</div>
+		</div>
+		{/loop}
+	</div>
+	<div class="downapp"></div>
+	<div class="container rukou"><a href="?m=app&c=register&a=index" target="_blank" class="zhuce">注册企业账户</a>管理平台入口<span><a href="http://app.caapa.org/index.php/member-default.html" target="_blank">app.caapa.org/admin</a></span></div>
+</div>
+{template 'content', 'footer'}

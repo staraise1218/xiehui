@@ -1,0 +1,33 @@
+{template 'content', 'header'}
+<div class="categoryimage"><img src="{APP_PATH}statics/default/images/aboutbanner.jpg" alt=""></div>
+<div class="min-width-1300">
+	<div class="container">
+		<div class="crumb">中国游乐APP &gt; 文章列表 > 文章详情</div>
+		<div class="category_title">文章详情</div>
+		<div class="app_forum" style="border:none">
+			<div class="pic"><img src="{if $headerimg != ''}{$headerimg}{else}{IMG_PATH}nophoto.gif{/if}" width="80" height="80" alt=""></div>
+			<div class="info">
+				<div class="title">{$nickname}</div>
+				<div class="attr">{$addtime} <span>浏览人数：{$view}</span></div>
+				<div class="des">{$brief}</div>
+				<div class="info2">
+					<img src="{$url_info[url_image]}" width="192" height="192" alt="">
+					<div class="des2">
+						<p><span>{$url_info[url_intro]}</span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="comment_title">精彩评论({$comment[total]})</div>
+		{loop $comment['list'] $r}
+		<div class="commentlist">
+			<div class="pic"><img src="{if $r[headerimg] != ''}{$r[headerimg]}{else}{IMG_PATH}nophoto.gif{/if}" width="45" height="45" alt=""></div>
+			<div class="info"><span class="name">{$r[nickname]}：</span>{$r[content]}
+				<div class="time">{$r[addtime]}</div></div>
+		</div>
+		{/loop}
+		<div id="pages">{$pages}</div>
+	</div>
+</div>
+
+{template 'content', 'footer'}

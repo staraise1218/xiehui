@@ -1,0 +1,119 @@
+{template 'content', 'header'}
+    <style>
+        .wrap {
+            position: relative;
+            margin: 20px auto;
+            width: 1000px;
+            height: 500px;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        .wrap .con {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .wrap .con-2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            vertical-align: middle;
+            width: 100%;
+        }
+        .wrap .con-2 > div {
+            display: inline-block;
+        }
+        .left {
+            vertical-align: middle;
+            margin-right: 50px;
+        }
+        .right {
+            vertical-align: middle;
+        }
+        .right img {
+            width: 234px;
+        }
+        .code-icon {
+            width: 200px;
+        }
+        .tips {
+            padding: 10px;
+            background: #AC3133;
+            text-align: center;
+        }
+        .tips-icon {
+            float: left;
+            margin-left: 20px;
+        }
+        .tips-con {
+            display: inline-block;
+            color: #fff;
+            text-align: left
+        }
+        .title-1 {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            font-size: 22px;
+        }
+        .title-1_f {
+            font-size: 18px;
+            color: rgba(0, 0, 0, 0.5);
+            margin-left: 50px;
+        }
+        .title {
+            font-weight: 600;
+            font-size: 22px;
+        }
+        .title_f {
+            color: rgba(0, 0, 0, 0.5);
+            margin-top: 10px;
+        }
+        .toHome {
+            color: #fff;
+            padding: 10px 40px;
+            margin-top: 30px;
+            cursor: pointer;
+        }
+
+        .toHome.fail_btn {
+            background: #D81E07;
+        }
+
+        .toHome.success_btn {
+            background: #3EB034;
+        }
+
+    </style>
+	
+	<?php if($paystatus == 1){ ?>
+	<div class="wrap success">
+        <div class="title">
+            支付结果
+        </div>
+        <div class="con">
+            <img src="./statics/default/images/组8811@2x.png" alt="">
+            <div class="title">支付成功</div>
+            <!-- <div class="title_f">3秒后自动返回首页</div> -->
+            <div class="toHome success_btn" onclick="window.location='/'">返回首页</div>
+        </div>
+    </div>
+    <?php } else { ?>
+    <div class="wrap fali">
+        <div class="title">
+            支付结果
+        </div>
+        <div class="con">
+            <img src="./statics/default/images/组88@2x.png" alt="">
+            <div class="title">支付失败</div>
+            <!-- <div class="title_f">3秒后自动返回首页</div> -->
+            <div class="toHome fail_btn" onclick="window.location='/'">返回首页</div>
+        </div>
+    </div>
+    <?php } ?>
+{template 'content', 'footer'}

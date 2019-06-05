@@ -1,0 +1,151 @@
+{template 'content', 'header'}
+
+    <style>
+        .wrap {
+            position: relative;
+            margin: 20px auto;
+            width: 1200px;
+            height: 500px;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        .wrap .con {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .wrap .con-2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            vertical-align: middle;
+            width: 100%;
+        }
+        .wrap .con-2 > div {
+            display: inline-block;
+        }
+        .left {
+            vertical-align: middle;
+            margin-right: 50px;
+        }
+        .right {
+            vertical-align: middle;
+        }
+        .right img {
+            width: 234px;
+        }
+        .code-icon {
+            width: 200px;
+        }
+        .tips {
+            padding: 10px;
+            background: #AC3133;
+            text-align: center;
+        }
+        .tips-icon {
+            float: left;
+            margin-left: 20px;
+        }
+        .tips-con {
+            display: inline-block;
+            color: #fff;
+            text-align: left
+        }
+        .title-1 {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            font-size: 22px;
+        }
+        .title-1_f {
+            font-size: 18px;
+            color: rgba(0, 0, 0, 0.5);
+            margin-left: 50px;
+        }
+        .title {
+            font-weight: 600;
+            font-size: 22px;
+        }
+        .title_f {
+            color: rgba(0, 0, 0, 0.5);
+            margin-top: 10px;
+        }
+        .toHome {
+            color: #fff;
+            padding: 10px 40px;
+            margin-top: 30px;
+            cursor: pointer;
+        }
+
+        .toHome.fail_btn {
+            background: #D81E07;
+        }
+
+        .toHome.success_btn {
+            background: #3EB034;
+        }
+        .bet {
+            display: flex;
+            justify-content: space-between;
+        }
+        .price {
+            color: #FB503A;
+            font-weight: 600;
+        }
+    </style>
+	<div class="wrap" style="width: 1000px;">
+    	<div class="bet">
+    	    <div class="title-1_f">
+    	        <div class="title" style="display:inline-block">
+    	            微信支付
+    	        </div>
+
+    	    </div>
+    	    <span>
+    	        订单号：<?php echo $order_sn;?>，应付金额
+    	        <span class="price"><?php echo $total_amount;?></span>
+    	        元
+    	    </span>
+    	</div>
+    	<div class="con-2">
+    	    <div class="left">
+    	        <img class="code-icon" src="/index.php?m=report&c=pay&a=qrcode&url=<?php echo urlencode($code_url) ?>" alt="">
+    	        <div class="tips">
+    	            <img class="tips-icon" src="./statics/default/images/fukuanma@2x.png" alt="">
+    	            <p class="tips-con">
+    	                请使用微信扫一扫
+    	                <br>
+    	                通过二维码支付
+    	            </p>
+    	        </div>
+    	    </div>
+    	    <div class="right">
+    	        <img src="./statics/default/images/图层10@2x.png" alt="">
+    	    </div>
+    	</div>
+    </div>
+
+<script type="text/javascript">
+		function showUnreadNews()
+	    {
+	        $(document).ready(function() {
+	            $.ajax({
+	                type: "POST",
+	                url: "/index.php?m=report&c=pay&a=getPayStatus&order_sn={$order_sn}",
+	                dataType: "json",
+	                success: function(data) {
+	                 	if(data.code == 200 && data.status == '1'){
+	                 		window.location = "/index.php?m=report&c=pay&a=resultPage&paystatus=1";
+	                 	}
+	                }
+	            });
+	        });
+	    }
+	    setInterval('showUnreadNews()', 2000);
+	</script>
+{template 'content', 'footer'}

@@ -1,0 +1,27 @@
+{template 'content', 'header'}
+<div class="categoryimage"><img src="{$CATEGORYS[$catid][image]}" alt=""></div>
+<div class="min-width-1300">
+	<div class="container">
+
+		<div class="crumb">新闻中心 > 电子版杂志 > {$title}</div>
+		<div class="category_title">期刊详情</div>
+		<div class="qikan_description">
+			<div class="thumb"><img src="{thumb($thumb, 265, 368)}" width="265" height="368" alt="">
+				<div class="qikandown">
+					<a href="{APP_PATH}api.php?op=other&act=downPeriodical&type=1&id={$id}" target="_blank">阅读</a>
+					<a href="{APP_PATH}api.php?op=other&act=downPeriodical&type=0&id={$id}" target="_blank">下载</a>
+					<a href="{APP_PATH}index.php?m=activity&a=qikan_subscribe" target="_blank">订阅</a>
+				</div>
+			</div>
+			<div class="des">{nl2br($description)}</div>
+		</div>
+
+		
+		<div class="page_content" style="margin-top: 50px;">
+			{$content}
+		</div>
+
+	</div>
+</div>
+
+{template 'content', 'footer'}

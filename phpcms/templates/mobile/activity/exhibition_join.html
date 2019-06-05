@@ -1,0 +1,284 @@
+<!-- 我要参展 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+    <script src="statics/mobile/js/rem.js"></script>
+    <link rel="stylesheet" href="statics/mobile/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/global.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/index.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/slider.css">
+    <style>
+        .input-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .input-wrap textarea {
+            flex: 1;
+            border-radius: .2rem;
+            border: .1rem solid rgba(0, 0, 0, 0.2);
+        }
+
+        .input-wrap input {
+            flex: 1;
+        }
+
+        .input-wrap .text-1 {
+            width: 6rem;
+        }
+        .codediv .getcode { position: absolute; color: #38f; right: 2rem; font-size: 1rem }
+    </style>
+</head>
+
+<body>
+
+    <div id="ctrl">
+        <span class="ctr-icon glyphicon glyphicon-list"></span>
+    </div>
+
+    <div id="box">
+        <!-- ==============================================================
+        左侧内容区域
+============================================================== -->
+        <div id="left-box">
+            <!-- 轮播图 -->
+            <div class="slider">
+                <img class="img-100" src="statics/mobile/img/20190409110154571.jpg" alt="">
+            </div>
+            <!-- 轮播图 END -->
+            <!-- 导航区域 -->
+            {template "public", 'top', 'mobile'}
+            <!-- 导航区域 END -->
+
+            <!-- 面包屑导航 -->
+            <div class="nav-link left-center padding-1 text-1">
+                <a href="javascript:;">展位</a> &nbsp;>&nbsp;
+                我要参展
+            </div>
+            <p class="color-1 margin-lr-1 padding-b-05 border-bottom">我要参展</p>
+            <!-- 面包屑导航 END -->
+
+
+            <!-- 文字公共 -->
+            <div class="content padding-1">
+                <h4 class="text-blod">联系方式</h4>
+                {get_extend_setting('exhibition_contact')}
+
+                <h4 class="text-blod">预定信息</h4>
+
+
+                <form action="/index.php?m=activity&a=exhibition_join" method="post">
+
+                    <div class="input-wrap">
+                        <div class="text-1">单位名称:</div>
+                        <input type="text" name="info[unit_name]" class="form-control">
+                    </div>
+                    <div class="input-wrap">
+                        <div class="text-1">单位地址:</div>
+                        <input type="text" name="info[unit_address]" class="form-control">
+                    </div>
+
+
+                    <div class="input-wrap">
+                        <div class="text-1">会员等级:</div>
+                        <input type="text" name="info[member_lever]" class="form-control">
+                    </div>
+
+
+                    <div class="input-wrap">
+                        <div class="text-1">联系人:</div>
+                        <input type="text" name="info[contact_name]" class="form-control">
+                    </div>
+
+                    <div class="input-wrap codediv">
+                        <div class="text-1">手机号:</div>
+                        <input type="text" id="phone" name="info[contact_phone]" class="form-control">
+                    </div>
+
+                    <div class="input-wrap codediv">
+                        <div class="text-1">验证码:</div>
+                        <input type="text" name="code" class="form-control">
+                        <span class="getcode">获取验证码</span>
+                    </div>
+
+                    <div class="input-wrap">
+                        <div class="text-1">展位面积:</div>
+                        <input type="text" name="info[area]" class="form-control">
+                    </div>
+
+                    <div class="input-wrap">
+                        <div class="text-1">其他说明:</div>
+                        <textarea name="info[remarks]" id="" cols="30" rows="5"></textarea>
+                    </div>
+
+                    <input type="hidden" name="exhibition_type" value="{$exhibition_type}">
+                    {token()}
+                    <input type="hidden" name="dosubmit" value="dosubmit">
+
+                    <div class="container text-center padding-1 margin-top-2">
+                        <button class="btn-war submit" type="button">提交信息</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="line"></div>
+            <!-- footer -->
+            {template "public", 'footer', 'mobile'}
+        </div>
+        <!-- 左侧内容区域 END -->
+
+
+
+        <!-- ==============================================================
+        右侧菜单区域
+============================================================== -->
+        {template "public", 'rightMenu', 'mobile'}
+    </div>
+    <script src="statics/mobile/js/jquery.min.js"></script>
+    <script src="statics/mobile/bootstrap/js/bootstrap.min.js"></script>
+    <script src="statics/mobile/js/index.js"></script>
+    <script src="statics/mobile/js/slider.js"></script>
+    <script src="statics/mobile/js/global.js"></script>
+
+
+    <link rel="stylesheet" href="statics/plugin/layui/css/modules/layer/default/layer.css">
+    <script type="text/javascript" src="statics/plugin/layui/lay/modules/layer.js"></script>
+    <script type="text/javascript" src="{APP_PATH}statics/default/js/jquery.cookie.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+
+        // 检测手机号
+        function isPhone(phone){
+            var reg_mobile = /^1[34578]\d{9}$/;
+            return reg_mobile.test(phone);
+        }
+
+        //检查email邮箱
+        function isEmail(email){
+            var reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
+            return reg.test(email);
+        }
+        // 发送手机验证码
+        $('.getcode').click(function(){
+
+            var form = $(this).parents('form');
+            // 手机号码验证
+            var phone = form.find('#phone').val();
+
+            if(!isPhone(phone)){
+                layer.msg('手机号格式错误', {icon:2});
+                return false;
+            }
+            // 判断是否已发送，计时发送
+            if($(this).attr('disabled') == 'disabled'){
+                return false;
+            }
+
+            
+            // 可以发送验证码
+            $.cookie('second', 60);
+            settime($('.getcode'));
+
+            $.ajax({
+                url: '?m=activity&c=index&a=sendMobileCode',
+                type:'post',
+                dataType:'json',
+                data:{mobile:phone, scene:1},
+                success: function(data){
+                    if(data.code == 400){
+                        layer.msg(data.msg)
+                        $.cookie('second', 0);
+                        return false;
+                    }
+                    if(data.code == 200){
+                        
+                        layer.msg('验证码发送成功');
+                    }
+                },
+                error: function(){
+                    layer.msg('服务器错误');
+                }
+            })
+        })
+        // 刷新页面计算验证码发送时间
+        settime($('.getcode'));
+
+        //开始倒计时
+        var countnum;
+        function settime(obj, type='phone') { 
+            if(type == 'phone'){
+                countnum=$.cookie("second");
+            } else if (type == 'email') {
+                countnum=$.cookie("second_email");
+            }
+        
+            if (countnum == 0) { 
+                obj.removeAttr("disabled");
+                obj.removeClass('disabled');
+                obj.html("获取验证码"); 
+                return;
+            } else if(countnum>0){ 
+                obj.attr("disabled", true);
+                obj.addClass('disabled');
+                obj.html("重新发送(" + countnum + ")"); 
+                countnum--;
+
+                if(type == 'phone'){
+                    $.cookie("second", countnum);
+                } else if (type == 'email') {
+                    $.cookie("second_email", countnum);
+                }
+                
+            } 
+            setTimeout(function() { settime(obj, type) },1000) //每1000毫秒执行一次
+        }
+        
+    })
+</script>
+    <script type="text/javascript">
+        function msg_error(msg){
+            layer.msg(msg, {icon:2});
+        }
+        $(function(){
+            $('.submit').click(function(){
+                if($('input[name="info[unit_name]"]').val() == '') {
+                    msg_error('单位名称不能为空');
+                    return false;
+                }
+                if($('input[name="info[unit_address]"]').val() == '') {
+                    msg_error('单位地址不能为空');
+                    return false;
+                }
+                /*if($('input[name="info[member_lever]"]').val() == '') {
+                    msg_error('会员等级不能为空');
+                    return false;
+                }*/
+                if($('input[name="info[contact_name]"]').val() == '') {
+                    msg_error('联系人不能为空');
+                    return false;
+                }
+                if($('input[name="info[contact_phone]"]').val() == '') {
+                    msg_error('手机号不能为空');
+                    return false;
+                }
+                /*if($('input[name="info[area]"]').val() == '') {
+                    msg_error('展位面积不能为空');
+                    return false;
+                }*/
+
+                $('form').submit();
+            })
+        })
+    </script>
+</body>
+
+</html>

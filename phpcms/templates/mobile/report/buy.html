@@ -1,0 +1,255 @@
+<!-- 页面 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+    <script src="statics/mobile/js/rem.js"></script>
+    <link rel="stylesheet" href="statics/mobile/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/global.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/index.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/slider.css">
+    <style>
+        .content .item {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .content .item div:first-child {
+            width: 7rem;
+            text-align: right
+        }
+
+        .content .item div:last-child {
+            flex: 1;
+            border-radius: .3rem;
+        }
+
+        .pay-wrap {
+            display: inline-block;
+            height: 2.5rem;
+        }
+        .pay_method img {height: 2.2rem}
+    </style>
+</head>
+
+<body>
+
+    <div id="ctrl">
+        <span class="ctr-icon glyphicon glyphicon-list"></span>
+    </div>
+
+    <div id="box">
+        <!-- ==============================================================
+        左侧内容区域
+============================================================== -->
+        <div id="left-box">
+            <!-- 轮播图 -->
+            <div class="slider">
+                <img class="img-100" src="statics/mobile/img/20190409110154571.jpg" alt="">
+            </div>
+            <!-- 轮播图 END -->
+            <!-- 导航区域 -->
+            {template "public", 'top', 'mobile'}
+            <!-- 导航区域 END -->
+
+            <!-- 面包屑导航 -->
+            <div class="nav-link left-center padding-1 text-1">
+                文件下载 > 报告购买 > 购买信息
+            </div>
+            <!-- 面包屑导航 END -->
+
+            <form action="">
+                <div class="padding-1 content">
+                    <ul>
+                        <li class="item">
+                            <div class="">
+                                <p>报告名称：</p>
+                            </div>
+                            <div class="bg-gray padding-1">
+                                <p>{$report['title']}</p>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="">
+                                <p>姓名：</p>
+                            </div>
+                            <div class="padding-tb-05">
+                                <input type="text" name="fullname" class="form-control" placeholder="请输入姓名">
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="">
+                                <p>单位名称：</p>
+                            </div>
+                            <div class="padding-tb-05">
+                                <input type="text" name="company" class="form-control" placeholder="请输入单位名称">
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="">
+                                <p>联系方式：</p>
+                            </div>
+                            <div class="padding-tb-05">
+                                <input type="text" name="contact" id="phone" class="form-control" placeholder="请输入联系方式">
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="">
+                                <p class="margin-bottom-2">机器码：</p>
+                            </div>
+                            <div class="padding-tb-05">
+                                <input type="text" class="form-control" placeholder="请输入机器码">
+                                <a href="#" class="text-3">
+                                    <span class="glyphicon glyphicon-question-sign"></span>
+                                    如何找到机器码？</a>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="">
+                                <p>发票信息：</p>
+                            </div>
+                            <div class="padding-tb-05">
+                                <textarea class="form-control" name="invoice_info" id="" cols="30" rows="5" placeholder="如需开票，请备注开票信息和邮寄地址"></textarea>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="">
+                                <p class="">支付方式：</p>
+                            </div>
+                            <div class="padding-tb-05 pay_method">
+                                <!-- <span id="zfb" class="pay-wrap">
+                                    <img class="img-100-h" src="statics/mobile/img/r_zfb.jpg" alt="">
+                                    <img class="img-100-h" src="statics/mobile/img/g_zfb.jpg" alt="">
+                                </span>
+                                <span id="wx" class="pay-wrap">
+                                    <img class="img-100-h" src="statics/mobile/img/r_wx.jpg" alt="">
+                                    <img class="img-100-h" src="statics/mobile/img/g_wx.jpg" alt="">
+                                </span> -->
+                                <img class="zfb" data-pay="zfb" src="statics/mobile/img/r_zfb.jpg" alt="">
+                                <img class="wx" data-pay="wx" src="statics/mobile/img/g_wx.jpg" alt="">
+
+                                <input type="hidden" name="payment" value="alipay">
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="">
+                                <p class="">支付金额：</p>
+                            </div>
+                            <div class="padding-tb-05">
+                                <p class="color-price text-blod">￥{number_format($report['nomember_price'], 2)}</p>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="">
+                                <p class="">支付方式：</p>
+                            </div>
+                            <div class="btn-wrap huiyuanbox">
+                                <label for="feihuiyuan" class="feihuiyuan">
+                                    <input id="feihuiyuan" name="info[is_member]" value="0" checked type="radio" name="choose">
+                                    <span>非会员</span>
+                                </label>
+                                <label for="huiyuan" class="huiyuan">
+                                    <input id="huiyuan" name="info[is_member]" value="1" type="radio" name="choose">
+                                    <span>会员</span>
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="text-center">
+                        <button class="btn-war" type="button" id="surePay">确认支付</button>
+                    </div>
+                </div>
+                <input type="hidden" id="meeting_price_nomember" value="{number_format($report['nomember_price'], 2)}">
+                <input type="hidden" id="meeting_price_member" value="{number_format($report['price'], 2)}">
+                <input type="hidden" name="report_id" value="{$report['id']}">
+            </form>
+
+            <div class="line"></div>
+            <!-- footer -->
+            {template "public", 'footer', 'mobile'}
+        </div>
+        <!-- 左侧内容区域 END -->
+
+
+
+        <!-- ==============================================================
+        右侧菜单区域
+============================================================== -->
+        {template "public", 'rightMenu', 'mobile'}
+    </div>
+    <script src="statics/mobile/js/jquery.min.js"></script>
+    <script src="statics/mobile/bootstrap/js/bootstrap.min.js"></script>
+    <script src="statics/mobile/js/index.js"></script>
+    <script src="statics/mobile/js/slider.js"></script>
+    <script src="statics/mobile/js/global.js"></script>
+
+<link rel="stylesheet" href="/statics/plugin/layui/css/modules/layer/default/layer.css">
+<script type="text/javascript" src="/statics/plugin/layui/lay/modules/layer.js"></script>
+    <script type="text/javascript">
+        // 切换支付方式
+        $('.pay_method img').on('click', function (e) {
+            console.log($(this).attr('data-pay'))
+            if($(this).attr('data-pay') == 'wx') {
+                $('.pay_method .wx').prop('src','statics/mobile/img/r_wx.jpg');
+                $('.pay_method .zfb').prop('src','statics/mobile/img/g_zfb.jpg');
+                $('input[name=payment]').val('wxpay')
+            } else if ($(this).attr('data-pay') == 'zfb') {
+                $('.pay_method .wx').prop('src','statics/mobile/img/g_wx.jpg');
+                $('.pay_method .zfb').prop('src','statics/mobile/img/r_zfb.jpg');
+                $('input[name=payment]').val('alipay')
+            }
+        })
+
+        // 切换会员价
+        $('.huiyuanbox .feihuiyuan').on('click', function () {
+            var price = $('#meeting_price_nomember').val();
+            $(".baomingfei").text('￥'+price+'元')
+        })
+        $('.huiyuanbox .huiyuan').on('click', function () {
+            var price = $('#meeting_price_member').val();
+            $(".baomingfei").text('￥'+price+'元')
+        })
+
+        $("#surePay").click(function() {
+            if($('input[name=fullname]').val() == ''){
+                layer.msg('请输入姓名', {icon:2});
+                return false;
+            }           
+            if($('input[name=unit_name]').val() == ''){
+                layer.msg('请输入单位名称', {icon:2});
+                return false;
+            }
+            var phone = document.getElementById('phone').value;
+            if(!(/^1[34578]\d{9}$/.test(phone))){ 
+                layer.msg('手机号码有误', {icon:2});
+                return false; 
+            } 
+
+            layer.load(1);
+            var payname = $('input[name=payment]').val();
+            $.ajax({
+                    url: '/index.php?m=report&c=index&a=dosubmit',
+                    type: 'post',
+                    dataType: 'json',
+                    data:$('form').serialize(),
+                    success: function(data){
+                        layer.closeAll('loading');
+                        if(data.code == 200){
+                            layer.msg('下单成功，正在跳转支付页面', {icon:1}, function(){
+                                window.location="/index.php?m=report&c=paywap&a=topay&order_sn="+data.order_sn+"&payname="+payname;
+                            });
+                        }
+                    }
+                })
+            })
+        
+    </script>
+</body>
+
+</html>

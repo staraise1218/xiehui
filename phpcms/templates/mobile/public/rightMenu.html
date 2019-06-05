@@ -1,0 +1,23 @@
+<div id="right-box">
+    <ul id="accordion" class="accordion">
+        <li>
+            <div class="link"><i class=""></i><a href="/">首页</a> <span class="glyphicon glyphicon-menu-right"></span></div>
+        </li>
+        {pc:content action="category" catid="0" num="7" siteid="$siteid" order="listorder ASC"}
+        {loop $data $r}
+        <li>
+            <div class="link"><i class=""></i><a href="{if $r[catid] == '16'}javascript:;{else}{$r[url]}{/if}">{$r[catname]}</a> <span class="glyphicon glyphicon-menu-right"></span></div>
+            {pc:content action="category" catid="$r[catid]" return="subcats"}
+            {if !empty($subcats)}
+            <ul class="submenu">
+                {loop $subcats $sub}
+                <li><a href="{$sub[url]}">{$sub[catname]}</a></li>
+                {/loop}
+            </ul>
+            {/if}
+            {/pc}
+        </li>
+        {/loop}
+        {/pc}
+    </ul>
+</div>

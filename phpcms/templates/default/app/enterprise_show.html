@@ -1,0 +1,16 @@
+{template 'content', 'header'}
+<div class="categoryimage"><img src="{APP_PATH}statics/default/images/aboutbanner.jpg" alt=""></div>
+<div class="min-width-1300">
+	<div class="container">
+		<div class="crumb">中国游乐APP &gt; 企业列表 > 企业详情</div>
+		<div class="category_title" style="color: #000;">{$enterprise_name}</div>
+		<div class="page_content">{if $biref != ''}{$biref}{else}该公司暂无介绍{/if}</div>
+		<div class="enterprise_attr">
+			<a href="?m=app&c=project&a=lists&enterprise_id={$user_id}">招商信息</a><span class="eyj"></span>
+			<a href="?m=app&c=product&a=lists&enterprise_id={$user_id}">产品服务</a><span class="eyj"></span>
+			<a href="?m=app&c=recruit&a=lists&enterprise_id={$user_id}">招聘信息</a>
+		</div>
+	</div>
+</div>
+
+{template 'content', 'footer'}

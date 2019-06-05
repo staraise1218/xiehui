@@ -1,0 +1,115 @@
+<!-- APP 产品列表 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+    <script src="statics/mobile/js/rem.js"></script>
+    <link rel="stylesheet" href="statics/mobile/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/global.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/index.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/slider.css">
+    <style>
+        .search-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .search-top input {
+            border: none;
+            padding: .5rem;
+            border-radius: .2rem;
+            flex: 1;
+        }
+
+        .search-top span {
+            padding: .5rem 1rem;
+            margin-left: 1rem;
+            border-radius: .3rem;
+        }
+
+        .item div:first-child {
+            width: 12rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="ctrl">
+        <span class="ctr-icon glyphicon glyphicon-list"></span>
+    </div>
+
+    <div id="box">
+        <!-- ==============================================================
+        左侧内容区域
+============================================================== -->
+        <div id="left-box">
+            <!-- 轮播图 -->
+           <!--  <div class="slider">
+               <img class="img-100" src="" alt="">
+           </div> -->
+            <!-- 轮播图 END -->
+            <!-- 导航区域 -->
+            {template "public", 'top', 'mobile'}
+            <!-- 导航区域 END -->
+
+            <!-- 面包屑导航 -->
+            <div class="nav-link left-center padding-1 text-1">
+                中国游乐APP &gt; 企业列表
+            </div>
+            <p class="color-1 margin-lr-1 padding-b-05 border-bottom">产品列表</p>
+            <!-- 面包屑导航 END -->
+            <div class="search-top">
+                <form action="" method="get">
+                    <input type="hidden" name="m" value="app">
+                    <input type="hidden" name="c" value="enterprise">
+                    <input type="hidden" name="a" value="lists">
+                    <input type="text" class="bg-gray-1" name="keyname" value="{$keyname}">
+                    <span class="bg-red-1" onclick="">搜索</span>
+                </form>
+            </div>
+            <ul class="padding-1">
+                {loop $enterprises $r}
+                <li class="item between-start" onclick="window.location='?m=app&c=enterprise&a=show&id={$r[user_id]}'">
+                    <div class="left-center">
+                        <img src="{$r[image_url]}" alt="" class="img-100">
+                    </div>
+                    <div class="flex-1 margin-left-1">
+                        <p class="text-blod text-1">{$r[enterprise_name]}</p>
+                        <p class="text-2 color-6">
+                                {strcut($r[brief])}
+                        </p>
+                    </div>
+                </li>
+                {/loop}
+            </ul>
+
+        <div id="pages">{$pages}</div>
+
+            <div class="line"></div>
+            <!-- footer -->
+            {template "public", 'footer', 'mobile'}
+        </div>
+        <!-- 左侧内容区域 END -->
+
+
+        <!-- ==============================================================
+        右侧菜单区域
+============================================================== -->
+         {template "public", 'rightMenu', 'mobile'}
+    </div>
+    <script src="statics/mobile/js/jquery.min.js"></script>
+    <script src="statics/mobile/bootstrap/js/bootstrap.min.js"></script>
+    <script src="statics/mobile/js/index.js"></script>
+    <script src="statics/mobile/js/slider.js"></script>
+    <script src="statics/mobile/js/global.js"></script>
+</body>
+
+</html>

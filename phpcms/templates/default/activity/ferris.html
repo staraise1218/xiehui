@@ -1,0 +1,75 @@
+{template 'content', 'header'}
+
+<div class="categoryimage"><img src="{$banner}" alt=""></div>
+<div class="min-width-1300">
+	<div class="container">
+		<div class="crumb">{catpos($catid)} 摩天奖介绍</div>
+		<div class="act_title"><span>摩天奖介绍</span></div>
+		<div class="actInfo">
+			{$description}
+		</div>
+
+		<div class="canzhan"> <a href="index.php?m=content&c=index&a=lists&catid=25">我要参评</a></div>
+		<div class="act_title"><span>历年获奖单位</span></div>
+		<div class="tuji">
+			<div class="direction">
+				<span class="l"></span>
+				<span class="r"></span>
+			</div>
+			<ul class="tujibox">
+
+				{pc:content action="lists" catid="24" num="20" order="listorder desc, id desc"}
+				{loop $data $r}
+				<li>
+					<a href="{$r[url]}" target="_blank">
+						<img src="{thumb($r[thumb], 390, 220)}" width="390" height="220" alt="">
+						<p class="tit">{$r[title]}</p>
+					</a>
+				</li>
+				{/loop}
+				{/pc}
+			</ul>
+		</div>
+
+		<div class="act_title">{if $cooperation_plan != ''}<a class="getplan" href="{APP_PATH}index.php?m=activity&a=downfile&activity_id={$activity_id}" target="_blank">获取方案</a>{/if}<span>赞助与合作</span></div>
+		<div class="minglu">
+			<img src="{$cooperation}" alt="">
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		// 同期活动议程切换
+		$('.lichengtab span').click(function(){
+			$(this).addClass('current').siblings().removeClass('current');
+
+			$('.lichengbox .con').eq($(this).index()).show().siblings().hide();
+		})
+
+
+		// 图集滚动
+		  // 设置ul总宽度
+		  var li_num = $('.tujibox li').length;
+		  var tujibox_w = li_num*390+li_num*15;
+		  $('.tujibox').css('width', tujibox_w);
+
+		$('.direction .r').click(function(){
+			$('.tujibox').stop(false, true);
+			var marginLeft = Math.abs(parseInt($('.tujibox').css('marginLeft')));
+			var stopLeft = (li_num-3)*390+(li_num-4)*15;
+
+			if(marginLeft >= stopLeft) return;
+
+			$('.tujibox').stop(false, true).animate({ marginLeft: "-=405" }, 500);
+		})
+		$('.direction .l').click(function(){
+			$('.tujibox').stop(false, true);
+			if(parseInt($('.tujibox').css('marginLeft')) >= 0) return;
+
+			$('.tujibox').animate({ marginLeft: "+=405" }, 500);
+		})
+	})
+</script>
+
+{template 'content', 'footer'}
