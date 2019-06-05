@@ -27,8 +27,11 @@
             border-radius: .2rem;
             flex: 1;
         }
+        .img-box {
+            text-align: center;
+        }
         .img-box img {
-            width: 32%;
+            width: 46%;
             margin-right: .8%;
         }
         .img-box img:last-child {
@@ -124,14 +127,14 @@
 
                 <!-- 项目介绍 -->
                 <div class="title padding-tb-1">项目介绍</div>
-                <div class="product-con">>
+                <div class="product-con">
                     {php echo str_replace('/ueditor/php/upload/image', APP_BASE_URL.'/ueditor/php/upload/image', $brief)}
                 </div>
 
                 <!-- 地图 -->
                 <div class="title padding-tb-1">{$traffic_detail}</div>
                 <div class="map-wrap" id="mapContainer" style="height: 300px">
-                    此处放地图
+                    <!-- 此处放地图 -->
                 </div>
 
                 <!-- 联系人 -->

@@ -46,7 +46,7 @@
             <ul class="padding-1">
                 {pc:content action="lists" catid="$catid" num="15" order="listorder desc, id DESC" page="$page"}
                 {loop $data $r}
-                <li class="item between-center border-bottom text-1 padding-tb-05">
+                <li class="item pd-3 between-center border-bottom text-1 padding-tb-05">
                     <a class="color-6" href="{$r[url]}">{$r['title']}</a>
                     <p class="nowrap color-6">{date('Y-m-d', $r[inputtime])}</p>
                 </li>
