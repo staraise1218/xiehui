@@ -401,6 +401,7 @@ em {
  .footer-wrap {
     display: flex;
     justify-content: space-between;
+    white-space: nowrap;
 }
 
 .footer-text .left { 
