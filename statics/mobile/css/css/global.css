@@ -395,25 +395,29 @@ em {
 /**
  * footer
  */
- .footer {
+
+.footer {
     padding: 1rem 2rem;
 }
- .footer-wrap {
+.footer-wrap {
     display: flex;
     justify-content: space-between;
-    white-space: nowrap;
 }
 
 .footer-text .left { 
     align-self: flex-start;
+    width: 6.3rem;
+    white-space: nowrap;
     width: 7rem;
 }
 .footer-text .right {
-    align-self: flex-start
+    align-self: flex-start;
+    flex: 1;
 }
 .footer-shengming {
     background: #F6F6F6;
 }
+
 
 
 
