@@ -45,7 +45,7 @@
             <ul class="padding-1">
                 {pc:content action="lists" catid="$catid" num="20" order="listorder desc, id DESC" page="$page"}
                 {loop $data $r}
-                <li class="item border-bottom padding-tb-1">
+                <li class="item pd-3 border-bottom padding-tb-1">
                     <p><a href="{$r[url]}">{$r[title]}</a></p>
                     <p class="color-1">{date('Y-m-d', $r[inputtime])}</p>
                     <p class="color-5">{$r[description]}</p>

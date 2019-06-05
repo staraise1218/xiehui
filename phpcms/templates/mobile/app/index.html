@@ -42,6 +42,11 @@
             display: flex;
             justify-content: left
         }
+        h4 {
+            font-size: 16px !important;
+        }
+
+        /* 测试git */
     </style>
 </head>
 
@@ -82,7 +87,7 @@
                 {loop $projects $r}
                 {php if($n>3) break;}
                 <li class="padding-1" onclick="window.location='?m=app&c=project&a=show&id={$r[project_id]}'">
-                    <p class="text-blod text-1">{$r[project_name]}</p>
+                    <p class="text-blod padding-b-3 text-1">{$r[project_name]}</p>
                     <div class="item between-start">
                         <div class="left-center">
                             <img src="{$r[image_default_url]}" alt="" class="img-100">
@@ -109,7 +114,7 @@
                 {loop $products $r}
                 {php if($n>3) break;}
                 <li class="padding-1" onclick="window.location='?m=app&c=product&a=show&id={$r[product_id]}'">
-                    <p class="text-blod text-1">{$r[product_name]}</p>
+                    <p class="text-blod padding-b-3 text-1">{$r[product_name]}</p>
                     <div class="item between-start">
                         <div class="left-center">
                             <img src="{$r[image_default_url]}" alt="" class="img-100">

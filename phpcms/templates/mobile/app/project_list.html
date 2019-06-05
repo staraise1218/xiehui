@@ -67,8 +67,8 @@
             </div>
             <p class="color-1 margin-lr-1 padding-b-05 border-bottom">项目列表</p>
             <!-- 面包屑导航 END -->
-            <div class="search-top">
-                <form action="" method="get">
+            <div >
+                <form class="search-top" action="" method="get">
                     <input type="hidden" name="m" value="app">
                     <input type="hidden" name="c" value="project">
                     <input type="hidden" name="a" value="lists">
@@ -78,7 +78,7 @@
             </div>
             <ul class="padding-1">
                 {loop $projects $r}
-                <li class="item between-start" onclick="window.location='?m=app&c=project&a=show&id={$r[project_id]}'">
+                <li class="item between-start padding-b-3" onclick="window.location='?m=app&c=project&a=show&id={$r[project_id]}'">
                     <div class="left-center">
                         <img src="{$r[image_default_url]}" alt="" class="img-100">
                     </div>
