@@ -19,10 +19,14 @@ a {
 
 
 
+
 /**
  * 新闻动态
  */
-
+/* 修改新闻动态padding */
+.news .list-item {
+    padding: .8rem 0;
+}
 
 
 /**
