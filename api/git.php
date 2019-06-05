@@ -4,6 +4,5 @@
  */
 defined('IN_PHPCMS') or exit('No permission resources.'); 
 
-$output = shell_exec("cd /home/www/xiehui; git pull ");
-var_dump($output);
+$output = shell_exec("cd /home/www/xiehui; git pull 2<&1");
 echo "<pre>$output</pre>";
