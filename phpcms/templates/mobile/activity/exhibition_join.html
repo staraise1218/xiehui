@@ -34,7 +34,10 @@
         .input-wrap .text-1 {
             width: 6rem;
         }
-        .codediv .getcode { position: absolute; color: #38f; right: 2rem; font-size: 1rem }
+        .codediv .getcode { position: absolute; color: #38f; right: 2rem; font-size: 1rem },
+        .left-title {
+            margin-right: 1rem;
+        }
     </style>
 </head>
 
@@ -78,44 +81,44 @@
                 <form action="/index.php?m=activity&a=exhibition_join" method="post">
 
                     <div class="input-wrap">
-                        <div class="text-1">单位名称:</div>
+                        <div class="text-1 left-title">单位名称:</div>
                         <input type="text" name="info[unit_name]" class="form-control">
                     </div>
                     <div class="input-wrap">
-                        <div class="text-1">单位地址:</div>
+                        <div class="text-1 left-title">单位地址:</div>
                         <input type="text" name="info[unit_address]" class="form-control">
                     </div>
 
 
                     <div class="input-wrap">
-                        <div class="text-1">会员等级:</div>
+                        <div class="text-1 left-title">会员等级:</div>
                         <input type="text" name="info[member_lever]" class="form-control">
                     </div>
 
 
                     <div class="input-wrap">
-                        <div class="text-1">联系人:</div>
+                        <div class="text-1 left-title">联系人:</div>
                         <input type="text" name="info[contact_name]" class="form-control">
                     </div>
 
                     <div class="input-wrap codediv">
-                        <div class="text-1">手机号:</div>
+                        <div class="text-1 left-title">手机号:</div>
                         <input type="text" id="phone" name="info[contact_phone]" class="form-control">
                     </div>
 
                     <div class="input-wrap codediv">
-                        <div class="text-1">验证码:</div>
+                        <div class="text-1 left-title">验证码:</div>
                         <input type="text" name="code" class="form-control">
                         <span class="getcode">获取验证码</span>
                     </div>
 
                     <div class="input-wrap">
-                        <div class="text-1">展位面积:</div>
+                        <div class="text-1 left-title">展位面积:</div>
                         <input type="text" name="info[area]" class="form-control">
                     </div>
 
                     <div class="input-wrap">
-                        <div class="text-1">其他说明:</div>
+                        <div class="text-1 left-title">其他说明:</div>
                         <textarea name="info[remarks]" id="" cols="30" rows="5"></textarea>
                     </div>
 
