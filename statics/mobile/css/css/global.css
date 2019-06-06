@@ -363,7 +363,8 @@ em {
     width: 100%;
     padding: .5rem 1rem;
     font-size: 1.2rem;
-    box-shadow: 0rem .3rem .3rem rgba(0,0,0,0.1)
+    box-shadow: 0rem .3rem .3rem rgba(0,0,0,0.1);
+    white-space: nowrap;
 }
 
 .search {
@@ -374,7 +375,7 @@ em {
     position: absolute;
 }
 .search input {
-    border: none;
+    /* border: none;
     border-radius: 2rem;
     background: #F6F6F6;
     padding: 0.3rem .2rem;
@@ -382,7 +383,21 @@ em {
     background-size: cover;
     margin-left: 1rem;
     padding-left: 2.6rem;
-    outline:none;
+    outline:none; */
+
+
+
+    
+    border: none;
+    border-radius: 2rem;
+    background: #F6F6F6;
+    padding: 0 .2rem;
+    background-image: url(../../img/searchbg.jpg);
+    background-size: cover;
+    margin-left: 1rem;
+    padding-left: 3rem;
+    outline: none;
+    line-height: 3em;
 }
 .top-nav a {
     margin-left: .5rem;
