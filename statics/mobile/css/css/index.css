@@ -88,7 +88,8 @@ a {
 }
 
 .scro-item {
-    width: 12.5rem;
+    /* width: 12.5rem; */
+    width: 160px;
     display: inline-block;
     padding: 0 .5rem;
 }
