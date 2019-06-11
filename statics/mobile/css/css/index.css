@@ -80,6 +80,7 @@ a {
 .scro-box {
     width: 100%;
     overflow: hidden;
+    height: 12rem;
 }
 .scro-con {
     white-space: nowrap;
@@ -99,7 +100,6 @@ a {
 .scro-item:first-child {
     /* padding-left: 1rem; */
 }
-
 
 
 
