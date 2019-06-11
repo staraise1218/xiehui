@@ -440,6 +440,8 @@ em {
     font-size: .2rem;
     outline: none;
     height: 25px;
+    box-sizing: border-box;
+    line-height: 25px;
 }
 .top-nav-2 .nav-right {
     display: flex;
