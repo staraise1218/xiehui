@@ -439,6 +439,7 @@ em {
     padding: .3rem 1rem .3rem 2.5rem;
     font-size: .2rem;
     outline: none;
+    height: 25px;
 }
 .top-nav-2 .nav-right {
     display: flex;
