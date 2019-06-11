@@ -77,11 +77,6 @@ a {
     justify-content: center;
     align-items: center;
 }
-.scro-box {
-    width: 100%;
-    overflow: hidden;
-    height: 12rem;
-}
 .scro-con {
     white-space: nowrap;
     font-size: 0;
