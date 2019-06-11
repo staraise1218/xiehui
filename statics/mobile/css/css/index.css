@@ -52,7 +52,7 @@ a {
     padding: .1rem;
 }
 .poster {
-    flex: 1;
+    /* flex: 1; */
     min-height: 16rem;
 }
 
