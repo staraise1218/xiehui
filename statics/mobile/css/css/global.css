@@ -375,8 +375,8 @@ em {
 }
 .search-icon_self {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     left: 1.5rem;
     top: 50%;
     transform: translateY(-50%);
@@ -436,7 +436,7 @@ em {
     background: #F6F6F6;
     border: none;
     border-radius: 2rem;
-    padding: .3rem 1rem .3rem 2.5rem;
+    padding: .3rem 1rem .3rem 2rem;
     font-size: .2rem;
     outline: none;
     height: 25px;
