@@ -26,7 +26,7 @@ a {
 /* 修改新闻动态padding */
 .news .list-item {
     line-height: 2em;
-    /* padding: .8rem 0; */
+    padding: .8rem 0;
 }
 
 
