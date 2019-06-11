@@ -470,6 +470,9 @@ em {
     display: flex;
     justify-content: space-between;
 }
+.footer-wrap li p {
+    padding-bottom: .2rem;
+}
 
 .footer-text .left { 
     align-self: flex-start;
@@ -480,6 +483,7 @@ em {
 .footer-text .right {
     align-self: flex-start;
     flex: 1;
+    padding-bottom: .4rem;
 }
 .footer-shengming {
     background: #F6F6F6;
