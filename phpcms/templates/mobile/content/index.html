@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="statics/mobile/css/css/global.css?v=1.3">
     <link rel="stylesheet" href="statics/mobile/css/css/index.css">
     <link rel="stylesheet" href="statics/mobile/css/css/slider.css">
+    <link rel="stylesheet" href="statics/mobile/css/css/swiper.min.css">
     <style>
         .scro-box {
             position: relative;
@@ -30,10 +31,12 @@
         #scroll-con3 {
             position: absolute
         }
+
         .border-bottom {
-            border-bottom: .1rem solid rgba(0,0,0,0.02);
+            border-bottom: .1rem solid rgba(0, 0, 0, 0.02);
         }
-/*         
+
+        /*         
         .scro-item_self {
             width: 260px !important;
         } */
@@ -53,9 +56,23 @@
 ============================================================== -->
         <div id="left-box">
             <!-- 轮播图 -->
-            <div class="slider">
-                <img class="img-100" src="statics/mobile/img/20190409110154571.jpg" alt="">
+
+            <div class="swiper-container" style="border: 1px solid red">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img class="img-100" src="statics/mobile/img/20190409110154571.jpg" alt="">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="img-100" src="statics/mobile/img/20190409110154571.jpg" alt="">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="img-100" src="statics/mobile/img/20190409110154571.jpg" alt="">
+                    </div>
+                </div>
             </div>
+            <!-- <div class="slider">
+                <img class="img-100" src="statics/mobile/img/20190409110154571.jpg" alt="">
+            </div> -->
             <!-- 轮播图 END -->
             <!-- 导航区域 -->
             {template "public", 'top', 'mobile'}
@@ -69,7 +86,8 @@
                 <ul class="color-6 text-2">
                     {pc:content action="lists" catid="21" num="6" order="listorder desc, id DESC"}
                     {loop $data $r}
-                    <li class="list-item border-bottom padding-tb-05" onclick="window.location={$r['url']}">{$r['title']}</li>
+                    <li class="list-item border-bottom padding-tb-05" onclick="window.location={$r['url']}">
+                        {$r['title']}</li>
                     {/loop}
                     {/pc}
                 </ul>
@@ -90,7 +108,8 @@
                             <p class="text-2">{date('Y-m-d', $r[inputtime])}</p>
                         </div>
                         <div class="poster margin-top-05">
-                            <a href="{$r[url]}"><img class="img-100" src="{thumb($r[thumb], 318, 440)}" alt="poster"></a>
+                            <a href="{$r[url]}"><img class="img-100" src="{thumb($r[thumb], 318, 440)}"
+                                    alt="poster"></a>
                         </div>
                     </div>
                     {/loop}
@@ -152,8 +171,10 @@
                         {loop $data $r}
                         <li class="scro-item scro-item_self">
                             <div>
-                                <a href="{$r[url]}"><img class="img-100 img_self" src="{thumb($r[thumb], 390, 220)}" alt="">
-                                <p class="text-center scro-tex padding-tb-05">{strcut($r[title], 14)}</p></a>
+                                <a href="{$r[url]}"><img class="img-100 img_self" src="{thumb($r[thumb], 390, 220)}"
+                                        alt="">
+                                    <p class="text-center scro-tex padding-tb-05">{strcut($r[title], 14)}</p>
+                                </a>
                             </div>
                         </li>
                         {/loop}
@@ -183,8 +204,10 @@
                         {loop $data $r}
                         <li class="scro-item scro-item_self">
                             <div>
-                                <a href="{$r[url]}"><img class="img-100 img_self" src="{thumb($r[thumb], 390, 220)}" alt="">
-                                <p class="text-center scro-tex padding-tb-05">{strcut($r[title], 14)}</p></a>
+                                <a href="{$r[url]}"><img class="img-100 img_self" src="{thumb($r[thumb], 390, 220)}"
+                                        alt="">
+                                    <p class="text-center scro-tex padding-tb-05">{strcut($r[title], 14)}</p>
+                                </a>
                             </div>
                         </li>
                         {/loop}
@@ -214,8 +237,10 @@
                         {loop $data $r}
                         <li class="scro-item scro-item_self">
                             <div>
-                                <a href="{$r[url]}"><img class="img-100 img_self" src="{thumb($r[thumb], 390, 220)}" alt="">
-                                <p class="text-center scro-tex padding-tb-05">{strcut($r[title], 14)}</p></a>
+                                <a href="{$r[url]}"><img class="img-100 img_self" src="{thumb($r[thumb], 390, 220)}"
+                                        alt="">
+                                    <p class="text-center scro-tex padding-tb-05">{strcut($r[title], 14)}</p>
+                                </a>
                             </div>
                         </li>
                         {/loop}
@@ -272,11 +297,14 @@
 ============================================================== -->
         {template 'public', 'rightMenu', 'mobile'}
     </div>
-    
+
     <script src="statics/mobile/bootstrap/js/bootstrap.min.js"></script>
     <script src="statics/mobile/js/index.js"></script>
     <script src="statics/mobile/js/slider.js"></script>
+    <script src="statics/mobile/js/swiper.esm.js"></script>
+    <script src="statics/mobile/js/swiper.min.js"></script>
     <script src="statics/mobile/js/global.js"></script>
+
 </body>
 
 </html>
