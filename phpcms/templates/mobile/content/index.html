@@ -36,6 +36,43 @@
             border-bottom: .1rem solid rgba(0, 0, 0, 0.02);
         }
 
+
+
+        .qikan-item {
+            display: flex;
+            text-align: center;
+            font-size: 12px;
+            width: 50%;
+        }
+
+        .qikan-item:first-child {
+            padding-right: 5px;
+            box-sizing: border-box;
+        }
+
+        .qikan-item:last-child {
+            padding-left: 5px;
+            box-sizing: border-box;
+        }
+
+        .qikan-item .qikan-date {
+            background: #F7E6E7;
+            height: 40px;
+            color: #A37478;
+            box-sizing: border-box;
+            margin-right: 10px;
+            flex: 1;
+            width: 10px;
+            font-weight: 600;
+        }
+
+        .qikan-item .qikan-date p:last-child {
+            display: block;
+            white-space: nowrap;
+            transform: scale(.7, .7);
+            margin-right: 20px;
+        }
+
         /*         
         .scro-item_self {
             width: 260px !important;
@@ -103,7 +140,7 @@
                 <div class="poster-wrapper margin-top-1">
                     {pc:content action="lists" catid="17" num="2" order="listorder desc, id DESC"}
                     {loop $data $r}
-                    <div class="poster-item margin-r-05">
+                    <!-- <div class="poster-item margin-r-05">
                         <div class="tag">
                             <p class="text-2">{date('Y-m-d', $r[inputtime])}</p>
                         </div>
@@ -111,10 +148,28 @@
                             <a href="{$r[url]}"><img class="img-100" src="{thumb($r[thumb], 318, 440)}"
                                     alt="poster"></a>
                         </div>
+                    </div> -->
+
+                    <div class="qikan-item">
+                        <div class="qikan-date">
+                            <p>{date('d', $r[inputtime])}</p>
+                            <p>{date('Y-m', $r[inputtime])}</p>
+                        </div>
+                        <a href="{$r[url]}"><img src="{thumb($r[thumb], 318, 440)}" alt="poster"></a>
                     </div>
                     {/loop}
                     {/pc}
+
+
+
                 </div>
+
+
+
+
+
+
+
             </div>
             <!-- 电子期刊 END -->
             <!-- APP 同步信息 -->
