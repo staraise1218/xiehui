@@ -252,7 +252,7 @@
 
             <div class="line"></div>
 
-             {template 'public', 'footer', 'mobile'}
+            {template 'public', 'footer', 'mobile'}
         </div>
         <!-- 左侧内容区域 END -->
 
@@ -270,6 +270,11 @@
     <script src="statics/mobile/js/swiper.esm.js"></script>
     <script src="statics/mobile/js/swiper.min.js"></script>
     <script src="statics/mobile/js/global.js"></script>
+    <script>
+        var mySwiper = new Swiper('.swiper-container', {
+            autoplay: true, //可选选项，自动滑动
+        })
+    </script>
 
 </body>
 
