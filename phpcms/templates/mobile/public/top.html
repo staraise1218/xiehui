@@ -19,13 +19,14 @@
 
 <script src="statics/mobile/js/jquery.min.js"></script>
 <script type="text/javascript">
-    $(function(){
-        $('input[name="keyword"]').keyup(function(e){
+    $(function () {
+        $('input[name="keyword"]').keyup(function (e) {
             var keyword = this.value;
-            if(keyword == '') return false;
+            if (keyword == '') return false;
 
-            if(e.keyCode == '13'){
-                location.href = '{APP_PATH}index.php?m=content&c=index&a=search&siteid=1&keyword='+keyword
+            if (e.keyCode == '13') {
+                location.href = '{APP_PATH}index.php?m=content&c=index&a=search&siteid=1&keyword=' +
+                    keyword
             }
         })
     })
