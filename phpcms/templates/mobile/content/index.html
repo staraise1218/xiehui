@@ -96,17 +96,20 @@
 
             <div class="swiper-container">
                 <div class="swiper-wrapper">
+                   {pc:get sql="SELECT setting FROM phpcms_poster WHERE spaceid = 11 AND disabled=0 ORDER BY listorder ASC"}
+                    {loop $data $r}
+                    <?php 
+                        $r = json_decode($r['setting'], true);
+                        $r = $r[1];
+                    ?>
                     <div class="swiper-slide">
-                        <img class="img-100" src="statics/mobile/img/20190409110154571.jpg" alt="">
+                        <a href="{if $r[linkurl] != ''}{$r[linkurl]}{else}javascript:;{/if}"><img class="img-100" src="{$r[imageurl]}" alt=""></a>
                     </div>
-                    <div class="swiper-slide">
-                        <img class="img-100" src="statics/mobile/img/20190426031958655.jpg" alt="">
-                    </div>
-                    <div class="swiper-slide">
-                        <img class="img-100" src="statics/mobile/img/20180702055253627.jpg" alt="">
-                    </div>
+                    {/loop}
+                    {/pc}
                 </div>
             </div>
+                
             <!-- <div class="slider">
                 <img class="img-100" src="statics/mobile/img/20190409110154571.jpg" alt="">
             </div> -->
