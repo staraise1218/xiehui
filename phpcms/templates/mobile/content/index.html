@@ -272,9 +272,11 @@
     <script src="statics/mobile/js/global.js"></script>
     <script>
         var mySwiper = new Swiper('.swiper-container', {
-            autoplay: true, //可选选项，自动滑动
             autoHeight: true,
             disableOnInteraction: false,
+            autoplay: {
+                disableOnInteraction: false,
+            },
         })
     </script>
 
