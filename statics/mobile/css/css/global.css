@@ -703,3 +703,9 @@ label {
     border-radius: 4px;
     line-height: 1.6rem;
 }
+
+
+
+.scro-box p {
+    font-size: 8px;
+}
