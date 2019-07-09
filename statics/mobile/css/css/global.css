@@ -709,3 +709,6 @@ label {
 .scro-box p {
     font-size: 8px;
 }
+.scro-tex {
+    text-overflow: ellipsis;
+}
