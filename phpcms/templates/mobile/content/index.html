@@ -126,7 +126,7 @@
                 <ul class="color-6 text-2">
                     {pc:content action="lists" catid="21" num="6" order="listorder desc, id DESC"}
                     {loop $data $r}
-                    <li class="list-item border-bottom padding-tb-05" onclick="window.location={$r['url']}">
+                    <li class="list-item border-bottom padding-tb-05" onclick="window.location='{$r['url']}'">
                         {$r['title']}</li>
                     {/loop}
                     {/pc}
