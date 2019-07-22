@@ -70,12 +70,12 @@
 		<div class="app_title"><a href="?m=app&c=forum&a=artlists">MORE»</a><span>论坛</span></div>
 		{loop $forums $r}
 		{php if($n>3) break;}
-		<div class="app_forum">
+		<div class="app_forum" onclick="window.location='?m=app&c=forum&a=show&type=art&id={$r[inter_id]}'">
 			<div class="pic"><img src="{if $r[headerimg] != ''}{$r[headerimg]}{else}{IMG_PATH}nophoto.gif{/if}" width="80" height="80" alt=""></div>
 			<div class="info">
 				<div class="title">{$r[nickname]}</div>
 				<div class="attr">{$r[addtime]} <span>浏览人数：{$r[view]}</span></div>
-				<div class="des"><a href="?m=app&c=forum&a=show&type=art&id={$r[inter_id]}">{$r['brief']}</a></div>
+				<div class="des">{$r['brief']}</div>
 				<!-- <div class="info2">
 					<img src="{$r[url_info][url_image]}" width="192" height="192" alt="">
 					<div class="des2">
