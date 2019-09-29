@@ -15,5 +15,5 @@ a:active {color:#ad0400;}
 /*.min-width-1300 {min-width: 1300px;}*/
 
 .top_title { height: 40px; line-height: 40px; font-size: 14px; border-bottom: 1px solid #eee; text-align: center; background: #cf041a; color: #ffe335; }
-.contentainer { font-size: 14px; color: #ffe335; padding: 15px; text-align: justify; background: url('../images/gqpf.jpg') no-repeat; background-size: background-size: 100% auto;}
+.container { font-size: 14px; color: #ffe335; padding: 15px; text-align: justify; background-image: url('../images/gqpf.jpg'); background-size: 100% auto;}
 .description p { text-indent: 2em; line-height: 24px; }
