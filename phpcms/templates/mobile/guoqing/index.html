@@ -14,8 +14,9 @@
 </head>
 <body>
 	<div class="top_title">一起点亮中国文旅地图</div>
+	<div id="allmap" style="height: 500px; width: 100%;"></div>
 	<div class="contentainer">
-		<div id="allmap"></div>
+
 		<div class="description">
 			<p>中国70华诞，全国各地的文旅人坚守在自己的岗位上，为人民创造快乐，创造幸福，让我们一同为祖国母亲庆祝，一同点亮中国文旅地图！（参与点亮中国文旅地图活动，可获得由中国游艺机游乐园协会颁发的特殊勋章）</p>
 		</div>
@@ -28,19 +29,19 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">姓名</label>
 				<div class="layui-input-block">
-				<input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+				<input type="text" name="title" placeholder="请输入标题" class="layui-input">
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">手机号</label>
 				<div class="layui-input-block">
-				<input type="text" name="username" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+				<input type="text" name="username" placeholder="请输入手机号" class="layui-input">
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">乐园/景点</label>
 				<div class="layui-input-block">
-				<input type="text" name="username" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+				<input type="text" name="username" placeholder="请输入乐园/景点" class="layui-input">
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -54,41 +55,10 @@
 	
 	<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=4y8GNKB2Coct45eFxZWslUWlzWD6Gvdt"></script>
 	<script type="text/javascript">
-		/*if(navigator.geolocation){  
-			navigator.geolocation.getCurrentPosition(onSuccess , onError);  
-		}else{  
-			alert("您的浏览器不支持使用HTML 5来获取地理位置服务");  
-		}  
-		//定位数据获取成功响应  
-		function  onSuccess(position){  
-			alert('纬度: '          + position.coords.latitude          + '\n' +  
-			'经度: '         + position.coords.longitude         + '\n' +  
-			'海拔: '          + position.coords.altitude          + '\n' +  
-			'水平精度: '          + position.coords.accuracy          + '\n' +  
-			'垂直精度: ' + position.coords.altitudeAccura)  
-		}  
-		//定位数据获取失败响应  
-		function onError(error) {  
-			switch(error.code)  
-			{  
-				case error.PERMISSION_DENIED:  
-					alert("您拒绝对获取地理位置的请求");  
-					break;  
-				case error.POSITION_UNAVAILABLE:  
-					alert("位置信息是不可用的");  
-					break;  
-				case error.TIMEOUT:  
-					alert("请求您的地理位置超时");  
-					break;  
-				case error.UNKNOWN_ERROR:  
-					alert("未知错误");  
-					break;  
-			}  
-		}*/
-
+		
 		var map = new BMap.Map("allmap");
 		var point = new BMap.Point(116.331398,39.897445);
-		map.centerAndZoom(point,12);
+		map.centerAndZoom(point,15);
 
 		var geolocation = new BMap.Geolocation();
 		geolocation.getCurrentPosition(function(r){
