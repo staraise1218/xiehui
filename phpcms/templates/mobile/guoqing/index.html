@@ -113,9 +113,8 @@
 							layer.msg('提交成功', {icon:1}, function(){
 								// 将用户的地理位置标注
 								point = new BMap.Point(longitude, latitude);
-								var myIcon = new BMap.Icon("http://www.caapa.org/statics/images/icon/red_flag.png");     
-								var marker = new BMap.Marker(point, myIcon);
-								marker.setIcon('')
+								var myIcon = new BMap.Icon("http://www.caapa.org/statics/images/icon/red_flag.png", new BMap.Size(16, 16));     
+								var marker = new BMap.Marker(point, {icon:myIcon});
 								map.addOverlay(marker);
 							});
 						} else {

@@ -6,7 +6,7 @@ pc_base::load_app_func('util','content');
 class index {
 	private $db;
 	function __construct() {
-		$this->db = pc_base::load_model('content_model');
+		$this->db = pc_base::load_model('guoqing_model');
 		/*$this->_userid = param::get_cookie('_userid');
 		$this->_username = param::get_cookie('_username');
 		$this->_groupid = param::get_cookie('_groupid');*/
@@ -14,13 +14,8 @@ class index {
 
 	//首页
 	public function init() {
-		if(isset($_GET['siteid'])) {
-			$siteid = intval($_GET['siteid']);
-		} else {
-			$siteid = 1;
-		}
-		$siteid = $GLOBALS['siteid'] = max($siteid,1);
-		define('SITEID', $siteid);
+		// 获取所有的经纬度坐标
+		$list = $this->db->select("longitude != '' and latitude != ''", 'longitude, latitude');
 
 		include template('guoqing','index', 'mobile');
 	}
