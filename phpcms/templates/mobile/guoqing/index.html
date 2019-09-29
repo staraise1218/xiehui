@@ -11,6 +11,21 @@
 	<link rel="stylesheet" type="text/css" href="{APP_PATH}statics/default/css/guoqing.css">
 	<link rel="stylesheet" type="text/css" href="{APP_PATH}statics/plugin/layui/css/layui.css">
 	<script type="text/javascript" src="{APP_PATH}statics/default/js/jquery-1.11.0.min.js"></script>
+	<style type="text/css">
+		.layui-form-label{
+			 /* float: left; */
+		    display: block;
+		    padding: 9px 0px;
+		     width: 100%; 
+		    font-weight: 400;
+		    line-height: 20px;
+		     text-align: left; 
+		}
+		.layui-input-block {
+			margin-left: 0;
+		}
+		.kuohao {color: #eee; font-size: 12px;}
+	</style>
 </head>
 <body>
 	<div class="top_title">一起点亮中国文旅地图</div>
@@ -27,7 +42,7 @@
 
 		<form class="layui-form" action="">
 			<div class="layui-form-item">
-				<label class="layui-form-label">姓名</label>
+				<label class="layui-form-label">我是<span class="kuohao">(姓名)</span></label>
 				<div class="layui-input-block">
 					<input type="text" name="name" placeholder="请输入姓名" class="layui-input">
 				</div>
@@ -39,7 +54,7 @@
 				</div>
 			</div>
 			<div class="layui-form-item">
-				<label class="layui-form-label">乐园/景点</label>
+				<label class="layui-form-label">我在<span class="kuohao">(乐园/景点)</span>，为点亮中国文旅地图接力！</label>
 				<div class="layui-input-block">
 					<input type="text" name="jingdian" placeholder="请输入乐园/景点" class="layui-input">
 				</div>
