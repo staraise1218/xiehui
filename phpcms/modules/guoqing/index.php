@@ -16,6 +16,7 @@ class index {
 	public function init() {
 		// 获取所有的经纬度坐标
 		$list = $this->db->select("longitude != '' and latitude != ''", 'longitude, latitude');
+		$list = json_encode($list);
 
 		include template('guoqing','index', 'mobile');
 	}

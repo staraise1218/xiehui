@@ -51,7 +51,7 @@
 				</div>
 			</div>
 		</form>
-		<div style="height: 300px;"></div>
+		<div style="height: 150px;"></div>
 	</div>
 	
 
@@ -59,19 +59,21 @@
 	<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=4y8GNKB2Coct45eFxZWslUWlzWD6Gvdt"></script>
 	<script type="text/javascript">
 		var longitude = '', latitude = ''; // 定义用户经纬度
+		var list = JSON.parse('<?php echo $list; ?>'); // 初始化已点亮的经纬度
+		var myIcon = new BMap.Icon("http://www.caapa.org/statics/images/icon/red_flag.png", new BMap.Size(16, 16)); // 自定义标记图标
 
 		// 初始化百度地图，并获取用户经纬度坐标
 		var map = new BMap.Map("allmap");
-		var point = new BMap.Point(116.331398,39.897445);
-		map.centerAndZoom(point,15);
-		map.enableScrollWheelZoom(true); 
+		var point = new BMap.Point(103.460025, 35.851543);
+		map.centerAndZoom(point, 5); // 设置地图中心点，及级别
+		map.enableScrollWheelZoom(true);  // 设置鼠标滑轮缩放
 
 		var geolocation = new BMap.Geolocation();
 		geolocation.getCurrentPosition(function(r){
 			if(this.getStatus() == BMAP_STATUS_SUCCESS){
 				// var mk = new BMap.Marker(r.point);
 				// map.addOverlay(mk);
-				map.panTo(r.point);
+				// map.panTo(r.point);
 				// alert('您的位置：'+r.point.lng+','+r.point.lat);
 				longitude = r.point.lng;
 				latitude = r.point.lat;
@@ -80,6 +82,13 @@
 				alert('failed'+this.getStatus());
 			}        
 		});
+
+		// 初始化已点亮的经纬度
+		$.each(list, function(){
+			point = new BMap.Point(this.longitude, this.latitude);
+			var marker = new BMap.Marker(point, {icon:myIcon});
+			map.addOverlay(marker);
+		})
 
 
 		layui.use(['form'], function(){
@@ -113,7 +122,7 @@
 							layer.msg('提交成功', {icon:1}, function(){
 								// 将用户的地理位置标注
 								point = new BMap.Point(longitude, latitude);
-								var myIcon = new BMap.Icon("http://www.caapa.org/statics/images/icon/red_flag.png", new BMap.Size(16, 16));     
+								 
 								var marker = new BMap.Marker(point, {icon:myIcon});
 								map.addOverlay(marker);
 							});
