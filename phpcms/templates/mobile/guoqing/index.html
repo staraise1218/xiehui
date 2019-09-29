@@ -29,19 +29,19 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">姓名</label>
 				<div class="layui-input-block">
-				<input type="text" name="name" placeholder="请输入姓名" class="layui-input">
+					<input type="text" name="name" placeholder="请输入姓名" class="layui-input">
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">手机号</label>
 				<div class="layui-input-block">
-				<input type="text" name="mobile" placeholder="请输入手机号" class="layui-input">
+					<input type="text" name="mobile" placeholder="请输入手机号" class="layui-input">
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">乐园/景点</label>
 				<div class="layui-input-block">
-				<input type="text" name="jingdian" placeholder="请输入乐园/景点" class="layui-input">
+					<input type="text" name="jingdian" placeholder="请输入乐园/景点" class="layui-input">
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -64,12 +64,13 @@
 		var map = new BMap.Map("allmap");
 		var point = new BMap.Point(116.331398,39.897445);
 		map.centerAndZoom(point,15);
+		map.enableScrollWheelZoom(true); 
 
 		var geolocation = new BMap.Geolocation();
 		geolocation.getCurrentPosition(function(r){
 			if(this.getStatus() == BMAP_STATUS_SUCCESS){
-				var mk = new BMap.Marker(r.point);
-				map.addOverlay(mk);
+				// var mk = new BMap.Marker(r.point);
+				// map.addOverlay(mk);
 				map.panTo(r.point);
 				// alert('您的位置：'+r.point.lng+','+r.point.lat);
 				longitude = r.point.lng;
@@ -92,22 +93,51 @@
 				var jingdian = $("input[name='jingdian']").val();
 
 				// 验证数据
-				if(name == '') layer.msg('姓名必填', {icon:2});
-				if("/^1[345678]\d{9}$/".test(mobile) ==  false) layer.msg('手机号格式不正确', {icon:2});
+				if(name == '') {
+					layer.msg('姓名必填', {icon:2});
+					return false;
+				}
+				if(/^1[345678]\d{9}$/.test(mobile) ==  false) {
+					layer.msg('手机号格式不正确', {icon:2});
+					return false;
+				}
+
 
 				$.ajax({
-					url: "/index.php?op=guoqing",
+					url: "/api.php?op=guoqing",
 					type: 'post',
 					dataType: 'json',
-					data: {name: name, mobile: mobile, jingdian: jingdian},
+					data: {name: name, mobile: mobile, jingdian: jingdian, longitude: longitude, latitude: latitude},
 					success: function(data){
-
+						if(data.code == 200){
+							layer.msg('提交成功', {icon:1}, function(){
+								// 将用户的地理位置标注
+								point = new BMap.Point(longitude, latitude);
+								var marker = new BMap.Marker(point);
+								map.addOverlay(marker);
+							});
+						} else {
+							layer.msg('提交失败', {icon:2})
+						}
 					}
 				})
 			})
 		})
 
 	</script>
+
+	<!-- 微信分享 -->
+	<!-- <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+	<script type="text/javascript">
+		wx.config({
+		  debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+		  appId: '', // 必填，公众号的唯一标识
+		  timestamp: , // 必填，生成签名的时间戳
+		  nonceStr: '', // 必填，生成签名的随机串
+		  signature: '',// 必填，签名
+		  jsApiList: [] // 必填，需要使用的JS接口列表
+		});
+	</script> -->
 </body>
 </html>
 	
