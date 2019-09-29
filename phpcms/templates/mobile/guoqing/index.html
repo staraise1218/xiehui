@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="top_title">一起点亮中国文旅地图</div>
-	<div id="allmap" style="height: 500px; width: 100%;"></div>
+	<div id="allmap" style="height: 300px; width: 100%;"></div>
 	<div class="contentainer">
 
 		<div class="description">
@@ -29,33 +29,38 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">姓名</label>
 				<div class="layui-input-block">
-				<input type="text" name="title" placeholder="请输入标题" class="layui-input">
+				<input type="text" name="name" placeholder="请输入姓名" class="layui-input">
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">手机号</label>
 				<div class="layui-input-block">
-				<input type="text" name="username" placeholder="请输入手机号" class="layui-input">
+				<input type="text" name="mobile" placeholder="请输入手机号" class="layui-input">
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">乐园/景点</label>
 				<div class="layui-input-block">
-				<input type="text" name="username" placeholder="请输入乐园/景点" class="layui-input">
+				<input type="text" name="jingdian" placeholder="请输入乐园/景点" class="layui-input">
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<div class="layui-input-block">
-				<button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+				<button type="button" class="layui-btn submit">立即提交</button>
 				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 				</div>
 			</div>
 		</form>
+		<div style="height: 300px;"></div>
 	</div>
 	
+
+	<script src="{APP_PATH}statics/plugin/layui/layui.js" charset="utf-8"></script>
 	<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=4y8GNKB2Coct45eFxZWslUWlzWD6Gvdt"></script>
 	<script type="text/javascript">
-		
+		var longitude = '', latitude = ''; // 定义用户经纬度
+
+		// 初始化百度地图，并获取用户经纬度坐标
 		var map = new BMap.Map("allmap");
 		var point = new BMap.Point(116.331398,39.897445);
 		map.centerAndZoom(point,15);
@@ -66,12 +71,42 @@
 				var mk = new BMap.Marker(r.point);
 				map.addOverlay(mk);
 				map.panTo(r.point);
-				alert('您的位置：'+r.point.lng+','+r.point.lat);
+				// alert('您的位置：'+r.point.lng+','+r.point.lat);
+				longitude = r.point.lng;
+				latitude = r.point.lat;
 			}
 			else {
 				alert('failed'+this.getStatus());
 			}        
 		});
+
+
+		layui.use(['form'], function(){
+		  	var form = layui.form
+		  		,layer = layui.layer
+			// 提交表单
+			//监听提交
+			$('.submit').click(function(){
+				var name = $("input[name='name']").val();
+				var mobile = $("input[name='mobile']").val();
+				var jingdian = $("input[name='jingdian']").val();
+
+				// 验证数据
+				if(name == '') layer.msg('姓名必填', {icon:2});
+				if("/^1[345678]\d{9}$/".test(mobile) ==  false) layer.msg('手机号格式不正确', {icon:2});
+
+				$.ajax({
+					url: "/index.php?op=guoqing",
+					type: 'post',
+					dataType: 'json',
+					data: {name: name, mobile: mobile, jingdian: jingdian},
+					success: function(data){
+
+					}
+				})
+			})
+		})
+
 	</script>
 </body>
 </html>
