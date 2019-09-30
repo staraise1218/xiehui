@@ -173,7 +173,7 @@
 					return false;
 				}
 				if(code == ''){
-					layer.msg('验证码必填', {icon:1});
+					layer.msg('验证码必填', {icon:2});
 					return false;
 				}
 
@@ -181,7 +181,7 @@
 					url: "/index.php?m=guoqing&c=index&a=submit",
 					type: 'post',
 					dataType: 'json',
-					data: {name: name, mobile: mobile, jingdian: jingdian, longitude: longitude, latitude: latitude},
+					data: {name: name, mobile: mobile, jingdian: jingdian, longitude: longitude, latitude: latitude， code: code},
 					success: function(data){
 						if(data.code == 200){
 							layer.msg('提交成功', {icon:1}, function(){
@@ -217,7 +217,8 @@
 			}
 
 			// 可以发送验证码
-
+			$.cookie('second', 60);
+			settime($('.getcode'));
 			layer.load(1);
 			$.ajax({
 				url: '/index.php?m=guoqing&c=index&a=sendMobileCode',
@@ -232,8 +233,7 @@
 						return false;
 					}
 					if(data.code == 200){
-						$.cookie('second', 60);
-						settime($('.getcode'));
+						
 						layer.msg('验证码发送成功');
 					}
 				},
