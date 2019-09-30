@@ -5,8 +5,10 @@ define('CACHE_MODEL_PATH',CACHE_PATH.'caches_model'.DIRECTORY_SEPARATOR.'caches_
 pc_base::load_app_func('util','content');
 class index {
 	private $db;
+	private $curl;
 	function __construct() {
 		$this->db = pc_base::load_model('guoqing_model');
+		$this->curl = pc_base::load_sys_class('curl');
 		/*$this->_userid = param::get_cookie('_userid');
 		$this->_username = param::get_cookie('_username');
 		$this->_groupid = param::get_cookie('_groupid');*/
@@ -47,17 +49,56 @@ class index {
 	    return $str;
 	}
 
-	
+
 
 	// 发送验证码
+	
+	// scene 1 活动报名 
 	public function sendMobileCode(){
-		$postdata = new_addslashes($_POST);
-		$url = APP_URL.'api_passport/sendMobileCode';
+		$mobile = $_POST['mobile'];
+        $scene = $_POST['scene'];
 
-		$postdata['mobile'] = $postdata['phone'];
-		$result = $this->curl->post($url, $postdata);
+         // 检测发送次数
+        $day_time_start = strtotime(date('Y-m-d'));
+        $day_time_end = $day_time_start + 3600*24;
 
-		die($result);
+        $sms_log_model = pc_base::load_model('sms_log_model');
+        $count = $sms_log_model->count("mobile=$mobile and add_time > $day_time_start and add_time < $day_time_end");
+
+        if($count >= 10){
+            die(json_encode(array('code'=>400, 'msg'=>'您的次数已超限')));
+        }
+
+        $code = rand(100000, 999999);
+        $data = array(
+            'mobile' => $mobile,
+            'code' => $code,
+            'scene' => $scene,
+            'add_time' => time(),
+        );
+
+        $smsLogid = $sms_log_model->insert($data, true);
+
+        // 执行短信网关发送 
+        
+
+        $rongliansms = pc_base::load_sys_class('rongliansms');
+        $result = $rongliansms->sendTemplateSMS($mobile, array($code), 207012);
+        if(empty($result)){
+			die(json_encode(array('code'=>400, 'msg'=>'发送失败')));
+		}elseif($result->statusReturn == false){
+			if($result->statusCode == '160040'){
+				die(json_encode(array('code'=>400, 'msg'=>'该电话号码今日获取验证码已达上限')));
+			}else{
+				die(json_encode(array('code'=>400, 'msg'=>'发送失败')));
+			}
+		}
+		else{
+			$sms_log_model = pc_base::load_model('sms_log_model');
+			$sms_log_model->update(array('status'=>'1'), array('id'=>$smsLogid));
+			die(json_encode(array('code'=>400, 'msg'=>'发送成功')));
+			
+		}
 	}
 }
 ?>

@@ -167,7 +167,6 @@
 					return false;
 				}
 
-
 				$.ajax({
 					url: "/api.php?op=guoqing",
 					type: 'post',
@@ -183,7 +182,7 @@
 								map.addOverlay(marker);
 							});
 						} else {
-							layer.msg('提交失败', {icon:2})
+							layer.msg(data.msg, {icon:2})
 						}
 					}
 				})
@@ -193,12 +192,11 @@
 
 		// 发送手机验证码
 		$('.getcode').click(function(){
-			alert(1);
-			var form = $(this).parents('form');
 			// 手机号码验证
-			var moble = form.find('#moble').val();
+			var moble = $('input[name=mobile]').val();
+
 			if(!isPhone(moble)){
-				tips('手机号格式错误', '#moble');
+				layer.msg('手机号格式错误', {icon: 2});
 				return false;
 			}
 			// 判断是否已发送，计时发送
@@ -208,22 +206,24 @@
 
 			
 			// 可以发送验证码
-			$.cookie('second', 60);
-			settime($('.getcode'));
-
+			
+			
+			layer.load(1);
 			$.ajax({
-				url: '?m=app&c=register&a=sendMobileCode',
+				url: '/index.php?m=guoqing&c=index&a=sendMobileCode',
 				type:'post',
 				dataType:'json',
-				data:{phone:phone, type:1},
+				data:{mobile:mobile, scene:1},
 				success: function(data){
+					layer.closeAll('loading');
 					if(data.code == 400){
 						layer.msg(data.msg)
 						$.cookie('second', 0);
 						return false;
 					}
 					if(data.code == 200){
-						
+						$.cookie('second', 60);
+						settime($('.getcode'));
 						layer.msg('验证码发送成功');
 					}
 				},
@@ -289,9 +289,9 @@
 		wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
 			wx.updateAppMessageShareData({ 
 				title: '我叫xxx，是第10000位文旅人，我坚守在xxx.让我们一同接力点亮中国文旅地图，为祖国献礼！', // 分享标题
-				desc: '一起点亮中国文旅地图描述', // 分享描述
+				desc: '文旅人一同接力点亮中国文旅地图', // 分享描述
 				link: '{$url}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-				imgUrl: '{APP_PATH}statics/images/icon/red_flag.png', // 分享图标
+				imgUrl: '{APP_PATH}statics/guoqing/share_icon.jpg', // 分享图标
 				success: function () {
 					// 设置成功
 				}
