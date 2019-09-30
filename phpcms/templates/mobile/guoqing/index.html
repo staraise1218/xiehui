@@ -75,58 +75,37 @@
 <script type="text/javascript" src="{APP_PATH}statics/default/js/NativeShare.js"></script>
 
 <script type="text/javascript">
-
-    var nativeShare = new NativeShare()
-
-    var shareData = {
-
-        title: '分享标题',
-
-        desc: '',
-
-        // 如果是微信该link的域名必须要在微信后台配置的安全域名之内的。
-
-        link: 'https://www.baidu.com',
-
-        icon: 'https://www.baidu.com',
-
-        // 不要过于依赖以下两个回调，很多浏览器是不支持的
-
-        success: function() {
-
-            console.log("success")
-
-        },
-
-        fail: function() {
-
-            console.log("fail")
-
+        var nativeShare = new NativeShare()
+        var shareData = {
+            title: 'NativeShare',
+            desc: 'NativeShare是一个整合了各大移动端浏览器调用原生分享的插件',
+            // 如果是微信该link的域名必须要在微信后台配置的安全域名之内的。
+            link: 'https://github.com/fa-ge/NativeShare',
+            icon: 'https://pic3.zhimg.com/v2-080267af84aa0e97c66d5f12e311c3d6_xl.jpg',
+            // 不要过于依赖以下两个回调，很多浏览器是不支持的
+            success: function() {
+                alert('success')
+            },
+            fail: function() {
+                alert('fail')
+            }
         }
-
-    }
-
-    nativeShare.setShareData(shareData)
-
-    function call(command) {
-
-        try {
-
-            nativeShare.call(command)
-
-        } catch (err) {
-
-            // 如果不支持，你可以在这里做降级处理
-
-            alert(err.message)
-
-            // console.log("err.message")
-
+        nativeShare.setShareData(shareData)
+        function call(command) {
+            try {
+                nativeShare.call(command)
+            } catch (err) {
+                // 如果不支持，你可以在这里做降级处理
+                alert(err.message)
+            }
         }
+        function setTitle(title) {
+            nativeShare.setShareData({
+                title: title,
+            })
+        }
+    </script>
 
-    }
-
-</script>
 
 	<script src="{APP_PATH}statics/plugin/layui/layui.js" charset="utf-8"></script>
 	<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=4y8GNKB2Coct45eFxZWslUWlzWD6Gvdt"></script>
