@@ -11,7 +11,11 @@
 	<link rel="stylesheet" type="text/css" href="{APP_PATH}statics/default/css/guoqing.css">
 	<link rel="stylesheet" type="text/css" href="{APP_PATH}statics/plugin/layui/css/layui.css">
 	<link rel="icon" href="{APP_PATH}statics/images/icon/red_flag.png" type="image/x-icon"/> 
+
+	<link rel="stylesheet" href="{APP_PATH}statics/plugin/layui/css/modules/layer/default/layer.css">
 	<script type="text/javascript" src="{APP_PATH}statics/default/js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="{APP_PATH}statics/default/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="{APP_PATH}statics/plugin/layui/lay/modules/layer.js"></script>
 	<style type="text/css">
 		.formContent {
 			width: 300px;
@@ -30,6 +34,9 @@
 		}
 		.layui-input-block{
 			margin-left: 95px;
+		}
+		.layui-input, .layui-textarea {
+			padding-left: 0px;
 		}
 
 		input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
@@ -76,8 +83,8 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">手机号</label>
 					<div class="layui-input-block">
-						<input type="text" name="mobile" placeholder="" class="layui-input inputstyle">
-						<div class="getCode">发送验证码</div>
+						<input type="text" id="mobile" name="mobile" placeholder="" class="layui-input inputstyle">
+						<div class="getcode">发送验证码</div>
 					</div>
 				</div>
 				<div class="layui-form-item">
@@ -183,6 +190,90 @@
 			})
 		})
 
+
+		// 发送手机验证码
+		$('.getcode').click(function(){
+			var form = $(this).parents('form');
+			// 手机号码验证
+			var moble = form.find('#moble').val();
+			if(!isPhone(moble)){
+				tips('手机号格式错误', '#moble');
+				return false;
+			}
+			// 判断是否已发送，计时发送
+			if($(this).attr('disabled') == 'disabled'){
+				return false;
+			}
+
+			
+			// 可以发送验证码
+			$.cookie('second', 60);
+			settime($('.getcode'));
+
+			$.ajax({
+				url: '?m=app&c=register&a=sendMobileCode',
+				type:'post',
+				dataType:'json',
+				data:{phone:phone, type:1},
+				success: function(data){
+					if(data.code == 400){
+						layer.msg(data.msg)
+						$.cookie('second', 0);
+						return false;
+					}
+					if(data.code == 200){
+						
+						layer.msg('验证码发送成功');
+					}
+				},
+				error: function(){
+					layer.msg('服务器错误');
+				}
+			})
+		})
+
+		// 刷新页面计算验证码发送时间
+		settime($('.getcode'));
+
+		function tips(message, id){
+			layer.tips(message, id, {tips:[1, '#000']})
+		}
+
+		function isPhone(phone){
+			var reg_mobile = /^1[34578]\d{9}$/;
+			return reg_mobile.test(phone);
+		}
+
+		//开始倒计时
+		var countnum;
+		function settime(obj, type='phone') { 
+			if(type == 'phone'){
+				countnum=$.cookie("second");
+			} else if (type == 'email') {
+				countnum=$.cookie("second_email");
+			}
+		
+			if (countnum == 0) { 
+				obj.removeAttr("disabled");
+				obj.removeClass('disabled');
+				obj.html("获取验证码"); 
+				return;
+			} else if(countnum>0){ 
+				obj.attr("disabled", true);
+				obj.addClass('disabled');
+				obj.html("重新发送(" + countnum + ")"); 
+				countnum--;
+
+				if(type == 'phone'){
+					$.cookie("second", countnum);
+				} else if (type == 'email') {
+					$.cookie("second_email", countnum);
+				}
+				
+			} 
+			setTimeout(function() { settime(obj, type) },1000) //每1000毫秒执行一次
+		}
+
 	</script>
 
 	<!-- 微信分享 -->
@@ -199,7 +290,7 @@
 
 		wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
 			wx.updateAppMessageShareData({ 
-				title: '一起点亮中国文旅地图', // 分享标题
+				title: '我叫___，是第 位文旅人，我坚守在____（填写的景区/乐园名字）！让我们一同接力点亮中国文旅地图，为祖国献礼！', // 分享标题
 				desc: '一起点亮中国文旅地图描述', // 分享描述
 				link: '{$url}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 				imgUrl: '{APP_PATH}statics/images/icon/red_flag.png', // 分享图标

@@ -46,5 +46,18 @@ class index {
 	    }
 	    return $str;
 	}
+
+	
+
+	// 发送验证码
+	public function sendMobileCode(){
+		$postdata = new_addslashes($_POST);
+		$url = APP_URL.'api_passport/sendMobileCode';
+
+		$postdata['mobile'] = $postdata['phone'];
+		$result = $this->curl->post($url, $postdata);
+
+		die($result);
+	}
 }
 ?>
