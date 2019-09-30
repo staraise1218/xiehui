@@ -19,6 +19,7 @@ a:active {color:#ad0400;}
 .description p { text-indent: 2em; line-height: 24px; }
 input {background: #eee;} */
 .part{text-align: center;}
+.part img {width: 100%}
 .container {background: url('../../guoqing/guoqing_03.jpg') center top repeat-y; background-size: 100% auto; max-width: 610px;width: 100%; margin: 0 auto; padding: 15px;}
 .form_box { background: #fff3c5 url('../../guoqing/guoqing_06.jpg') center top no-repeat; background-size: 100% auto; padding-top: 150px; margin-top: 15px; font-size: 18px;}
 .getCode { padding: 5px 15px; background: #bf130f; border-radius: 30px; position: absolute; right: 0px; top: 0px; font-size: 14px; color: #FFF; cursor: pointer;}
