@@ -193,6 +193,7 @@
 
 		// 发送手机验证码
 		$('.getcode').click(function(){
+			alert(1);
 			var form = $(this).parents('form');
 			// 手机号码验证
 			var moble = form.find('#moble').val();
@@ -235,9 +236,6 @@
 		// 刷新页面计算验证码发送时间
 		settime($('.getcode'));
 
-		function tips(message, id){
-			layer.tips(message, id, {tips:[1, '#000']})
-		}
 
 		function isPhone(phone){
 			var reg_mobile = /^1[34578]\d{9}$/;
@@ -290,7 +288,7 @@
 
 		wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
 			wx.updateAppMessageShareData({ 
-				title: '我叫___，是第 位文旅人，我坚守在____（填写的景区/乐园名字）！让我们一同接力点亮中国文旅地图，为祖国献礼！', // 分享标题
+				title: '我叫xxx，是第 位文旅人，我坚守在xxx.让我们一同接力点亮中国文旅地图，为祖国献礼！', // 分享标题
 				desc: '一起点亮中国文旅地图描述', // 分享描述
 				link: '{$url}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 				imgUrl: '{APP_PATH}statics/images/icon/red_flag.png', // 分享图标
