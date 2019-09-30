@@ -104,7 +104,13 @@
 	<div class="part bottom">
 		<img src="/statics/guoqing/guoqing_14.jpg" alt="" />
 	</div>
-	
+	<div class="shadowbg"></div>
+	<div class="shadow">
+		<div class="zhishi">
+			<img src="/statics/guoqing/guoqing_15.png" alt="" />
+			<button class="ikown">我知道了</button>
+		</div>
+	</div>
 	
 
 
@@ -250,14 +256,8 @@
 								map.addOverlay(marker);
 								debugger
 								// 显示遮罩
-								var html = '<div class="shadowbg"></div>\
-										<div class="shadow">\
-											<div class="zhishi">\
-												<img src="/statics/guoqing/guoqing_15.png" alt="" />\
-												<button class="ikown">我知道了</button>\
-											</div>\
-										</div>';
-								$('body').append(html);
+								$('.shadowbg').show();
+								$('.shadow').show();
 							});
 						} else {
 							layer.msg(data.msg, {icon:2})

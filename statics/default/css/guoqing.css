@@ -25,9 +25,9 @@ input {background: #eee;} */
 .getcode { padding: 5px 10px; background: #bf130f; border-radius: 30px; position: absolute; right: 0px; top: 0px; font-size: 12px; color: #FFF; cursor: pointer;}
 .submit {  text-align: center; }
 .submit img {width: 100%;}
-/*.shadowbg , .shadow {display: none;}*/
-.shadowbg { width: 100%; height: 100%; position: absolute; top: 0; left: 0; right: 0; bottom:0; z-index: 100; background: #000; opacity:0.7; }
+.shadowbg , .shadow {display: none;}
+.shadowbg { width: 100%; height: 100%; position: fixed; top: 0; left: 0; right: 0; bottom:0; z-index: 100; background: #000; opacity:0.7; }
 .shadow {text-align: center;}
-.shadow .zhishi { position: absolute; top: 20px; z-index: 101}
+.shadow .zhishi { position: fixed; top: 20px; z-index: 101}
 .shadow .zhishi img { width: 80%; margin-top: 50px; }
 .shadow .zhishi .ikown { width: 60%; margin-top: 50px; height: 40px; line-height: 40px; text-align: center; font-size: 14px; color: #000; border:none; background: #FFF; border-radius: 5px; }
