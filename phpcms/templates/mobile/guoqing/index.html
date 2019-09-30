@@ -104,13 +104,7 @@
 	<div class="part bottom">
 		<img src="/statics/guoqing/guoqing_14.jpg" alt="" />
 	</div>
-	<div class="shadowbg"></div>
-	<div class="shadow">
-		<div class="zhishi">
-			<img src="/statics/guoqing/guoqing_15.png" alt="" />
-			<button class="ikown">我知道了</button>
-		</div>
-	</div>
+	
 	
 
 
@@ -254,9 +248,16 @@
 								 
 								var marker = new BMap.Marker(point, {icon:myIcon});
 								map.addOverlay(marker);
+								debugger
 								// 显示遮罩
-								$('.shadowbg').show();
-								$('.shadow').show();
+								var html = '<div class="shadowbg"></div>\
+										<div class="shadow">\
+											<div class="zhishi">\
+												<img src="/statics/guoqing/guoqing_15.png" alt="" />\
+												<button class="ikown">我知道了</button>\
+											</div>\
+										</div>';
+								$('body').append(html);
 							});
 						} else {
 							layer.msg(data.msg, {icon:2})
