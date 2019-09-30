@@ -111,13 +111,36 @@
 	<script src="{APP_PATH}statics/plugin/layui/layui.js" charset="utf-8"></script>
 	<!-- 微信分享 -->
 	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+	<script type="text/javascript">
+		// 微信分享
+		wx.config({
+		  debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+		  appId: 'wx7b1b84d27f85d7c4', // 必填，公众号的唯一标识
+		  timestamp: '{$timestamp}', // 必填，生成签名的时间戳
+		  nonceStr: '{$nonceStr}', // 必填，生成签名的随机串
+		  signature: '{$signature}',// 必填，签名
+		  jsApiList: ['updateAppMessageShareData'] // 必填，需要使用的JS接口列表
+		});
+
+		wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
+			wx.updateAppMessageShareData({ 
+				title: title, // 分享标题
+				desc: '文旅人一同接力点亮中国文旅地图', // 分享描述
+				link: '{$url}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+				imgUrl: '{APP_PATH}statics/guoqing/share_icon.jpg', // 分享图标
+				success: function () {
+					// 设置成功
+				}
+			})
+		});
+
+	</script>
 	<!-- 百度地图 -->
 	<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=4y8GNKB2Coct45eFxZWslUWlzWD6Gvdt"></script>
 	<script type="text/javascript">
 		var longitude = '', latitude = ''; // 定义用户经纬度
 		var list = JSON.parse('<?php echo $list; ?>'); // 初始化已点亮的经纬度
 		var myIcon = new BMap.Icon("http://www.caapa.org/statics/images/icon/red_flag.png", new BMap.Size(16, 16)); // 自定义标记图标
-		var title = '接力一同点亮中国文旅地图！'; // 分享标题
 
 		// 初始化百度地图，并获取用户经纬度坐标
 		var map = new BMap.Map("allmap");
@@ -186,7 +209,15 @@
 						if(data.code == 200){
 							layer.msg('提交成功', {icon:1}, function(){
 								// 修改分享标题
-								title = '我叫'+name+'，是第'+data.count+'位文旅人，我坚守在'+jingdian+'.让我们一同接力点亮中国文旅地图，为祖国献礼！';
+								wx.updateAppMessageShareData({ 
+									title: '我叫'+name+'，是第'+data.count+'位文旅人，我坚守在'+jingdian+'.让我们一同接力点亮中国文旅地图，为祖国献礼！', // 分享标题
+									desc: '文旅人一同接力点亮中国文旅地图', // 分享描述
+									link: '{$url}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+									imgUrl: '{APP_PATH}statics/guoqing/share_icon.jpg', // 分享图标
+									success: function () {
+										// 设置成功
+									}
+								})
 								// 将用户的地理位置标注
 								point = new BMap.Point(longitude, latitude);
 								 
@@ -282,28 +313,7 @@
 			setTimeout(function() { settime(obj, type) },1000) //每1000毫秒执行一次
 		}
 
-		// 微信分享
-		wx.config({
-		  debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-		  appId: 'wx7b1b84d27f85d7c4', // 必填，公众号的唯一标识
-		  timestamp: '{$timestamp}', // 必填，生成签名的时间戳
-		  nonceStr: '{$nonceStr}', // 必填，生成签名的随机串
-		  signature: '{$signature}',// 必填，签名
-		  jsApiList: ['updateAppMessageShareData'] // 必填，需要使用的JS接口列表
-		});
-
-		wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
-			wx.updateAppMessageShareData({ 
-				title: title, // 分享标题
-				desc: '文旅人一同接力点亮中国文旅地图', // 分享描述
-				link: '{$url}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-				imgUrl: '{APP_PATH}statics/guoqing/share_icon.jpg', // 分享图标
-				success: function () {
-					// 设置成功
-				}
-			})
-		});
-
+		
 	</script>
 
 	
