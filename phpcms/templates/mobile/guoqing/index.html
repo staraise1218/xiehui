@@ -156,7 +156,7 @@
 	<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=4y8GNKB2Coct45eFxZWslUWlzWD6Gvdt"></script>
 	<script type="text/javascript">
 		layer.msg('正在获取位置...');
-		var longitude = '', latitude = ''; // 定义用户经纬度
+		var longitude = '', latitude = '', city=''; // 定义用户经纬度
 		var list = JSON.parse('<?php echo $list; ?>'); // 初始化已点亮的经纬度
 		var myIcon = new BMap.Icon("http://www.caapa.org/statics/images/icon/red_flag.png", new BMap.Size(16, 16)); // 自定义标记图标
 
@@ -178,6 +178,7 @@
 				// map.panTo(r.point);
 				console.log(r)
 				layer.msg('您的位置：'+r.address.city);
+				city = r.address.city;
 				// alert('您的位置：'+r.point.lng+','+r.point.lat);
 				longitude = r.point.lng;
 				latitude = r.point.lat;
@@ -220,15 +221,16 @@
 					return false;
 				}
 
+				layer.load(1);
 				$.ajax({
 					url: "/index.php?m=guoqing&c=index&a=submit",
 					type: 'post',
 					dataType: 'json',
-					data: {name: name, mobile: mobile, jingdian: jingdian, longitude: longitude, latitude: latitude, code: code},
+					data: {name: name, mobile: mobile, jingdian: jingdian, longitude: longitude, latitude: latitude, code: code, city: city},
 					success: function(data){
+						layer.closeAll('loading');
 						if(data.code == 200){
-							layer.msg('提交成功', {icon:1}, function(){
-								var title = '第'+data.count+'位文旅人'+name+'坚守在'+jingdian+'接力点亮了中国文旅地图，为祖国庆生！';
+							var title = '第'+data.count+'位文旅人'+name+'坚守在'+jingdian+'接力点亮了中国文旅地图，为祖国庆生！';
 								
 								// 修改分享标题
 								wx.updateAppMessageShareData({ 
@@ -255,11 +257,10 @@
 								 
 								var marker = new BMap.Marker(point, {icon:myIcon});
 								map.addOverlay(marker);
-								debugger
+								
 								// 显示遮罩
 								$('.shadowbg').show();
 								$('.shadow').show();
-							});
 						} else {
 							layer.msg(data.msg, {icon:2})
 						}
