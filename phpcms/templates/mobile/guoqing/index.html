@@ -68,7 +68,64 @@
 		</form>
 		<div style="height: 150px;"></div>
 	</div>
-	
+	<button onclick="call('wechatFriend')">微信好友</button>
+
+<button onclick="call('wechatTimeline')">朋友圈</button>
+<script type="text/javascript" src="{APP_PATH}statics/default/js/NativeShare.js"></script>
+
+<script type="text/javascript">
+
+    var nativeShare = new NativeShare()
+
+    var shareData = {
+
+        title: '分享标题',
+
+        desc: '',
+
+        // 如果是微信该link的域名必须要在微信后台配置的安全域名之内的。
+
+        link: 'https://www.baidu.com',
+
+        icon: 'https://www.baidu.com',
+
+        // 不要过于依赖以下两个回调，很多浏览器是不支持的
+
+        success: function() {
+
+            console.log("success")
+
+        },
+
+        fail: function() {
+
+            console.log("fail")
+
+        }
+
+    }
+
+    nativeShare.setShareData(shareData)
+
+    function call(command) {
+
+        try {
+
+            nativeShare.call(command)
+
+        } catch (err) {
+
+            // 如果不支持，你可以在这里做降级处理
+
+            alert(err.message)
+
+            // console.log("err.message")
+
+        }
+
+    }
+
+</script>
 
 	<script src="{APP_PATH}statics/plugin/layui/layui.js" charset="utf-8"></script>
 	<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=4y8GNKB2Coct45eFxZWslUWlzWD6Gvdt"></script>
@@ -149,33 +206,6 @@
 			})
 		})
 
-		wx.onMenuShareAppMessage({
-
-		    title: '1111111111', // 分享标题
-
-		    desc: '22222222222222', // 分享描述
-
-		    link: 'http://www.caapa.org/index.php?m=guoqing&c=index&a=init', // 分享链接
-
-		    imgUrl: 'http://www.caapa.org/statics/images/icon/red_flag.png', // 分享图标
-
-		    type: '', // 分享类型,music、video或link，不填默认为link
-
-		    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-
-		    success: function () { 
-
-		        // 用户确认分享后执行的回调函数
-
-		    },
-
-		    cancel: function () { 
-
-		        // 用户取消分享后执行的回调函数
-
-		    }
-
-		});
 	</script>
 
 	<!-- 微信分享 -->
