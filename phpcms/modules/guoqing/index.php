@@ -44,9 +44,9 @@ class index {
 		$data = $_POST;
 
 		// 检测验证码是否正确
-		/*if( false == $this->checkMobileCode($data['mobile'], $data['code'], 1, $error)){
+		if( false == $this->checkMobileCode($data['mobile'], $data['code'], 1, $error)){
 			die(json_encode(array('code'=>400, 'msg'=>$error)));
-		}*/
+		}
 
 		unset($data['code']);
 		$this->db->insert($data);
@@ -72,7 +72,7 @@ class index {
 	public function sendMobileCode(){
 		$mobile = $_POST['mobile'];
         $scene = $_POST['scene'];
-die(json_encode(array('code'=>400, 'msg'=>'发送成功')));
+
          // 检测发送次数
         $day_time_start = strtotime(date('Y-m-d'));
         $day_time_end = $day_time_start + 3600*24;
