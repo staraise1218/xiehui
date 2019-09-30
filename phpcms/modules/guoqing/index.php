@@ -44,9 +44,9 @@ class index {
 		$data = $_POST;
 
 		// 检测验证码是否正确
-		if( false == $this->checkMobileCode($data['mobile'], $data['code'], 1, $error)){
+		/*if( false == $this->checkMobileCode($data['mobile'], $data['code'], 1, $error)){
 			die(json_encode(array('code'=>400, 'msg'=>$error)));
-		}
+		}*/
 
 		unset($data['code']);
 		$this->db->insert($data);
