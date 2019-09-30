@@ -48,6 +48,7 @@ class index {
 			die(json_encode(array('code'=>400, 'msg'=>$error)));
 		}*/
 
+		unset($data['code']);
 		$this->db->insert($data);
 
 		$count = $this->db->count("longitude != '' and latitude != ''");
