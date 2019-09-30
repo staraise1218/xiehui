@@ -14,7 +14,12 @@ a:active {color:#ad0400;}
 .clear {clear: both; height: 0}
 /*.min-width-1300 {min-width: 1300px;}*/
 
-.top_title { height: 30px; line-height: 30px; background: url('../images/gqtitle.png') left center repeat-x; font-size: 14px; border-bottom: 1px solid #eee; text-align: center; color: #b4341c; }
+/* .top_title { height: 30px; line-height: 30px; background: url('../images/gqtitle.png') left center repeat-x; font-size: 14px; border-bottom: 1px solid #eee; text-align: center; color: #b4341c; }
 .container { font-size: 14px; color: #ffe335; padding: 15px; text-align: justify; background-image: url('../images/gqpf.jpg'); background-size: 100% auto;}
 .description p { text-indent: 2em; line-height: 24px; }
-input {background: #eee;}
+input {background: #eee;} */
+.part{text-align: center;}
+.container {background: url('../../guoqing/guoqing_03.jpg') center top repeat-y; max-width: 610px; margin: 0 auto; padding: 15px;}
+.form_box { background: #fff3c5 url('../../guoqing/guoqing_06.jpg') center top no-repeat; padding-top: 150px; margin-top: 15px; font-size: 18px;}
+
+.submit { width: 333px; height: 80px; background: url(../../guoqing/guoqing_10.png) left center no-repeat; border: none; }
