@@ -181,7 +181,7 @@
 					url: "/index.php?m=guoqing&c=index&a=submit",
 					type: 'post',
 					dataType: 'json',
-					data: {name: name, mobile: mobile, jingdian: jingdian, longitude: longitude, latitude: latitude， code: code},
+					data: {name: name, mobile: mobile, jingdian: jingdian, longitude: longitude, latitude: latitude, code: code},
 					success: function(data){
 						if(data.code == 200){
 							layer.msg('提交成功', {icon:1}, function(){
