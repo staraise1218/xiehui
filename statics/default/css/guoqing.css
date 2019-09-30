@@ -22,6 +22,6 @@ input {background: #eee;} */
 .part img {width: 100%}
 .container {background: url('../../guoqing/guoqing_03.jpg') center top repeat-y; background-size: 100% auto; max-width: 610px; margin: 0 auto; padding: 15px 15px 0;}
 .form_box { background: #fff3c5 url('../../guoqing/guoqing_06.jpg') center top no-repeat; background-size: 100% auto; padding-top: 150px; margin-top: 15px; font-size: 18px;}
-.getcode { padding: 5px 15px; background: #bf130f; border-radius: 30px; position: absolute; right: 0px; top: 0px; font-size: 14px; color: #FFF; cursor: pointer;}
+.getcode { padding: 5px 10px; background: #bf130f; border-radius: 30px; position: absolute; right: 0px; top: 0px; font-size: 12px; color: #FFF; cursor: pointer;}
 .submit {  text-align: center; }
 .submit img {width: 100%;}
