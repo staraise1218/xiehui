@@ -18,9 +18,9 @@ a:active {color:#ad0400;}
 .container { font-size: 14px; color: #ffe335; padding: 15px; text-align: justify; background-image: url('../images/gqpf.jpg'); background-size: 100% auto;}
 .description p { text-indent: 2em; line-height: 24px; }
 input {background: #eee;} */
-.part{text-align: center;}
+.part{text-align: center; max-width: 640px; margin: 0 auto;}
 .part img {width: 100%}
-.container {background: url('../../guoqing/guoqing_03.jpg') center top repeat-y; background-size: 100% auto; max-width: 610px; margin: 0 auto; padding: 15px;}
+.container {background: url('../../guoqing/guoqing_03.jpg') center top repeat-y; background-size: 100% auto; max-width: 610px; margin: 0 auto; padding: 15px 15px 0;}
 .form_box { background: #fff3c5 url('../../guoqing/guoqing_06.jpg') center top no-repeat; background-size: 100% auto; padding-top: 150px; margin-top: 15px; font-size: 18px;}
 .getCode { padding: 5px 15px; background: #bf130f; border-radius: 30px; position: absolute; right: 0px; top: 0px; font-size: 14px; color: #FFF; cursor: pointer;}
-.submit { width: 333px; height: 80px; border: none; }
+.submit { width: 333px; height: 80px; background-image: url(../../guoqing/guoqing_10.png); background-size: cover; border: none; }
