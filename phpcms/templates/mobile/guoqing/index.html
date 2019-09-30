@@ -90,7 +90,7 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">验证码</label>
 					<div class="layui-input-block">
-						<input type="text" name="mobile" placeholder="" class="layui-input inputstyle">
+						<input type="text" name="code" placeholder="" class="layui-input inputstyle">
 					</div>
 				</div>
 				<div class="submit"><img src="/statics/guoqing/guoqing_10.png" alt="" /></div>
@@ -114,6 +114,7 @@
 		var longitude = '', latitude = ''; // 定义用户经纬度
 		var list = JSON.parse('<?php echo $list; ?>'); // 初始化已点亮的经纬度
 		var myIcon = new BMap.Icon("http://www.caapa.org/statics/images/icon/red_flag.png", new BMap.Size(16, 16)); // 自定义标记图标
+		var title = ''; // 分享标题
 
 		// 初始化百度地图，并获取用户经纬度坐标
 		var map = new BMap.Map("allmap");
@@ -157,6 +158,7 @@
 				var name = $("input[name='name']").val();
 				var mobile = $("input[name='mobile']").val();
 				var jingdian = $("input[name='jingdian']").val();
+				var code = $("input[name='code']").val();
 
 				// 验证数据
 				if(name == '') {
@@ -167,15 +169,21 @@
 					layer.msg('手机号格式不正确', {icon:2});
 					return false;
 				}
+				if(code == ''){
+					layer.msg('验证码必填', {icon:1});
+					return false;
+				}
 
 				$.ajax({
-					url: "/api.php?op=guoqing",
+					url: "/index.php?m=guoqing&c=index&a=submit",
 					type: 'post',
 					dataType: 'json',
 					data: {name: name, mobile: mobile, jingdian: jingdian, longitude: longitude, latitude: latitude},
 					success: function(data){
 						if(data.code == 200){
 							layer.msg('提交成功', {icon:1}, function(){
+								// 修改分享标题
+								title = '我叫'+name+'，是第'+data.count+'位文旅人，我坚守在'+jingdian+'.让我们一同接力点亮中国文旅地图，为祖国献礼！';
 								// 将用户的地理位置标注
 								point = new BMap.Point(longitude, latitude);
 								 
@@ -194,9 +202,9 @@
 		// 发送手机验证码
 		$('.getcode').click(function(){
 			// 手机号码验证
-			var moble = $('input[name=mobile]').val();
+			var mobile = $('input[name=mobile]').val();
 
-			if(!isPhone(moble)){
+			if(!isPhone(mobile)){
 				layer.msg('手机号格式错误', {icon: 2});
 				return false;
 			}
@@ -205,10 +213,8 @@
 				return false;
 			}
 
-			
 			// 可以发送验证码
-			
-			
+
 			layer.load(1);
 			$.ajax({
 				url: '/index.php?m=guoqing&c=index&a=sendMobileCode',
@@ -273,11 +279,7 @@
 			setTimeout(function() { settime(obj, type) },1000) //每1000毫秒执行一次
 		}
 
-	</script>
-
-	<!-- 微信分享 -->
-	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
-	<script type="text/javascript">
+		// 微信分享
 		wx.config({
 		  debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
 		  appId: 'wx7b1b84d27f85d7c4', // 必填，公众号的唯一标识
@@ -289,7 +291,7 @@
 
 		wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
 			wx.updateAppMessageShareData({ 
-				title: '我叫xxx，是第10000位文旅人，我坚守在xxx.让我们一同接力点亮中国文旅地图，为祖国献礼！', // 分享标题
+				title: title, // 分享标题
 				desc: '文旅人一同接力点亮中国文旅地图', // 分享描述
 				link: '{$url}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 				imgUrl: '{APP_PATH}statics/guoqing/share_icon.jpg', // 分享图标
@@ -298,7 +300,12 @@
 				}
 			})
 		});
+
 	</script>
+
+	<!-- 微信分享 -->
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+
 </body>
 </html>
 	

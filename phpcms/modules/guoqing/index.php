@@ -40,6 +40,20 @@ class index {
 		include template('guoqing','index', 'mobile');
 	}
 
+	public function submit(){
+		$data = $_POST;
+
+		// 检测验证码是否正确
+		if( false == $this->checkMobileCode($data['mobile'], $data['code'], 1, $error)){
+			die(json_encode(array('code'=>400, 'msg'=>$error)));
+		}
+
+		$this->db->insert($data);
+
+		$count = $this->db->count("longitude != '' and latitude != ''");
+		die(json_encode(array('code'=>200, 'count'=>$count)));
+	}
+
 	function createNonceStr($length = 16) {
 	    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	    $str = "";
@@ -80,10 +94,9 @@ class index {
         $smsLogid = $sms_log_model->insert($data, true);
 
         // 执行短信网关发送 
-        
-
         $rongliansms = pc_base::load_sys_class('rongliansms');
         $result = $rongliansms->sendTemplateSMS($mobile, array($code), 207012);
+
         if(empty($result)){
 			die(json_encode(array('code'=>400, 'msg'=>'发送失败')));
 		}elseif($result->statusReturn == false){
@@ -99,6 +112,28 @@ class index {
 			die(json_encode(array('code'=>400, 'msg'=>'发送成功')));
 			
 		}
+	}
+
+	// 检测验证码
+	public function checkMobileCode($mobile, $code, $scene, &$error){
+		$sms_log_model = pc_base::load_model('sms_log_model');
+		$smsLog = $sms_log_model->get_one("mobile=$mobile and scene=$scene", 'code, add_time', 'id desc');
+
+        if(!$smsLog){
+            $error = '手机验证码错误';
+            return false;
+        }
+
+        if($smsLog['code'] != $code){
+            $error = '手机验证码错误';
+            return false;
+        }
+
+        if(time() > ($smsLog['add_time'] + 300)){
+            $error = '验证码已失效';
+            return false;
+        }
+        return true;
 	}
 }
 ?>
