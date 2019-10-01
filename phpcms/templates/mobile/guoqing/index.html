@@ -169,11 +169,11 @@
 		// 初始化百度地图，并获取用户经纬度坐标
 		var map = new BMap.Map("allmap");
 		var point = new BMap.Point(103.460025, 35.851543);
-		map.centerAndZoom(point, 5); // 设置地图中心点，及级别
+		map.centerAndZoom(point, 4); // 设置地图中心点，及级别
 		// 设置地图皮肤
-		map.setMapStyle({     
+		/*map.setMapStyle({     
 		  styleId: '3c4909433d74650322f8fabfc69f8686'
-		});
+		});*/
 		map.enableScrollWheelZoom(true);  // 设置鼠标滑轮缩放
 
 		var geolocation = new BMap.Geolocation();
