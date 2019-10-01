@@ -98,7 +98,7 @@ class index {
 	public function sendMobileCode(){
 		$mobile = $_POST['mobile'];
         $scene = $_POST['scene'];
-die(json_encode(array('code'=>200, 'msg'=>'发送成功')));
+
          // 检测发送次数
         $day_time_start = strtotime(date('Y-m-d'));
         $day_time_end = $day_time_start + 3600*24;
