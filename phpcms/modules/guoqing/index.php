@@ -40,6 +40,31 @@ class index {
 		include template('guoqing','index', 'mobile');
 	}
 
+	public function test() {
+		// 获取access_token
+		$output = file_get_contents("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx7b1b84d27f85d7c4&secret=5bc386846ad2feb31f973dcb65d4b203");
+		$res = json_decode($output, true);
+		$accessToken = $res["access_token"];
+		// 获取jsapi_ticket
+		$output = file_get_contents("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={$accessToken}&type=jsapi");
+		$getTicket= json_decode($output, ture);
+		$ticket = $getTicket['ticket'];
+
+		
+		$nonceStr = $this->createNonceStr();
+		$timestamp = time();
+		$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+		$url = $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+		$string = "jsapi_ticket=".$ticket."&noncestr=".$nonceStr."&timestamp=".$timestamp."&url=".$url;
+		$signature = sha1($string);
+		
+		// 获取所有的经纬度坐标
+		$list = $this->db->select("longitude != '' and latitude != ''", 'longitude, latitude');
+		$list = json_encode($list);
+
+		include template('guoqing','test', 'mobile');
+	}
+
 	public function submit(){
 		$data = $_POST;
 
