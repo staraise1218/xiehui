@@ -44,11 +44,12 @@ class index {
 		$data = $_POST;
 
 		// 检测验证码是否正确
-		/*if( false == $this->checkMobileCode($data['mobile'], $data['code'], 1, $error)){
+		if( false == $this->checkMobileCode($data['mobile'], $data['code'], 1, $error)){
 			die(json_encode(array('code'=>400, 'msg'=>$error)));
-		}*/
+		}
 
 		unset($data['code']);
+		$data['add_time'] = date('Y-m-d H:i:s');
 		$this->db->insert($data);
 
 		$count = $this->db->count("longitude != '' and latitude != ''");
