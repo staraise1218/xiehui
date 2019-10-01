@@ -291,8 +291,7 @@
 			}
 
 			// 可以发送验证码
-			$.cookie('second', 60);
-			settime($('.getcode'));
+			
 			layer.load(1);
 			$.ajax({
 				url: '/index.php?m=guoqing&c=index&a=sendMobileCode',
@@ -307,6 +306,8 @@
 						return false;
 					}
 					if(data.code == 200){
+						$.cookie('second', 30);
+						settime($('.getcode'));
 						
 						layer.msg('验证码发送成功');
 					}
@@ -334,7 +335,7 @@
 			} else if (type == 'email') {
 				countnum=$.cookie("second_email");
 			}
-		
+
 			if (countnum == 0) { 
 				obj.removeAttr("disabled");
 				obj.removeClass('disabled');
